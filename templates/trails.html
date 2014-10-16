@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Trails{% endblock %}
+
+
+
+{% block content %}
+	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+  		<div class="container">
+	  		<h1>Trails</h1>
+  		</div>
+	</div>
+	
+	<div class="container">
+	<ul>
+		{% for key in trails %}
+		<li><a href="">{{ key.properties.TName }}</a></li>
+		{% endfor %}
+	</ul>
+		
+	</div>
+  </div>
+
+</div>
+</div>
+{% endblock %}
