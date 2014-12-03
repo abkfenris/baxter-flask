@@ -21,6 +21,7 @@ class User(db.Model):
 	last = db.Column(db.String(80))
 	email = db.Column(db.String(120), unique=True)
 	password_hash = db.Column(db.String(128))
+	observer = db.Column(db.Boolean, default=False)
 	
 	@property
 	def password(self):
@@ -51,22 +52,22 @@ class User(db.Model):
 	
 
 
-class Observer(db.Model):
-	"""
-	Weather/Snow/Avalanche Observer
-	
-	Arguments:
-		id (int): Primary Key
-		user_id (int): User id
-	"""
-	__tablename__ = 'observers'
-	
-	id = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-	user = db.relationship('User', backref='observer')
-	
-	def __repr__(self):
-		return '<Observer %r>' % self.user.username
+#class Observer(db.Model):
+#	"""
+#	Weather/Snow/Avalanche Observer
+#	
+#	Arguments:
+#		id (int): Primary Key
+#		user_id (int): User id
+#	"""
+#	__tablename__ = 'observers'
+#	
+#	id = db.Column(db.Integer, primary_key=True)
+#	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+#	user = db.relationship('User', backref='observer')
+#	
+#	def __repr__(self):
+#		return '<Observer %r>' % self.user.username
 
 	
 class WeatherOb(db.Model):
@@ -111,8 +112,8 @@ class WeatherOb(db.Model):
 	__tablename__ = 'weather_observations'
 	
 	id = db.Column(db.Integer, primary_key=True)
-	observer_id = db.Column(db.Integer, db.ForeignKey('observers.id'))
-	observer = db.relationship('Observer', backref='observations')
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+	observer = db.relationship('User', backref='observations')
 	
 	date = db.Column(db.DateTime)
 	
@@ -175,8 +176,8 @@ class WeatherFor(db.Model):
 	
 	id = db.Column(db.Integer, primary_key=True)
 	
-	observer_id = db.Column(db.Integer, db.ForeignKey('observers.id'))
-	observer = db.relationship('Observer', backref='weather_forecasts')
+	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+	observer = db.relationship('User', backref='weather_forecasts')
 	
 	condition = db.Column(db.String(40))
 

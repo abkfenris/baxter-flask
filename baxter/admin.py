@@ -7,13 +7,13 @@ from flask.ext.admin.contrib.sqla import ModelView
 from wtforms.fields import SelectField
 
 from . import db
-from models import User, Observer, WeatherOb, WeatherFor
+from models import User, WeatherOb, WeatherFor
 
 class UserView(ModelView):
 	pass
 
-class ObserverView(ModelView):
-	pass
+#class ObserverView(ModelView):
+#	pass
 
 class WeatherObView(ModelView):
 	form_overrides = dict(sky=SelectField, 
@@ -101,6 +101,6 @@ class WeatherForView(ModelView):
 admin = Admin(name='Baxter Data')
 
 admin.add_view(UserView(User, db.session))
-admin.add_view(ObserverView(Observer, db.session))
+#admin.add_view(ObserverView(Observer, db.session))
 admin.add_view(WeatherObView(WeatherOb, db.session))
 admin.add_view(WeatherForView(WeatherFor, db.session))

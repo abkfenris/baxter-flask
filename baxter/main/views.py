@@ -6,4 +6,4 @@ from flask import render_template, Response, make_response, url_for, current_app
 
 from . import main
 from .. import db
-from ..models import User, Observer, WeatherOb, WeatherFor
+from ..models import User, WeatherOb, WeatherFor
