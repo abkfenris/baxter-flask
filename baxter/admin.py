@@ -15,6 +15,10 @@ class UserView(ModelView):
 #class ObserverView(ModelView):
 #	pass
 
+def observers():
+	return User.query.filter_by(observer=True)
+
+
 class WeatherObView(ModelView):
 	form_overrides = dict(sky=SelectField, 
 						  precip_type=SelectField, 
@@ -24,6 +28,7 @@ class WeatherObView(ModelView):
 						  wind_direction=SelectField)
 	form_args = dict(
 		# Pass the choices to the SelectField
+		observer=dict(query_factory=observers),
 		sky=dict(
 			choices=[('CLR', 'Clear'), 
 					 ('FEW', 'Few Clouds'), 
@@ -88,6 +93,7 @@ class WeatherObView(ModelView):
 class WeatherForView(ModelView):
 	form_overrides = dict(condition=SelectField)
 	form_args= dict(
+		observer=dict(query_factory=observers),
 		condition=dict(
 			choices=[('GREEN', 'Green - Favorable Conditions'),
 					 ('YELLOW', 'Yellow - Favorable but Deteriorating Conditions'),
