@@ -51,25 +51,6 @@ class User(db.Model):
 		return '<User %r>' % self.username
 	
 
-
-#class Observer(db.Model):
-#	"""
-#	Weather/Snow/Avalanche Observer
-#	
-#	Arguments:
-#		id (int): Primary Key
-#		user_id (int): User id
-#	"""
-#	__tablename__ = 'observers'
-#	
-#	id = db.Column(db.Integer, primary_key=True)
-#	user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-#	user = db.relationship('User', backref='observer')
-#	
-#	def __repr__(self):
-#		return '<Observer %r>' % self.user.username
-
-	
 class WeatherOb(db.Model):
 	"""
 	Weather Observation
