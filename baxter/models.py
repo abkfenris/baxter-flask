@@ -151,17 +151,46 @@ class WeatherOb(db.Model):
 	snow_blowing_extent = db.Column(db.String(40))
 	snow_water_equil = db.Column(db.Float)
 	
+
+
+class WeatherFor(db.Model):
+	"""
+	Weather Forecast
 	
+	Arguments:
+		id (int): Primay Key
+		observer_id (int): Forecaster/Observer foreign id
+		oberver: Forecaster/Observer object
+		Condition (list): Mountain Condition
+		for_temp_high (int): High temperature
+		for_temp_low (int): Low temperature
+		trail_comment (text): Trail condition information
+		for_today (text): Today's forecast
+		for_tomorrow (text): Tomorrow's forecast
+		for_long (text): Long term forecast
+		body (text): Forecasters's comments
+		
+	"""
+	__tablename__ = 'weather_forecasts'
 	
-#
-#class WeatherFor(db.Model):
-#	"""
-#	Weather Forecast
-#	
-#	Arguments:
-#		
-#	"""
-#	__tablename__ = 'weather_forecasts'
+	id = db.Column(db.Integer, primary_key=True)
+	
+	observer_id = db.Column(db.Integer, db.ForeignKey('observers.id'))
+	observer = db.relationship('Observer', backref='weather_forecasts')
+	
+	condition = db.Column(db.String(40))
+
+	for_temp_high = db.Column(db.Integer)
+	for_temp_low = db.Column(db.Integer)
+	
+	trail_comment = db.Column(db.Text)
+	
+	for_today = db.Column(db.Text)
+	for_tomorrow = db.Column(db.Text)
+	for_long = db.Column(db.Text)
+	
+	body = db.Column(db.Text)
+
 #
 #class Avalanche(db.Model):
 #	"""

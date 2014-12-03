@@ -7,7 +7,7 @@ from flask.ext.admin.contrib.sqla import ModelView
 from wtforms.fields import SelectField
 
 from . import db
-from models import User, Observer, WeatherOb
+from models import User, Observer, WeatherOb, WeatherFor
 
 class UserView(ModelView):
 	pass
@@ -85,9 +85,22 @@ class WeatherObView(ModelView):
 		)
 	)
 
+class WeatherForView(ModelView):
+	form_overrides = dict(condition=SelectField)
+	form_args= dict(
+		condition=dict(
+			choices=[('GREEN', 'Green - Favorable Conditions'),
+					 ('YELLOW', 'Yellow - Favorable but Deteriorating Conditions'),
+					 ('RED', 'Red - Above Treeline and Technical Activities Not Recomended')
+			]
+		)
+	)
+
+
 
 admin = Admin(name='Baxter Data')
 
 admin.add_view(UserView(User, db.session))
 admin.add_view(ObserverView(Observer, db.session))
 admin.add_view(WeatherObView(WeatherOb, db.session))
+admin.add_view(WeatherForView(WeatherFor, db.session))
