@@ -1,5 +1,6 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from geoalchemy2 import Geometry
 
 class User(db.Model):
 	"""
@@ -195,7 +196,36 @@ class WeatherFor(db.Model):
 #	"""
 #	__tablename__ = "avalanche_forecasts"
 #
-#class Trail(db.Model):
-#	"""
-#	
-#	"""
+class Trail(db.Model):
+	"""
+	Arguments:
+		
+	"""
+	id = db.Column(db.Integer, primary_key=True)
+	geom = db.Column(Geometry('MULTILINESTRING', srid=926919))
+	use_type = db.Column(db.String(40))
+	comments = db.Text()
+	tid = db.Column(db.Integer)
+	skitrail = db.Column(db.Boolean)
+	name = db.Column(db.String(120))
+	length_mi = db.Column(db.Float)
+	status = db.Column(db.String(40))
+	display = db.Column(db.Boolean)
+	pubshare = db.Column(db.Boolean)
+	gpsupdate = db.Column(db.Date)
+	gpsunit = db.Column(db.String(40))
+	gpsuser = db.Column(db.String(40))
+	bspaid = db.Column(db.String(40))
+	tsid = db.Column(db.String(40))
+	display_wu = db.Column(db.Boolean)
+	display_wn = db.Column(db.Boolean)
+	ttype = db.Column(db.String(40))
+	season = db.Column(db.String(40))
+	shape_leng = db.Column(db.Float)
+	tclass = db.Column(db.String(40))
+	maintclass = db.Column(db.String(40))
+	slength = db.Column(db.Float)
+	min_slope = db.Column(db.Float)
+	max_slope = db.Column(db.Float)
+	avg_slope = db.Column(db.Float)
+	length_ft = db.Column(db.Float)
