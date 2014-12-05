@@ -12,6 +12,7 @@ class Config:
 class DevelopmentConfig(Config):
 	DEBUG = True
 	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/baxter'
+	MAPBOX_MAP_ID = os.environ.get('MAPBOX_MAP_ID')
 
 class TestingConfig(Config):
 	TESTING = True

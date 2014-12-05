@@ -26,7 +26,7 @@ class WTFormsMapInput(object):
             # If validation in Flask-Admin fails on somethign other than
             # the spatial column, it is never converted to geojson.  Didn't
             # spend the time to figure out why, so I just convert here.
-            if isinstance(value, (WKTElement, WKBElement)):
+            if isinstance(value.st_transform(4236), (WKTElement, WKBElement)):
                 html += subme % geojson.dumps(to_shape(value))
             else:
                 html += subme % geojson.dumps(value)

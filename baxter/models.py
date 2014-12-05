@@ -1,6 +1,7 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from geoalchemy2 import Geometry
+#from geoalchemy2 import Geometry
+from flask.ext.admin.contrib.geoa.sqltypes import Geometry
 
 class User(db.Model):
 	"""
@@ -229,3 +230,8 @@ class Trail(db.Model):
 	max_slope = db.Column(db.Float)
 	avg_slope = db.Column(db.Float)
 	length_ft = db.Column(db.Float)
+
+class POI(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(40))
+	point = db.Column(Geometry("POINT"))

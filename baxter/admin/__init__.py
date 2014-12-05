@@ -7,8 +7,8 @@ from flask.ext.admin.contrib.sqla import ModelView
 from wtforms.fields import SelectField
 
 from .. import db
-from ..models import User, WeatherOb, WeatherFor, Trail
-from .fields import WTFormsMapField
+from ..models import POI, User, WeatherOb, WeatherFor, Trail
+#from .fields import WTFormsMapField
 
 class UserView(ModelView):
 	pass
@@ -102,20 +102,24 @@ class WeatherForView(ModelView):
 	)
 
 class TrailView(ModelView):
-	can_create = True
 	column_exclude_list = ('geom')
-	form_overrides = dict(location=WTFormsMapField)
-	form_args = dict(
-		geom=dict(geometry_type='MultiLineString', height=500, width=500)
-					)
-	
-	def __init__(self, Trail, session, **kwargs):
-		super(TrailView, self).__init__(Trail, session, **kwargs)
-	
-	def scaffold_form(self):
-		form_class = super(TrailView, self).scaffold_form()
-		form_class.geom = WTFormsMapField()
-		return form_class
+
+
+#class TrailView(ModelView):
+#	can_create = True
+#	column_exclude_list = ('geom')
+#	form_overrides = dict(location=WTFormsMapField)
+#	form_args = dict(
+#		geom=dict(geometry_type='MultiLineString', height=500, width=500)
+#					)
+#	
+#	def __init__(self, Trail, session, **kwargs):
+#		super(TrailView, self).__init__(Trail, session, **kwargs)
+#	
+#	def scaffold_form(self):
+#		form_class = super(TrailView, self).scaffold_form()
+#		form_class.geom = WTFormsMapField()
+#		return form_class
 		
 	
 
