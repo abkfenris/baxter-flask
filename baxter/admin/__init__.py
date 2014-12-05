@@ -6,13 +6,14 @@ from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 from wtforms.fields import SelectField
 
-from . import db
-from models import User, WeatherOb, WeatherFor
+from .. import db
+from ..models import User, WeatherOb, WeatherFor, Trail
+from .fields import WTFormsMapField
 
 class UserView(ModelView):
 	pass
 
-
+# http://wtforms.readthedocs.org/en/latest/ext.html#module-wtforms.ext.sqlalchemy
 def observers():
 	return User.query.filter_by(observer=True)
 
@@ -100,6 +101,23 @@ class WeatherForView(ModelView):
 		)
 	)
 
+class TrailView(ModelView):
+	can_create = True
+	column_exclude_list = ('geom')
+	form_overrides = dict(location=WTFormsMapField)
+	form_args = dict(
+		geom=dict(geometry_type='MultiLineString', height=500, width=500)
+					)
+	
+	def __init__(self, Trail, session, **kwargs):
+		super(TrailView, self).__init__(Trail, session, **kwargs)
+	
+	def scaffold_form(self):
+		form_class = super(TrailView, self).scaffold_form()
+		form_class.geom = WTFormsMapField()
+		return form_class
+		
+	
 
 
 admin = Admin(name='Baxter Data')
@@ -107,3 +125,4 @@ admin = Admin(name='Baxter Data')
 admin.add_view(UserView(User, db.session))
 admin.add_view(WeatherObView(WeatherOb, db.session))
 admin.add_view(WeatherForView(WeatherFor, db.session))
+admin.add_view(TrailView(Trail, db.session))
