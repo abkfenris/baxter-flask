@@ -11,7 +11,7 @@ if os.environ.get('FLASK_COVERAGE'):
 
 from flask import url_for, Flask
 from baxter import create_app, db
-from baxter.models import User, WeatherOb, WeatherFor, Trail
+from baxter.models import User, WeatherOb, WeatherFor, Trail, POI
 # from baxter.models import 
 from flask.ext.script import Manager, Shell
 import config
@@ -24,7 +24,7 @@ migrate = Migrate(app, db)
 manager.add_command('db', MigrateCommand)
 
 def make_shell_context():
-	return dict(app=app, db=db, User=User, WeatherOb=WeatherOb, WeatherFor=WeatherFor, Trail=Trail)
+	return dict(app=app, db=db, User=User, WeatherOb=WeatherOb, WeatherFor=WeatherFor, Trail=Trail, POI=POI)
 manager.add_command('shell', Shell(make_context=make_shell_context))
 
 

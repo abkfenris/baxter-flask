@@ -3,7 +3,8 @@ Admin interface, sets up admin views
 """
 
 from flask.ext.admin import Admin
-from flask.ext.admin.contrib.sqla import ModelView
+#from flask.ext.admin.contrib.sqla import ModelView
+from flask.ext.admin.contrib.geoa import ModelView
 from wtforms.fields import SelectField
 
 from .. import db
@@ -103,6 +104,8 @@ class WeatherForView(ModelView):
 
 class TrailView(ModelView):
 	column_exclude_list = ('geom')
+	
+	column_searchable_list = ('name', 'ttype')
 
 
 #class TrailView(ModelView):
@@ -130,3 +133,4 @@ admin.add_view(UserView(User, db.session))
 admin.add_view(WeatherObView(WeatherOb, db.session))
 admin.add_view(WeatherForView(WeatherFor, db.session))
 admin.add_view(TrailView(Trail, db.session))
+admin.add_view(ModelView(POI, db.session))

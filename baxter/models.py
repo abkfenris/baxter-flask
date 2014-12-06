@@ -2,6 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 #from geoalchemy2 import Geometry
 from flask.ext.admin.contrib.geoa.sqltypes import Geometry
+from shapely.geometry import geo
 
 class User(db.Model):
 	"""
@@ -203,7 +204,7 @@ class Trail(db.Model):
 		
 	"""
 	id = db.Column(db.Integer, primary_key=True)
-	geom = db.Column(Geometry('MULTILINESTRING', srid=926919))
+	geom = db.Column(Geometry('MULTILINESTRING', 926919))
 	use_type = db.Column(db.String(40))
 	comments = db.Text()
 	tid = db.Column(db.Integer)
@@ -230,8 +231,57 @@ class Trail(db.Model):
 	max_slope = db.Column(db.Float)
 	avg_slope = db.Column(db.Float)
 	length_ft = db.Column(db.Float)
+	
+	def geojsonitem(self):
+		try:
+			geometry = geo.mapping(self.geom)
+		except AttributeError:
+			geometry = None
+		return {"type": "Feature",
+				"geometry": geometry,
+				"properties": {"name": self.name,
+							   "use_type": self.use_type,
+							   "comments": self.comments,
+							   "tid": self.tid,
+							   "skitrail": self.skitrail,
+							   "length_mi": self.length_mi,
+							   "status": self.status,
+							   "display": self.display,
+							   "pubshare": self.pubshare,
+							   "gpsupdate": self.gpsupdate,
+							   "gpsunit": self.gpsunit,
+							   "gpsuser": self.gpsuser,
+							   "bspaid": self.bspaid,
+							   "tsid": self.tsid,
+							   "display_wu": self.display_wu,
+							   "display_wn": self.display_wn,
+							   "type": self.ttype,
+							   "season": self.season,
+							   "shape_leng": self.shape_leng,
+							   "class": self.tclass,
+							   "maintclass": self.maintclass,
+							   "slength": self.slength,
+							   "min_slope": self.min_slope,
+							   "max_slope": self.max_slope,
+							   "avg_slope": self.avg_slope,
+							   "length_ft": self.length_ft
+							   }
+				}
+	
 
 class POI(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(40))
 	point = db.Column(Geometry("POINT"))
+	
+	def geojsonitem(self):
+		try:
+			geometry = geo.mapping(self.point)
+		except AttributeError:
+			geometry = None
+		return {"type": "Feature",
+				"geometry": geometry,
+				"properties": {
+					"name" : self.name
+					}
+				}
