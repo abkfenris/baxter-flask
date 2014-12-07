@@ -1,15 +1,93 @@
 """
 Admin interface, sets up admin views
 """
+import os
+import os.path as op
 
+from flask import url_for
 from flask.ext.admin import Admin
 #from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin.contrib.geoa import ModelView
 from wtforms.fields import SelectField
+from sqlalchemy.event import listens_for
+from flask.ext.admin.form import FileUploadField, ImageUploadField, thumbgen_filename
+from flask.ext.admin.model import InlineFormAdmin
+from jinja2 import Markup
 
 from .. import db
-from ..models import User, WeatherOb, WeatherFor, Trail, POI, AvalanchePath, AvalancheIn, AvalancheInvolved
-#from .fields import WTFormsMapField
+from ..models import User, WeatherOb, WeatherFor, Trail, POI, AvalanchePath, AvalancheIn, AvalancheInvolved, Photo, SnowPit
+
+# File path
+file_path = op.join(op.dirname(__file__), 'files')
+try:
+    os.mkdir(file_path)
+except OSError:
+    pass
+
+# Delete Hook for SnowPit, delete file if model is deleted
+@listens_for(SnowPit, 'after_delete')
+def del_snowpit(mapper, connection, target):
+    if target.path:
+        try:
+            os.remove(op.join(file_path, target.path))
+        except OSError:
+            # Don't care as it doesn't exist
+            pass
+
+@listens_for(Photo, 'after_delete')
+def del_photo(mapper, connection, target):
+    if target.path:
+        # Delete Image
+        try:
+            os.remove(op.join(file_path, target.path))
+        except OSError:
+            pass
+        
+        # Delete the thumbnail
+        try:
+            os.remove(op.join(file_path, thumbgen_filename(target.path)))
+        except OSError:
+            pass
+
+
+
+class FileView(ModelView):
+    form_overrides = {'path': FileUploadField}
+    form_args = {'path': {'label': 'File',
+                          'base_path': file_path}}
+
+class InlineFileView(InlineFormAdmin):
+    form_overrides = {'path': FileUploadField}
+    form_args = {'path': {'label': 'File',
+                          'base_path': file_path}}
+
+class ImageView(ModelView):
+    #def _list_thumbnail(view, contex, model, name):
+    #    if not model.path:
+    #        return ''
+    #    
+    #    return Markup('<img src="%s">' % url_for('admin.static', filename=thumbgen_filename(model.path)))
+    
+    #column_formatters = {
+    #    'path': _list_thumbnail
+    #}
+    form_extra_fields = {
+        'path': ImageUploadField('Photo',
+                                base_path=file_path, 
+                                thumbnail_size=(100,100, True))
+    }
+
+class InlineImageView(InlineFormAdmin):
+    form_overrides = {'path': ImageUploadField}
+    form_args = {'path': {'label': 'Photo',
+                          'base_path': file_path}}
+    #form_extra_fields = {
+    #    'path': ImageUploadField('Photo',
+    #                            base_path=file_path, 
+    #                            thumbnail_size=(100,100, True))
+    #}
+
+
 
 class UserView(ModelView):
 	pass
@@ -125,7 +203,9 @@ class TrailView(ModelView):
 #		return form_class
 
 class AvalancheInView(ModelView):
-    inline_models = (AvalancheInvolved,)
+    inline_models = (AvalancheInvolved, 
+                     InlineFileView(SnowPit), 
+                     InlineImageView(Photo),)
     form_overrides = dict(aspect=SelectField, 
                           trigger=SelectField,
                           trigger_add=SelectField,
@@ -210,7 +290,6 @@ class AvalancheInView(ModelView):
     		]
 		)
     )
-	
 
 
 admin = Admin(name='Baxter Data')
@@ -222,3 +301,5 @@ admin.add_view(ModelView(Trail, db.session))
 admin.add_view(ModelView(POI, db.session))
 admin.add_view(ModelView(AvalanchePath, db.session))
 admin.add_view(AvalancheInView(AvalancheIn, db.session))
+admin.add_view(FileView(SnowPit, db.session))
+admin.add_view(ImageView(Photo, db.session))

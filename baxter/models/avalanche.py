@@ -38,6 +38,7 @@ class AvalancheIn(db.Model):
     __tablename__ = 'avalanche_ins'
     
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     observer = db.relationship('User', backref='avalanche_incidents')
@@ -49,12 +50,14 @@ class AvalancheIn(db.Model):
     occurence_date = db.Column(db.DateTime)
     location = db.Column(db.Text)
     elevation = db.Column(db.Integer)
+
     aspect = db.Column(db.String(40))
     trigger = db.Column(db.String(40))
     trigger_add = db.Column(db.String(40))
     av_problem = db.Column(db.String(40))
     av_type = db.Column(db.String(40))
     weak_layer = db.Column(db.String(40))
+
     depth = db.Column(db.Float)
     width = db.Column(db.Float)
     vertical = db.Column(db.Float)
@@ -101,7 +104,10 @@ class AvalancheInvolved(db.Model):
     carried = db.Column(db.Boolean)
     burried = db.Column(db.Boolean)
     rescuer = db.Column(db.Boolean)
-	
+    
+    locations = db.Column(Geometry('MULTIPOINT', 926919))
+    
+
 #
 #class AvalancheFor(dn.Model):
 #	"""
