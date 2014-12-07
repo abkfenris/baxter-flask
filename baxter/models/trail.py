@@ -85,8 +85,19 @@ class POI(db.Model):
     __tablename__ = 'points_of_interests'
     
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(40))
+    name = db.Column(db.String(40))    
     point = db.Column(Geometry("POINT", 926919))
+    bspaid = db.Column(db.String(40))
+    poiid = db.Column(db.Integer)
+    poi_group = db.Column(db.String(40))
+    poi_class = db.Column(db.String(40))
+    poi_type = db.Column(db.String(40))
+    remark = db.Column(db.Text)
+    elev_ft = db.Column(db.Float)
+    public_share = db.Column(db.Boolean)
+    site_capacity = db.Column(db.Integer)
+    facility_id = db.Column(db.Integer)
+    
     
     def geojsonitem(self):
         try:

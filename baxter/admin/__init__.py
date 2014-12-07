@@ -8,7 +8,7 @@ from flask.ext.admin.contrib.geoa import ModelView
 from wtforms.fields import SelectField
 
 from .. import db
-from ..models import User, WeatherOb, WeatherFor, Trail, POI, AvalanchePath
+from ..models import User, WeatherOb, WeatherFor, Trail, POI, AvalanchePath, AvalancheIn, AvalancheInvolved
 #from .fields import WTFormsMapField
 
 class UserView(ModelView):
@@ -123,7 +123,9 @@ class TrailView(ModelView):
 #		form_class = super(TrailView, self).scaffold_form()
 #		form_class.geom = WTFormsMapField()
 #		return form_class
-		
+
+class AvalancheInView(ModelView):
+    inline_models = (AvalancheInvolved,)
 	
 
 
@@ -134,3 +136,5 @@ admin.add_view(WeatherObView(WeatherOb, db.session))
 admin.add_view(WeatherForView(WeatherFor, db.session))
 admin.add_view(ModelView(Trail, db.session))
 admin.add_view(ModelView(POI, db.session))
+admin.add_view(ModelView(AvalanchePath, db.session))
+admin.add_view(AvalancheInView(AvalancheIn, db.session))
