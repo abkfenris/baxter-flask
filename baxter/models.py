@@ -1,7 +1,7 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 #from geoalchemy2 import Geometry
-from flask.ext.admin.contrib.geoa.sqltypes import Geometry
+from geoalchemy2 import Geometry
 from shapely.geometry import geo
 
 class User(db.Model):
@@ -176,8 +176,26 @@ class WeatherFor(db.Model):
 	
 	body = db.Column(db.Text)
 
+class AvalanchePath(db.model):
+    """
+    Avalanche Path
+    
+    Arguments:
+        id (int): Primary Key
+        name (string): Path Name
+        description (text): Description of path
+        path (Polygon): Avalanche Path
+    """
+    __tablename__ = 'avalanche_paths__'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    description = db.Column(db.Text)
+    path = db.Column(Geomentry('POLYGON', 926919))
+
+
 #
-#class Avalanche(db.Model):
+#class AvalancheIn(db.Model):
 #	"""
 #	Avalanche Incident
 #	
@@ -187,7 +205,7 @@ class WeatherFor(db.Model):
 #		name (string):
 #		date (datetime): 
 #	"""
-#	__tablename__ = 'avalanches'
+#	__tablename__ = 'avalanche_ins'
 #
 #class AvalancheFor(dn.Model):
 #	"""
