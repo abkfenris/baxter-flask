@@ -13,6 +13,7 @@ down_revision = '2cf6c7c1f0d7'
 from alembic import op
 import sqlalchemy as sa
 import flask_admin
+import geoalchemy2
 
 
 def upgrade():
@@ -21,7 +22,7 @@ def upgrade():
     #    batch_op.drop_index('idx_POI_point')
 
     with op.batch_alter_table('trail', schema=None) as batch_op:
-        batch_op.add_column(sa.Column('geom', flask_admin.contrib.geoa.sqltypes.Geometry(geometry_type='MULTILINESTRING'), nullable=True))
+        batch_op.add_column(sa.Column('geom', geoalchemy2.types.Geometry(geometry_type='MULTILINESTRING'), nullable=True))
 
     ### end Alembic commands ###
 

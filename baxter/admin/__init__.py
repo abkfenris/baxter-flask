@@ -8,7 +8,7 @@ from flask.ext.admin.contrib.geoa import ModelView
 from wtforms.fields import SelectField
 
 from .. import db
-from ..models import POI, User, WeatherOb, WeatherFor, Trail
+from ..models import User, WeatherOb, WeatherFor, Trail, POI, AvalanchePath
 #from .fields import WTFormsMapField
 
 class UserView(ModelView):
@@ -132,5 +132,5 @@ admin = Admin(name='Baxter Data')
 admin.add_view(UserView(User, db.session))
 admin.add_view(WeatherObView(WeatherOb, db.session))
 admin.add_view(WeatherForView(WeatherFor, db.session))
-admin.add_view(TrailView(Trail, db.session))
+admin.add_view(ModelView(Trail, db.session))
 admin.add_view(ModelView(POI, db.session))
