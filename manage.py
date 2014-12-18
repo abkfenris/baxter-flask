@@ -11,7 +11,7 @@ if os.environ.get('FLASK_COVERAGE'):
 
 from flask import url_for, Flask
 from baxter import create_app, db
-from baxter.models import User, WeatherOb, WeatherFor, Trail, POI, AvalanchePath
+from baxter.models import User, Role, WeatherOb, WeatherFor, Trail, POI, AvalanchePath
 # from baxter.models import 
 from flask.ext.script import Manager, Shell
 import config

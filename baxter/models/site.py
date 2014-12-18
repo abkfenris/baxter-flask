@@ -1,9 +1,35 @@
 from .. import db
-from werkzeug.security import generate_password_hash, check_password_hash
+#from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.security import UserMixin, RoleMixin, SQLAlchemyUserDatastore
 
-class User(db.Model):
+roles_users = db.Table('roles_users',
+	db.Column('user_id', db.Integer(), db.ForeignKey('users.id')),
+	db.Column('role_id', db.Integer(), db.ForeignKey('roles.id')))
+
+class Role(db.Model, RoleMixin):
+	"""
+	Role Model
+	
+	Using Flask-Security's RoleMixin
+	
+	Arguments:
+		id (int): Primary Role Key
+		name (str): Role name for reference in admin and for restrictions
+		description (str): Role description
+	"""
+	__tablename__ = 'roles'
+	
+	id = db.Column(db.Integer(), primary_key=True)
+	name = db.Column(db.String(80), unique=True)
+	description = db.Column(db.String(255))
+	
+
+
+class User(db.Model, UserMixin):
 	"""
 	User model
+	
+	Using Flask-Security's UserMixin
 	
 	Arguments:
 		id (int): Primary User Key
@@ -16,36 +42,21 @@ class User(db.Model):
 	__tablename__ = 'users'
 	
 	id = db.Column(db.Integer, primary_key=True)
+	email = db.Column(db.String(255), unique=True)
+	password = db.Column(db.String(255))
+	active = db.Column(db.Boolean())
+	confirmed_at = db.Column(db.DateTime())
+	
+	roles = db.relationship('Role', secondary=roles_users,
+							backref=db.backref('users', lazy='dynamic'))
+	
+
+	observer = db.Column(db.Boolean, default=False)
 	username = db.Column(db.String(80), unique=True)
 	first = db.Column(db.String(80))
 	last = db.Column(db.String(80))
-	email = db.Column(db.String(120), unique=True)
-	password_hash = db.Column(db.String(128))
-	observer = db.Column(db.Boolean, default=False)
-	
-	@property
-	def password(self):
-		raise AttributeError('password is not a readable atribute')
-	
-	@password.setter
-	def password(self, password):
-		"""
-		Takes user generated password and uses werkzeug.security to create a hash and stores it.
-		"""
-		self.password_hash = generate_password_hash(password)
-	
-	def verify_password(self, password):
-		"""
-		Verify's user's password against stored werkzeug.security hash.
-		
-		Arguments:
-			password (str): password to check against stored hash
-		"""
-		return check_password_hash(self.password_hash, password)
-	
-	# def __init__(self, username, email):
-	# 	self.username = username
-	# 	self.email = email
 	
 	def __repr__(self):
 		return '<User %r>' % self.username
+
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)

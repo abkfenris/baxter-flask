@@ -1,4 +1,4 @@
-from .site import User
+from .site import User, Role, user_datastore
 
 from .weather import WeatherOb, WeatherFor
 
