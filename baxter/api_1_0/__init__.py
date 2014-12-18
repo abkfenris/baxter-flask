@@ -12,7 +12,7 @@ api = Blueprint('api', __name__)
 
 @api.route('/<id>')
 def trail(id):
-	query = db.session.query(Trail.name, Trail.geom.ST_AsGeoJSON().label('geojson')).filter_by(id=id)
+	query = db.session.query(Trail.name, Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')).filter_by(id=id)
 	
 	return jsonify({
 		'type': 'Feature',
