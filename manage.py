@@ -16,10 +16,42 @@ from baxter.models import User, Role, WeatherOb, WeatherFor, Trail, POI, Avalanc
 from flask.ext.script import Manager, Shell
 import config
 from flask.ext.migrate import Migrate, MigrateCommand
+from flask.ext.security.script import CreateUserCommand, CreateRoleCommand, AddRoleCommand, RemoveRoleCommand, ActivateUserCommand, DeactivateUserCommand
 
 app = create_app('default')
 manager = Manager(app)
 migrate = Migrate(app, db)
+
+def sub_opts(app, **kwargs):
+	pass
+user_manager_desc = ("'user create_user --email name@server.com --password initialpass'" + '\n'
+	+'words')
+user_manager = Manager(sub_opts, usage='User and role management', description=user_manager_desc)
+
+class CreateUserC(CreateUserCommand):
+	"""
+	Create a user: -e or --email name@server.com, -p or --password initialpass, -a or --active y or active
+	"""
+	pass
+class CreateRoleC(CreateRoleCommand):
+	"""
+	Create a role: -n or --name role_name, -d or --desc role_description
+	"""
+	pass
+class AddRoleC(AddRoleCommand):
+	"""
+	Add a role to a user: -u or --user name@server.com, -r or --role role_name
+	"""
+	pass
+
+
+
+user_manager.add_command('create_user', CreateUserC())
+user_manager.add_command('create_role', CreateRoleC())
+user_manager.add_command('add_role', AddRoleC())
+
+manager.add_command('user', user_manager)
+
 
 manager.add_command('db', MigrateCommand)
 
