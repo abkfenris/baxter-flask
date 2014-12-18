@@ -4,14 +4,15 @@ Admin interface, sets up admin views
 import os
 import os.path as op
 
-from flask import url_for
-from flask.ext.admin import Admin
+from flask import url_for, redirect
+from flask.ext.admin import Admin, AdminIndexView, expose
 #from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin.contrib.geoa import ModelView
 from wtforms.fields import SelectField
 from sqlalchemy.event import listens_for
 from flask.ext.admin.form import FileUploadField, ImageUploadField, thumbgen_filename
 from flask.ext.admin.model import InlineFormAdmin
+from flask.ext.security import roles_required, roles_accepted, current_user, login_required
 from jinja2 import Markup
 
 from .. import db
@@ -90,7 +91,9 @@ class InlineImageView(InlineFormAdmin):
 
 
 class UserView(ModelView):
-	pass
+	def is_accessible(self):
+		return current_user.has_role('admin')
+	
 
 # http://wtforms.readthedocs.org/en/latest/ext.html#module-wtforms.ext.sqlalchemy
 def observers():
@@ -292,7 +295,17 @@ class AvalancheInView(ModelView):
     )
 
 
-admin = Admin(name='Baxter Data')
+class MyAdminIndexView(AdminIndexView):
+	
+	@expose('/')
+	def index(self):
+		if not current_user.is_authenticated():
+			return redirect(url_for('security.login'))
+		return super(MyAdminIndexView, self).index()
+	
+
+
+admin = Admin(name='Baxter Data', index_view=MyAdminIndexView())
 
 admin.add_view(UserView(User, db.session))
 admin.add_view(WeatherObView(WeatherOb, db.session, name="Weather Observations", category="Weather"))
@@ -303,3 +316,10 @@ admin.add_view(ModelView(AvalanchePath, db.session, name="Avalanche Path", categ
 admin.add_view(AvalancheInView(AvalancheIn, db.session, name="Avalanche Incident", category="Snow"))
 admin.add_view(FileView(SnowPit, db.session, name="Snow Pits", category="Snow"))
 admin.add_view(ImageView(Photo, db.session))
+
+#@admin.before_request
+#@login_required
+#def before_request():
+#	pass
+#    #if g.user.role != ROLE_ADMIN:
+#    #    abort(401)
