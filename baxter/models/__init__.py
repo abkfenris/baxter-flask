@@ -1,11 +1,11 @@
 from .site import User
 
-from weather import WeatherOb, WeatherFor
+from .weather import WeatherOb, WeatherFor
 
-from avalanche import AvalanchePath, AvalancheIn, AvalancheInvolved
+from .avalanche import AvalanchePath, AvalancheIn, AvalancheInvolved
 
-from trail import Trail, POI
+from .trail import Trail, POI
 
-from photo import Photo
+from .photo import Photo
 
-from snow import SnowPit
+from .snow import SnowPit

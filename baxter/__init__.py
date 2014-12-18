@@ -24,13 +24,13 @@ def create_app(config_name):
 	
 	toolbar.init_app(app)
 	
-	from main import main
+	from .main import main
 	app.register_blueprint(main)
 	
-	from admin import admin
+	from .admin import admin
 	admin.init_app(app)
 	
-	from api_1_0 import api as api_1_0_blueprint
+	from . api_1_0 import api as api_1_0_blueprint
 	app.register_blueprint(api_1_0_blueprint, url_prefix='/api/1.0')
 	
 	return app
