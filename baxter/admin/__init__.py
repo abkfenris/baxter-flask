@@ -6,6 +6,7 @@ import os.path as op
 
 from flask import url_for, redirect
 from flask.ext.admin import Admin, AdminIndexView, expose
+from flask.ext.admin.base import MenuLink
 #from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.admin.contrib.geoa import ModelView
 from wtforms.fields import SelectField
@@ -303,6 +304,10 @@ class MyAdminIndexView(AdminIndexView):
 			return redirect(url_for('security.login'))
 		return super(MyAdminIndexView, self).index()
 	
+class AuthenticatedMenuLink(MenuLink):
+	def is_accessible(self):
+		return current_user.is_authenticated()
+
 
 
 admin = Admin(name='Baxter Data', index_view=MyAdminIndexView())
@@ -316,6 +321,7 @@ admin.add_view(ModelView(AvalanchePath, db.session, name="Avalanche Path", categ
 admin.add_view(AvalancheInView(AvalancheIn, db.session, name="Avalanche Incident", category="Snow"))
 admin.add_view(FileView(SnowPit, db.session, name="Snow Pits", category="Snow"))
 admin.add_view(ImageView(Photo, db.session))
+admin.add_link(AuthenticatedMenuLink(name='Logout', endpoint='security.logout'))
 
 #@admin.before_request
 #@login_required
