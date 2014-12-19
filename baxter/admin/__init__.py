@@ -8,7 +8,7 @@ from flask import url_for, redirect
 from flask.ext.admin import Admin, AdminIndexView, expose
 from flask.ext.admin.base import MenuLink
 #from flask.ext.admin.contrib.sqla import ModelView
-from flask.ext.admin.contrib.geoa import ModelView
+from flask.ext.admin.contrib.geoa import ModelView as _ModelView
 from wtforms.fields import SelectField
 from sqlalchemy.event import listens_for
 from flask.ext.admin.form import FileUploadField, ImageUploadField, thumbgen_filename
@@ -51,6 +51,13 @@ def del_photo(mapper, connection, target):
         except OSError:
             pass
 
+class ModelView(_ModelView):
+	def is_accessible(self):
+		return current_user.is_authenticated()
+		
+	def inaccessible_callback(self, name, **kwargs):
+		return redirect(url_for('security.login'))
+	
 
 
 class FileView(ModelView):
