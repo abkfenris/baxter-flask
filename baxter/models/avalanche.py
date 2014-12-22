@@ -107,8 +107,20 @@ class AvalancheInvolved(db.Model):
     locations = db.Column(Geometry('MULTIPOINT', 926919))
 
 
+class AvalancheProb(db.Model):
+    """
+    Avalanche Problems
+    """
+    __tablename__ = 'avalanche_problems'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    definition = db.Column(db.Text)
+    photo = db.Column(db.String(160))
+
+
 #
-#class AvalancheFor(dn.Model):
+#class AvalancheFor(db.Model):
 #	"""
 #	Avalanche Forecast
 #

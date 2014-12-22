@@ -24,7 +24,8 @@ from .. import db
 from ..models import (User,
                       WeatherOb, WeatherFor,
                       Trail, POI,
-                      AvalanchePath, AvalancheIn, AvalancheInvolved,
+                      AvalanchePath, AvalancheIn,
+                      AvalancheInvolved, AvalancheProb,
                       Photo, SnowPit)
 
 # File path
@@ -195,6 +196,10 @@ class TrailView(ModelView):
     column_searchable_list = ('name', 'ttype')
 
 
+class AvalancheProbView(ModelView):
+    pass
+
+
 #class TrailView(ModelView):
 #    can_create = True
 #    column_exclude_list = ('geom')
@@ -350,6 +355,11 @@ admin.add_view(AvalancheInView(AvalancheIn, db.session,
                                category="Snow",
                                endpoint='admin.avalanchein',
                                url='avalanchein'))
+admin.add_view(AvalancheProbView(AvalancheProb, db.session,
+                                 name="Avalanche Problems",
+                                 category="Snow",
+                                 endpoint='admin.avalancheprob',
+                                 url='avalancheprob'))
 admin.add_view(FileView(SnowPit, db.session,
                         name="Snow Pits",
                         category="Snow",
