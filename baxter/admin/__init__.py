@@ -26,6 +26,7 @@ from ..models import (User,
                       Trail, POI,
                       AvalanchePath, AvalancheIn,
                       AvalancheInvolved, AvalancheProb,
+                      AvalancheInProb,
                       Photo, SnowPit)
 
 # File path
@@ -75,6 +76,10 @@ class FileView(ModelView):
     form_overrides = {'path': FileUploadField}
     form_args = {'path': {'label': 'File',
                           'base_path': file_path}}
+
+
+class InlineAvalancheInProb(InlineFormAdmin):
+    pass
 
 
 class InlineFileView(InlineFormAdmin):
@@ -219,7 +224,8 @@ class AvalancheProbView(ModelView):
 class AvalancheInView(ModelView):
     inline_models = (AvalancheInvolved,
                      InlineFileView(SnowPit),
-                     InlineImageView(Photo),)
+                     InlineImageView(Photo),
+                     InlineAvalancheInProb(AvalancheInProb))
     form_overrides = dict(aspect=SelectField,
                           trigger=SelectField,
                           trigger_add=SelectField,

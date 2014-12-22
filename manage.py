@@ -12,7 +12,8 @@ from baxter.models import (User, Role,
                            WeatherOb, WeatherFor,
                            Trail, POI,
                            AvalanchePath, AvalancheInvolved,
-                           AvalancheIn, AvalancheProb)
+                           AvalancheIn, AvalancheProb,
+                           AvalancheInProb)
 from baxter.user_manager import user_manager
 # from baxter.models import
 from flask.ext.script import Manager, Shell
@@ -35,7 +36,8 @@ def make_shell_context():
                 WeatherOb=WeatherOb, WeatherFor=WeatherFor,
                 Trail=Trail, POI=POI, AvalanchePath=AvalanchePath,
                 AvalancheInvolved=AvalancheInvolved,
-                AvalancheIn=AvalancheIn, AvalancheProb=AvalancheProb)
+                AvalancheIn=AvalancheIn, AvalancheProb=AvalancheProb,
+                AvalancheInProb=AvalancheInProb)
 manager.add_command('shell', Shell(make_context=make_shell_context))
 
 

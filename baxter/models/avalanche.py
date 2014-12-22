@@ -118,6 +118,32 @@ class AvalancheProb(db.Model):
     definition = db.Column(db.Text)
     photo = db.Column(db.String(160))
 
+    def __repr__(self):
+        return self.name
+
+
+class AvalancheInProb(db.Model):
+    """
+    Avalanche Incident and Problem complex connector
+    """
+    __tablename__ = 'avalanche_ob_problem'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    incident_id = db.Column(db.Integer, db.ForeignKey('avalanche_ins.id'))
+    incident = db.relationship('AvalancheIn', backref='problems')
+
+    problem_id = db.Column(db.Integer, db.ForeignKey('avalanche_problems.id'))
+    problem = db.relationship('AvalancheProb', backref='incidents')
+
+    importance = db.Column(db.Integer)
+    aspects = db.Column(db.String(80))
+    likelyhood = db.Column(db.String(40))
+    size = db.Column(db.String(40))
+    trend = db.Column(db.String(40))
+    discussion = db.Column(db.Text)
+
+
 
 #
 #class AvalancheFor(db.Model):

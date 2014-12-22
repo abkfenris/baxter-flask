@@ -5,7 +5,8 @@ from .weather import WeatherOb, WeatherFor
 from .avalanche import (AvalanchePath,
                         AvalancheIn,
                         AvalancheInvolved,
-                        AvalancheProb)
+                        AvalancheProb,
+                        AvalancheInProb)
 
 from .trail import Trail, POI
 
