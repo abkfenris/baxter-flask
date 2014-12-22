@@ -316,28 +316,48 @@ class AuthenticatedMenuLink(MenuLink):
 
 admin = Admin(name='Baxter Data', index_view=MyAdminIndexView())
 
-admin.add_view(UserView(User, db.session))
+admin.add_view(UserView(User, db.session,
+                        name="Users",
+                        endpoint='admin.users',
+                        url='user'))
 admin.add_view(WeatherObView(WeatherOb, db.session,
                              name="Weather Observations",
-                             category="Weather"))
+                             category="Weather",
+                             endpoint='admin.weatherob',
+                             url='weatherob'))
 admin.add_view(WeatherForView(WeatherFor, db.session,
                               name="Weather Forecasts",
-                              category="Weather"))
+                              category="Weather",
+                              endpoint='admin.weatherfor',
+                              url='weatherfor'))
 admin.add_view(ModelView(Trail, db.session,
                          name="Trails",
-                         category="Geospatial"))
+                         category="Geospatial",
+                         endpoint='admin.trail',
+                         url='trail'))
 admin.add_view(ModelView(POI, db.session,
                          name="POI",
-                         category="Geospatial"))
+                         category="Geospatial",
+                         endpoint='admin.poi',
+                         url='poi'))
 admin.add_view(ModelView(AvalanchePath, db.session,
                          name="Avalanche Path",
-                         category="Snow"))
+                         category="Snow",
+                         endpoint='admin.avalanchepath',
+                         url='avalanchepath'))
 admin.add_view(AvalancheInView(AvalancheIn, db.session,
                                name="Avalanche Incident",
-                               category="Snow"))
+                               category="Snow",
+                               endpoint='admin.avalanchein',
+                               url='avalanchein'))
 admin.add_view(FileView(SnowPit, db.session,
                         name="Snow Pits",
-                        category="Snow"))
-admin.add_view(ImageView(Photo, db.session))
+                        category="Snow",
+                        endpoint='admin.snowpit',
+                        url='snowpit'))
+admin.add_view(ImageView(Photo, db.session,
+                         name="Photos",
+                         endpoint='admin.photo',
+                         url='photo'))
 admin.add_link(AuthenticatedMenuLink(name='Logout',
                                      endpoint='security.logout'))
