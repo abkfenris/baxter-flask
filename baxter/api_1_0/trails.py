@@ -7,6 +7,7 @@ import json
 
 from . import api
 from .. import db
+from .. import cache
 from ..models import Trail
 
 @api.route('/trails/<id>')
@@ -25,6 +26,7 @@ def trail(id):
 
 
 @api.route('/trails/')
+@cache.cached(timeout=50)
 def list_trails():
     query = db.session.query(Trail.name,
             Trail.id,

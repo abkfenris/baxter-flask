@@ -8,6 +8,7 @@ from flask import Flask
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.security import Security
+from flask.ext.cache import Cache
 from config import config
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -16,6 +17,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 security = Security()
 toolbar = DebugToolbarExtension()
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 from .models import user_datastore
 
@@ -27,6 +29,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     security.init_app(app, user_datastore)
+    cache.init_app(app)
 
     toolbar.init_app(app)
 
