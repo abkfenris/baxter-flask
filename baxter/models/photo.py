@@ -5,6 +5,13 @@ from geoalchemy2 import Geometry
 class Photo(db.Model):
     """
     Photo
+
+    Arguments:
+        id (int): Primary Key for Photos
+        name (Unicode): filename
+        path (Unicode): path to file
+        location (Point): Location of the photo
+        description (text): Photo description
     """
     __tablename__ = 'photoss'
 

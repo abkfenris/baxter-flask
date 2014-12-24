@@ -29,10 +29,34 @@ class AvalancheIn(db.Model):
     Arguments:
         id (int): Primary key
         observer_id (int): Primary foreign key for observer
-        name (string):
-        date (datetime):
-        path_id:
-        path
+        name (string): Name of incident
+        path_id (int): Forign key of Avalanche Path where incident occured
+        path (AvalanchePath): Object of Avalanche Path where incident occured
+        observation_date (datetime): Date observer visited incident site
+        occurence_date (datetime): Date incident occured
+        location (text): Description of incident location
+        elevation (int): Elevation of slide path (ft)
+        aspect (string): Aspect that the slide occured on
+        trigger (string): Start trigger for slide
+        trigger_add (string) Additional trigger information
+        av_problem (string): Avalanche problem type
+        av_type (string): Avalanche type
+        weak_layer (string): Weak layer type
+        depth (float): Depth of displaced snowpack
+        width (float): Width of bed surface
+        vertical (float): Vertical distance that the slide ran
+        slope_angle (float): Steepest Slope Angle
+        people_caught (int): Number of people caught by slide
+        people_carried (int): Number of people carried by slide
+        people_buried_part (int): Number of people partially burried
+        people_buried_full (int): Number of people totally burried
+        snow_profile (text): Description of snowpack
+        image (str): DEPRICATED, use photo function
+        description (text): Description of slide
+        crown (MultiLineString): MultiLineString along crown(s)
+        bed_surface (MultiPolygon): MultiPolygon of bed surface
+        debris_field (MultiPolygon): MultiPolygon of debris field
+        problems (list): List of associated Avalanche Problem objects
     """
     __tablename__ = 'avalanche_ins'
 
@@ -80,6 +104,22 @@ class AvalancheInvolved(db.Model):
 
     Arguments:
         id (int): Primary key
+        incident_id (int): Foreign key for associated avalanche incident
+        incident (AvalancheIn): Object for associated avalanche incident
+        user_id (int): foreign key for associated user
+        user (User): Object for associated user
+        first (str): First Name
+        last (str): Last Name
+        phone (str): Phone Number
+        email (str): Email Address
+        info (Text): More information
+        observed (bool): Did they observe the slide?
+        group (bool): Were they part of the group that triggered the slide?
+        caught (bool): Were they caught by the slide?
+        carried (bool): Were they carried by the slide?
+        burried (bool): Were they burried by the slide?
+        rescuer (bool): Were they a rescuer
+        locations (Multipoint): Different locations where the person was
     """
     __tablename__ = 'avalanche_involved'
 
@@ -110,6 +150,12 @@ class AvalancheInvolved(db.Model):
 class AvalancheProb(db.Model):
     """
     Avalanche Problems
+
+    Arguments:
+        id (int): Primary key
+        name (str): Name of Avalanche Problem
+        definition (Text): Long description of Avalanche Problem in markdown
+        photo (str): path to photo
     """
     __tablename__ = 'avalanche_problems'
 
@@ -125,6 +171,19 @@ class AvalancheProb(db.Model):
 class AvalancheInProb(db.Model):
     """
     Avalanche Incident and Problem complex connector
+
+    Arguments:
+        id (int): Primary key for AvalancheInProb
+        incident_id (int): Foreign Key for associated Avalanche Incident
+        incident (AvalancheIn): Object for associated Avalanche Incident
+        problem_id (int): Foreign Key for associated Avalanche Problem
+        problem (AvalancheProb): Object for associated Avalanche Problem
+        importance (str): Rank when multiple problems, lower more important
+        aspects (str): Aspects effected by slide
+        likelyhood (str): Probability of occurence
+        size (str): Size likely
+        trend (str): Increasing, steady, or decreasing
+        discussion (Text): Discussion of problem
     """
     __tablename__ = 'avalanche_ob_problem'
 

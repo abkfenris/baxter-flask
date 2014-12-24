@@ -40,7 +40,11 @@ class User(db.Model, UserMixin):
         first (str): First name
         last (str): Last name
         email (str): User's email address
-        password_hash (str): Users hashed password
+        active (bool): Is the user activated
+        confirmed_at (Datetime): When was the user confirmed
+        roles (list): List of role objects that the user has
+        observer (bool): Is this user an official observer
+        username (str): Prefered username
     """
     __tablename__ = 'users'
 
