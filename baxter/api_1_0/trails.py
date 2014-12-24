@@ -26,7 +26,7 @@ def trail(id):
 
 
 @api.route('/trails/')
-@cache.cached(timeout=50)
+@cache.cached()
 def list_trails():
     query = db.session.query(Trail.name,
             Trail.id,

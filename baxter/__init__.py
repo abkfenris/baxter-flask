@@ -17,7 +17,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 security = Security()
 toolbar = DebugToolbarExtension()
-cache = Cache(config={'CACHE_TYPE': 'simple'})
+cache = Cache()
 
 from .models import user_datastore
 
