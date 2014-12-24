@@ -1,6 +1,32 @@
 {% extends "base.html" %}
 {% block title %}Trails{% endblock %}
 
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script>
+<script>
+var map = L.map('map').setView([45.9139,-68.9299], 11);
+
+L.tileLayer('http://{s}.tiles.mapbox.com/v3/fenris.kdh92755/{z}/{x}/{y}.png', {
+	attribution: 'Map data &copy; [...]',
+	maxZoom: 18
+}).addTo(map);
+
+function popUp(feature, layer) {
+	layer.bindPopup(feature.properties.name);
+}
+
+var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.list_trails' ) }}", {onEachFeature:popUp});
+geojsonLayer.addTo(map);
+</script>
+{% endblock %}
+
 
 
 {% block content %}
@@ -9,17 +35,14 @@
 	  		<h1>Trails</h1>
   		</div>
 	</div>
-	
+
 	<div class="container">
-	<ul>
-		{% for key in trails %}
-		<li><a href="">{{ key.properties.TName }}</a></li>
-		{% endfor %}
-	</ul>
-		
+		<div id="map" style="height: 600px;"></div>
+
 	</div>
   </div>
 
 </div>
 </div>
+
 {% endblock %}

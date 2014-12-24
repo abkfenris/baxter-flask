@@ -16,3 +16,7 @@ from ..models import User, WeatherOb, WeatherFor
 @main.route('/')
 def index():
     return render_template('index.html')
+
+@main.route('/trails/')
+def trails():
+    return render_template('trails.html')
