@@ -53,8 +53,16 @@ geojsonLayer.addTo(map);
 
 	<div class="container">
 		<div id="map" style="height: 600px;"></div>
+		
+		<div class="list-group">
+			{% for trail in trails %}
+			<a href="{{ url_for('main.trail', id=trail.id) }}" class="list-group-item">{{ trail.name }}</a>
+			{% endfor %}
+		</div>
+
 
 	</div>
+
   </div>
 
 </div>

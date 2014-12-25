@@ -15,7 +15,11 @@ from ..models import Trail
 
 @main.route('/trails/')
 def trails():
-    return render_template('trails.html')
+    query = db.session.query(Trail.name,
+            Trail.id
+            ).filter_by(display=True)
+    trails = query
+    return render_template('trails.html', trails=trails)
 
 
 @main.route('/trails/<id>/')

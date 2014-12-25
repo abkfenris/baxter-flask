@@ -13,13 +13,15 @@ from ..models import Trail
 @api.route('/trails/<id>')
 def trail(id):
     query = db.session.query(Trail.name,
+            Trail.id,
             Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')
-            ).filter_by(id=id)
+            ).filter_by(id=id,display=True)
 
     return jsonify({
         'type': 'Feature',
         'properties': {
             'name': query[0].name,
+            'id': query[0].id
         },
         'geometry': json.loads(query[0].geojson)
     })
@@ -31,7 +33,7 @@ def list_trails():
     query = db.session.query(Trail.name,
             Trail.id,
             Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')
-            )
+            ).filter_by(display=True)
 
     trails = []
     for trail in query:
@@ -39,6 +41,7 @@ def list_trails():
             'type': 'Feature',
             'properties': {
                 'name': trail.name,
+                'id': trail.id,
                 'url': url_for('.trail', id=trail.id)
             },
             'geometry': json.loads(trail.geojson)
