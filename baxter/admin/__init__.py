@@ -325,7 +325,7 @@ class AuthenticatedMenuLink(MenuLink):
         return current_user.is_authenticated()
 
 
-admin = Admin(name='Baxter Data', index_view=MyAdminIndexView())
+admin = Admin(name='Baxter Data', index_view=MyAdminIndexView(), template_mode='bootstrap3')
 
 admin.add_view(UserView(User, db.session,
                         name="Users",
