@@ -15,7 +15,7 @@
 <script>
 var map = L.map('map').setView([46.05,-68.94], 11);
 
-var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/fenris.kdh92755/{z}/{x}/{y}.png', {
+var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/{{ config['MAPBOX_MAP_ID'] }}/{z}/{x}/{y}.png', {
 	attribution: 'Map data &copy; [...]',
 	maxZoom: 18
 })
