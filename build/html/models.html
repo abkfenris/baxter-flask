@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Database models &mdash; Baxter 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Baxter 0.1 documentation" href="index.html"/>
+        <link rel="next" title="HTTP Routes for site" href="routes.html"/>
+        <link rel="prev" title="Baxter package" href="baxter.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> Baxter</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="baxter.html">Baxter package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="baxter.html#main-views">Main views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="baxter.html#module-baxter">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Database models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#avalanche">Avalanche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#snow">Snow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-baxter.models.trail">Trail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-baxter.models.weather">Weather</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-baxter.models.photo">Photo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#site">Site</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="routes.html">HTTP Routes for site</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="routes.html#browseable-routes">Browseable routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routes.html#api-routes">API routes</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Baxter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Database models</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/models.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="database-models">
+<h1>Database models<a class="headerlink" href="#database-models" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="avalanche">
+<h2>Avalanche<a class="headerlink" href="#avalanche" title="Permalink to this headline">¶</a></h2>
+<p>Database models that are related to avalanches.</p>
+<span class="target" id="module-baxter.models.avalanche"></span><dl class="class">
+<dt id="baxter.models.avalanche.AvalancheIn">
+<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheIn</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Avalanche Incident</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary key</li>
+<li><strong>observer_id</strong> (<em>int</em>) &#8211; Primary foreign key for observer</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; Name of incident</li>
+<li><strong>path_id</strong> (<em>int</em>) &#8211; Forign key of Avalanche Path where incident occured</li>
+<li><strong>path</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalanchePath" title="baxter.models.avalanche.AvalanchePath"><em>AvalanchePath</em></a>) &#8211; Object of Avalanche Path where incident occured</li>
+<li><strong>observation_date</strong> (<em>datetime</em>) &#8211; Date observer visited incident site</li>
+<li><strong>occurence_date</strong> (<em>datetime</em>) &#8211; Date incident occured</li>
+<li><strong>location</strong> (<em>text</em>) &#8211; Description of incident location</li>
+<li><strong>elevation</strong> (<em>int</em>) &#8211; Elevation of slide path (ft)</li>
+<li><strong>aspect</strong> (<em>string</em>) &#8211; Aspect that the slide occured on</li>
+<li><strong>trigger</strong> (<em>string</em>) &#8211; Start trigger for slide</li>
+<li><strong>av_problem</strong> (<em>string</em>) &#8211; Avalanche problem type</li>
+<li><strong>av_type</strong> (<em>string</em>) &#8211; Avalanche type</li>
+<li><strong>weak_layer</strong> (<em>string</em>) &#8211; Weak layer type</li>
+<li><strong>depth</strong> (<em>float</em>) &#8211; Depth of displaced snowpack</li>
+<li><strong>width</strong> (<em>float</em>) &#8211; Width of bed surface</li>
+<li><strong>vertical</strong> (<em>float</em>) &#8211; Vertical distance that the slide ran</li>
+<li><strong>slope_angle</strong> (<em>float</em>) &#8211; Steepest Slope Angle</li>
+<li><strong>people_caught</strong> (<em>int</em>) &#8211; Number of people caught by slide</li>
+<li><strong>people_carried</strong> (<em>int</em>) &#8211; Number of people carried by slide</li>
+<li><strong>people_buried_part</strong> (<em>int</em>) &#8211; Number of people partially burried</li>
+<li><strong>people_buried_full</strong> (<em>int</em>) &#8211; Number of people totally burried</li>
+<li><strong>snow_profile</strong> (<em>text</em>) &#8211; Description of snowpack</li>
+<li><strong>image</strong> (<em>str</em>) &#8211; DEPRICATED, use photo function</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Description of slide</li>
+<li><strong>crown</strong> (<em>MultiLineString</em>) &#8211; MultiLineString along crown(s)</li>
+<li><strong>bed_surface</strong> (<em>MultiPolygon</em>) &#8211; MultiPolygon of bed surface</li>
+<li><strong>debris_field</strong> (<em>MultiPolygon</em>) &#8211; MultiPolygon of debris field</li>
+<li><strong>problems</strong> (<em>list</em>) &#8211; List of associated Avalanche Problem objects</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="baxter.models.avalanche.AvalancheInProb">
+<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheInProb</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheInProb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheInProb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Avalanche Incident and Problem complex connector</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary key for AvalancheInProb</li>
+<li><strong>incident_id</strong> (<em>int</em>) &#8211; Foreign Key for associated Avalanche Incident</li>
+<li><strong>incident</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheIn" title="baxter.models.avalanche.AvalancheIn"><em>AvalancheIn</em></a>) &#8211; Object for associated Avalanche Incident</li>
+<li><strong>problem_id</strong> (<em>int</em>) &#8211; Foreign Key for associated Avalanche Problem</li>
+<li><strong>problem</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheProb" title="baxter.models.avalanche.AvalancheProb"><em>AvalancheProb</em></a>) &#8211; Object for associated Avalanche Problem</li>
+<li><strong>importance</strong> (<em>str</em>) &#8211; Rank when multiple problems, lower more important</li>
+<li><strong>aspects</strong> (<em>str</em>) &#8211; Aspects effected by slide</li>
+<li><strong>likelyhood</strong> (<em>str</em>) &#8211; Probability of occurence</li>
+<li><strong>size</strong> (<em>str</em>) &#8211; Size likely</li>
+<li><strong>trend</strong> (<em>str</em>) &#8211; Increasing, steady, or decreasing</li>
+<li><strong>discussion</strong> (<em>Text</em>) &#8211; Discussion of problem</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="baxter.models.avalanche.AvalancheInvolved">
+<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheInvolved</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheInvolved"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheInvolved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>People involved in avalanches</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary key</li>
+<li><strong>incident_id</strong> (<em>int</em>) &#8211; Foreign key for associated avalanche incident</li>
+<li><strong>incident</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheIn" title="baxter.models.avalanche.AvalancheIn"><em>AvalancheIn</em></a>) &#8211; Object for associated avalanche incident</li>
+<li><strong>user_id</strong> (<em>int</em>) &#8211; foreign key for associated user</li>
+<li><strong>user</strong> (<a class="reference internal" href="#baxter.models.site.User" title="baxter.models.site.User"><em>User</em></a>) &#8211; Object for associated user</li>
+<li><strong>first</strong> (<em>str</em>) &#8211; First Name</li>
+<li><strong>last</strong> (<em>str</em>) &#8211; Last Name</li>
+<li><strong>phone</strong> (<em>str</em>) &#8211; Phone Number</li>
+<li><strong>email</strong> (<em>str</em>) &#8211; Email Address</li>
+<li><strong>info</strong> (<em>Text</em>) &#8211; More information</li>
+<li><strong>observed</strong> (<em>bool</em>) &#8211; Did they observe the slide?</li>
+<li><strong>group</strong> (<em>bool</em>) &#8211; Were they part of the group that triggered the slide?</li>
+<li><strong>caught</strong> (<em>bool</em>) &#8211; Were they caught by the slide?</li>
+<li><strong>carried</strong> (<em>bool</em>) &#8211; Were they carried by the slide?</li>
+<li><strong>burried</strong> (<em>bool</em>) &#8211; Were they burried by the slide?</li>
+<li><strong>rescuer</strong> (<em>bool</em>) &#8211; Were they a rescuer</li>
+<li><strong>locations</strong> (<em>Multipoint</em>) &#8211; Different locations where the person was</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="baxter.models.avalanche.AvalanchePath">
+<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalanchePath</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalanchePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalanchePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Avalanche Path</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary Key</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; Path Name</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Description of path</li>
+<li><strong>path</strong> (<em>Polygon</em>) &#8211; Avalanche Path</li>
+<li><strong>incidents</strong> (<em>List</em>) &#8211; List of Avalanche Incidents</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="baxter.models.avalanche.AvalancheProb">
+<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheProb</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheProb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheProb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Avalanche Problems</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary key</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; Name of Avalanche Problem</li>
+<li><strong>definition</strong> (<em>Text</em>) &#8211; Long description of Avalanche Problem in markdown</li>
+<li><strong>photo</strong> (<em>str</em>) &#8211; path to photo</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="snow">
+<h2>Snow<a class="headerlink" href="#snow" title="Permalink to this headline">¶</a></h2>
+<p>Database models that are related to snow.</p>
+<span class="target" id="module-baxter.models.snow"></span><dl class="class">
+<dt id="baxter.models.snow.SnowPit">
+<em class="property">class </em><code class="descclassname">baxter.models.snow.</code><code class="descname">SnowPit</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/snow.html#SnowPit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.snow.SnowPit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Snowpit</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-baxter.models.trail">
+<span id="trail"></span><h2>Trail<a class="headerlink" href="#module-baxter.models.trail" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="baxter.models.trail.POI">
+<em class="property">class </em><code class="descclassname">baxter.models.trail.</code><code class="descname">POI</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#POI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.POI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Points of Interest</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) &#8211; Primary Key</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="baxter.models.trail.Trail">
+<em class="property">class </em><code class="descclassname">baxter.models.trail.</code><code class="descname">Trail</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Arguments:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-baxter.models.weather">
+<span id="weather"></span><h2>Weather<a class="headerlink" href="#module-baxter.models.weather" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="baxter.models.weather.WeatherFor">
+<em class="property">class </em><code class="descclassname">baxter.models.weather.</code><code class="descname">WeatherFor</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/weather.html#WeatherFor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.weather.WeatherFor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Weather Forecast</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primay Key</li>
+<li><strong>observer_id</strong> (<em>int</em>) &#8211; Forecaster/Observer foreign id</li>
+<li><strong>oberver</strong> &#8211; Forecaster/Observer object</li>
+<li><strong>Condition</strong> (<em>list</em>) &#8211; Mountain Condition</li>
+<li><strong>for_temp_high</strong> (<em>int</em>) &#8211; High temperature</li>
+<li><strong>for_temp_low</strong> (<em>int</em>) &#8211; Low temperature</li>
+<li><strong>trail_comment</strong> (<em>text</em>) &#8211; Trail condition information</li>
+<li><strong>for_today</strong> (<em>text</em>) &#8211; Today&#8217;s forecast</li>
+<li><strong>for_tomorrow</strong> (<em>text</em>) &#8211; Tomorrow&#8217;s forecast</li>
+<li><strong>for_long</strong> (<em>text</em>) &#8211; Long term forecast</li>
+<li><strong>body</strong> (<em>text</em>) &#8211; Forecasters&#8217;s comments</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="baxter.models.weather.WeatherOb">
+<em class="property">class </em><code class="descclassname">baxter.models.weather.</code><code class="descname">WeatherOb</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/weather.html#WeatherOb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.weather.WeatherOb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<p>Weather Observation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary Key</li>
+<li><strong>observer_id</strong> (<em>int</em>) &#8211; Primary foreign key for observer</li>
+<li><strong>observer</strong> (<em>object</em>) &#8211; Observer foreign object</li>
+<li><strong>date</strong> (<em>datetime</em>) &#8211; When the observation was taken</li>
+<li><strong>sky</strong> (<em>str</em>) &#8211; Sky Cover</li>
+<li><strong>precip_type</strong> (<em>str</em>) &#8211; Precipitation Type</li>
+<li><strong>precip_rate</strong> (<em>float</em>) &#8211; Precipitation Rate per hour</li>
+<li><strong>temp_max</strong> (<em>float</em>) &#8211; Maximum 24 hour Temperature</li>
+<li><strong>temp_min</strong> (<em>float</em>) &#8211; Minimum 24 hour Temperature</li>
+<li><strong>temp_present</strong> (<em>float</em>) &#8211; Current Temperature</li>
+<li><strong>temp_trend</strong> (<em>string</em>) &#8211; Temp rising/falling/rate</li>
+<li><strong>pressure_present</strong> (<em>float</em>) &#8211; Current Pressure</li>
+<li><strong>pressure_trend</strong> (<em>string</em>) &#8211; Pressure rising/falling/rate</li>
+<li><strong>humidity</strong> (<em>float</em>) &#8211; Relative Humidity</li>
+<li><strong>wind_speed</strong> (<em>float</em>) &#8211; Wind speed</li>
+<li><strong>wind_direction</strong> (<em>str</em>) &#8211; Wind direction</li>
+<li><strong>wind_gust_max</strong> (<em>float</em>) &#8211; Maximum gust speed</li>
+<li><strong>snow_depth</strong> (<em>float</em>) &#8211; Height of snow depth</li>
+<li><strong>snow_24</strong> (<em>float</em>) &#8211; 24 hour snow depth</li>
+<li><strong>snow_storm</strong> (<em>float</em>) &#8211; Storm snow depth</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-baxter.models.photo">
+<span id="photo"></span><h2>Photo<a class="headerlink" href="#module-baxter.models.photo" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="baxter.models.photo.Photo">
+<em class="property">class </em><code class="descclassname">baxter.models.photo.</code><code class="descname">Photo</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/photo.html#Photo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.photo.Photo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary Key for Photos</li>
+<li><strong>name</strong> (<em>Unicode</em>) &#8211; filename</li>
+<li><strong>path</strong> (<em>Unicode</em>) &#8211; path to file</li>
+<li><strong>location</strong> (<em>Point</em>) &#8211; Location of the photo</li>
+<li><strong>description</strong> (<em>text</em>) &#8211; Photo description</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="site">
+<h2>Site<a class="headerlink" href="#site" title="Permalink to this headline">¶</a></h2>
+<p>Database models that are used throughout the site.</p>
+<span class="target" id="module-baxter.models.site"></span><dl class="class">
+<dt id="baxter.models.site.Role">
+<em class="property">class </em><code class="descclassname">baxter.models.site.</code><code class="descname">Role</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/site.html#Role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.site.Role" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code>, <code class="xref py py-class docutils literal"><span class="pre">flask_security.core.RoleMixin</span></code></p>
+<p>Role Model</p>
+<p>Using Flask-Security&#8217;s RoleMixin</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary Role Key</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; Role name for reference in admin and for restrictions</li>
+<li><strong>description</strong> (<em>str</em>) &#8211; Role description</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="baxter.models.site.User">
+<em class="property">class </em><code class="descclassname">baxter.models.site.</code><code class="descname">User</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/site.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.site.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code>, <code class="xref py py-class docutils literal"><span class="pre">flask_security.core.UserMixin</span></code></p>
+<p>User model</p>
+<p>Using Flask-Security&#8217;s UserMixin</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id</strong> (<em>int</em>) &#8211; Primary User Key</li>
+<li><strong>username</strong> (<em>str</em>) &#8211; Unique username as chosen by the user</li>
+<li><strong>first</strong> (<em>str</em>) &#8211; First name</li>
+<li><strong>last</strong> (<em>str</em>) &#8211; Last name</li>
+<li><strong>email</strong> (<em>str</em>) &#8211; User&#8217;s email address</li>
+<li><strong>active</strong> (<em>bool</em>) &#8211; Is the user activated</li>
+<li><strong>confirmed_at</strong> (<em>Datetime</em>) &#8211; When was the user confirmed</li>
+<li><strong>roles</strong> (<em>list</em>) &#8211; List of role objects that the user has</li>
+<li><strong>observer</strong> (<em>bool</em>) &#8211; Is this user an official observer</li>
+<li><strong>username</strong> &#8211; Prefered username</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="routes.html" class="btn btn-neutral float-right" title="HTTP Routes for site"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="baxter.html" class="btn btn-neutral" title="Baxter package"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alex Kerney.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

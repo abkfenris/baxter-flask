@@ -12,6 +12,9 @@ from ..models import Trail
 
 @api.route('/trails/<id>')
 def trail(id):
+    """
+    Show individual trail *id*
+    """
     query = db.session.query(Trail.name,
             Trail.id,
             Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')
@@ -30,6 +33,9 @@ def trail(id):
 @api.route('/trails/')
 @cache.cached()
 def list_trails():
+    """
+    Show all trails
+    """
     query = db.session.query(Trail.name,
             Trail.id,
             Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')

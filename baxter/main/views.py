@@ -15,4 +15,7 @@ from ..models import User, WeatherOb, WeatherFor
 
 @main.route('/')
 def index():
+    """
+    Index page for site.
+    """
     return render_template('index.html')
