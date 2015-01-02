@@ -6,6 +6,8 @@
 Welcome to Baxter's documentation!
 ==================================
 
+.. image:: _static/guitar.png
+
 Contents:
 
 .. toctree::
