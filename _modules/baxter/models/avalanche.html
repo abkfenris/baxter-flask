@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>baxter.models.avalanche &mdash; Baxter 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Baxter 0.1 documentation" href="../../../index.html"/>
+        <link rel="up" title="baxter" href="../../baxter.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../../../index.html" class="fa fa-home"> Baxter</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../baxter.html">Baxter package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#main-views">Main views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#module-baxter">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Database models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#avalanche">Avalanche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#snow">Snow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.trail">Trail</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.weather">Weather</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.photo">Photo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#site">Site</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../routes.html">HTTP Routes for site</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../routes.html#browseable-routes">Browseable routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../routes.html#api-routes">API routes</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">Baxter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../baxter.html">baxter</a> &raquo;</li>
+      
+    <li>baxter.models.avalanche</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <h1>Source code for baxter.models.avalanche</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
+<span class="kn">from</span> <span class="nn">geoalchemy2</span> <span class="kn">import</span> <span class="n">Geometry</span>
+
+
+<div class="viewcode-block" id="AvalanchePath"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalanchePath">[docs]</a><span class="k">class</span> <span class="nc">AvalanchePath</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Avalanche Path</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        id (int): Primary Key</span>
+<span class="sd">        name (string): Path Name</span>
+<span class="sd">        description (text): Description of path</span>
+<span class="sd">        path (Polygon): Avalanche Path</span>
+<span class="sd">        incidents (List): List of Avalanche Incidents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_paths&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;POLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">aspect</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="AvalancheIn"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn">[docs]</a><span class="k">class</span> <span class="nc">AvalancheIn</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Avalanche Incident</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        id (int): Primary key</span>
+<span class="sd">        observer_id (int): Primary foreign key for observer</span>
+<span class="sd">        name (string): Name of incident</span>
+<span class="sd">        path_id (int): Forign key of Avalanche Path where incident occured</span>
+<span class="sd">        path (AvalanchePath): Object of Avalanche Path where incident occured</span>
+<span class="sd">        observation_date (datetime): Date observer visited incident site</span>
+<span class="sd">        occurence_date (datetime): Date incident occured</span>
+<span class="sd">        location (text): Description of incident location</span>
+<span class="sd">        elevation (int): Elevation of slide path (ft)</span>
+<span class="sd">        aspect (string): Aspect that the slide occured on</span>
+<span class="sd">        trigger (string): Start trigger for slide</span>
+<span class="sd">        trigger_add (string) Additional trigger information</span>
+<span class="sd">        av_problem (string): Avalanche problem type</span>
+<span class="sd">        av_type (string): Avalanche type</span>
+<span class="sd">        weak_layer (string): Weak layer type</span>
+<span class="sd">        depth (float): Depth of displaced snowpack</span>
+<span class="sd">        width (float): Width of bed surface</span>
+<span class="sd">        vertical (float): Vertical distance that the slide ran</span>
+<span class="sd">        slope_angle (float): Steepest Slope Angle</span>
+<span class="sd">        people_caught (int): Number of people caught by slide</span>
+<span class="sd">        people_carried (int): Number of people carried by slide</span>
+<span class="sd">        people_buried_part (int): Number of people partially burried</span>
+<span class="sd">        people_buried_full (int): Number of people totally burried</span>
+<span class="sd">        snow_profile (text): Description of snowpack</span>
+<span class="sd">        image (str): DEPRICATED, use photo function</span>
+<span class="sd">        description (text): Description of slide</span>
+<span class="sd">        crown (MultiLineString): MultiLineString along crown(s)</span>
+<span class="sd">        bed_surface (MultiPolygon): MultiPolygon of bed surface</span>
+<span class="sd">        debris_field (MultiPolygon): MultiPolygon of debris field</span>
+<span class="sd">        problems (list): List of associated Avalanche Problem objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_ins&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
+
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;users.id&#39;</span><span class="p">))</span>
+    <span class="n">observer</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;avalanche_incidents&#39;</span><span class="p">)</span>
+
+    <span class="n">path_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;avalanche_paths.id&#39;</span><span class="p">))</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;AvalanchePath&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;incidents&#39;</span><span class="p">)</span>
+
+    <span class="n">observation_date</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
+    <span class="n">occurence_date</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">elevation</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+
+    <span class="n">aspect</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">trigger</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">trigger_add</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">av_problem</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">av_type</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">weak_layer</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+
+    <span class="n">depth</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">vertical</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">slope_angle</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">())</span>
+    <span class="n">people_caught</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">people_carried</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">people_buried_part</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">people_buried_full</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">snow_profile</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">160</span><span class="p">))</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+
+    <span class="n">crown</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTILINESTRING&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">bed_surface</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">debris_field</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="AvalancheInvolved"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheInvolved">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInvolved</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    People involved in avalanches</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        id (int): Primary key</span>
+<span class="sd">        incident_id (int): Foreign key for associated avalanche incident</span>
+<span class="sd">        incident (AvalancheIn): Object for associated avalanche incident</span>
+<span class="sd">        user_id (int): foreign key for associated user</span>
+<span class="sd">        user (User): Object for associated user</span>
+<span class="sd">        first (str): First Name</span>
+<span class="sd">        last (str): Last Name</span>
+<span class="sd">        phone (str): Phone Number</span>
+<span class="sd">        email (str): Email Address</span>
+<span class="sd">        info (Text): More information</span>
+<span class="sd">        observed (bool): Did they observe the slide?</span>
+<span class="sd">        group (bool): Were they part of the group that triggered the slide?</span>
+<span class="sd">        caught (bool): Were they caught by the slide?</span>
+<span class="sd">        carried (bool): Were they carried by the slide?</span>
+<span class="sd">        burried (bool): Were they burried by the slide?</span>
+<span class="sd">        rescuer (bool): Were they a rescuer</span>
+<span class="sd">        locations (Multipoint): Different locations where the person was</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_involved&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">incident_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;avalanche_ins.id&#39;</span><span class="p">))</span>
+    <span class="n">incident</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;AvalancheIn&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;involved&#39;</span><span class="p">)</span>
+
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;users.id&#39;</span><span class="p">))</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;User&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;involved&#39;</span><span class="p">)</span>
+
+    <span class="n">first</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">phone</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+
+    <span class="n">observed</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">caught</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">carried</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">burried</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+    <span class="n">rescuer</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+
+    <span class="n">locations</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOINT&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="AvalancheProb"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Avalanche Problems</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        id (int): Primary key</span>
+<span class="sd">        name (str): Name of Avalanche Problem</span>
+<span class="sd">        definition (Text): Long description of Avalanche Problem in markdown</span>
+<span class="sd">        photo (str): path to photo</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_problems&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
+    <span class="n">definition</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">photo</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">160</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+</div>
+<div class="viewcode-block" id="AvalancheInProb"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheInProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Avalanche Incident and Problem complex connector</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        id (int): Primary key for AvalancheInProb</span>
+<span class="sd">        incident_id (int): Foreign Key for associated Avalanche Incident</span>
+<span class="sd">        incident (AvalancheIn): Object for associated Avalanche Incident</span>
+<span class="sd">        problem_id (int): Foreign Key for associated Avalanche Problem</span>
+<span class="sd">        problem (AvalancheProb): Object for associated Avalanche Problem</span>
+<span class="sd">        importance (str): Rank when multiple problems, lower more important</span>
+<span class="sd">        aspects (str): Aspects effected by slide</span>
+<span class="sd">        likelyhood (str): Probability of occurence</span>
+<span class="sd">        size (str): Size likely</span>
+<span class="sd">        trend (str): Increasing, steady, or decreasing</span>
+<span class="sd">        discussion (Text): Discussion of problem</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_ob_problem&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">incident_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;avalanche_ins.id&#39;</span><span class="p">))</span>
+    <span class="n">incident</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;AvalancheIn&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;problems&#39;</span><span class="p">)</span>
+
+    <span class="n">problem_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;avalanche_problems.id&#39;</span><span class="p">))</span>
+    <span class="n">problem</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;AvalancheProb&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;incidents&#39;</span><span class="p">)</span>
+
+    <span class="n">importance</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">aspects</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
+    <span class="n">likelyhood</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">trend</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">discussion</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+
+
+
+<span class="c">#</span>
+<span class="c">#class AvalancheFor(db.Model):</span>
+<span class="c">#	&quot;&quot;&quot;</span>
+<span class="c">#	Avalanche Forecast</span>
+<span class="c">#</span>
+<span class="c">#	Arguments:</span>
+<span class="c">#</span>
+<span class="c">#	&quot;&quot;&quot;</span>
+<span class="c">#	__tablename__ = &quot;avalanche_forecasts&quot;</span>
+<span class="c">#</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alex Kerney.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
