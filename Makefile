@@ -5,7 +5,7 @@
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
-BUILDDIR      = build
+BUILDDIR      = docs
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -48,15 +48,15 @@ help:
 	@echo "  coverage   to run coverage check of the documentation (if enabled)"
 	@echo "  ghp        to import documents into github-pages branch"
 
-ghp:
-	ghp-import -n build/html/
+ghp: html
+	ghp-import -n docs/html/
 	@echo
-	@echo "github-pages branch created from build/html"
+	@echo "github-pages branch created from docs/html"
 
 clean:
 	rm -rf $(BUILDDIR)/*
 
-html:
+html: clean
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
