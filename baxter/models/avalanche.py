@@ -66,7 +66,8 @@ class AvalancheIn(db.Model):
         crown (MultiLineString): MultiLineString along crown(s)
         bed_surface (MultiPolygon): MultiPolygon of bed surface
         debris_field (MultiPolygon): MultiPolygon of debris field
-        problems (list): List of associated Avalanche Problem objects
+        problems (AvalancheInProb): List of associated Avalanche Problem objects
+        involved (AvalancheInvolved): List of people involved in Avalanches
     """
     __tablename__ = 'avalanche_ins'
 

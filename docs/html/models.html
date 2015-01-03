@@ -58,6 +58,12 @@
         
         
             <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="public.html">Public Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="public.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="public.html#avalanche-incidents">Avalanche Incidents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="public.html#trails">Trails</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="baxter.html">Baxter package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="baxter.html#main-views">Main views</a></li>
 <li class="toctree-l2"><a class="reference internal" href="baxter.html#module-baxter">Module contents</a></li>
@@ -160,7 +166,8 @@
 <li><strong>crown</strong> (<em>MultiLineString</em>) &#8211; MultiLineString along crown(s)</li>
 <li><strong>bed_surface</strong> (<em>MultiPolygon</em>) &#8211; MultiPolygon of bed surface</li>
 <li><strong>debris_field</strong> (<em>MultiPolygon</em>) &#8211; MultiPolygon of debris field</li>
-<li><strong>problems</strong> (<em>list</em>) &#8211; List of associated Avalanche Problem objects</li>
+<li><strong>problems</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheInProb" title="baxter.models.avalanche.AvalancheInProb"><em>AvalancheInProb</em></a>) &#8211; List of associated Avalanche Problem objects</li>
+<li><strong>involved</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheInvolved" title="baxter.models.avalanche.AvalancheInvolved"><em>AvalancheInvolved</em></a>) &#8211; List of people involved in Avalanches</li>
 </ul>
 </td>
 </tr>
@@ -487,6 +494,10 @@ leaflet likes for a center point</p>
 <li><strong>roles</strong> (<em>list</em>) &#8211; List of role objects that the user has</li>
 <li><strong>observer</strong> (<em>bool</em>) &#8211; Is this user an official observer</li>
 <li><strong>username</strong> &#8211; Prefered username</li>
+<li><strong>avalanche_incidents</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheIn" title="baxter.models.avalanche.AvalancheIn"><em>AvalancheIn</em></a>) &#8211; List of Avalanche Instances</li>
+<li><strong>observations</strong> (<a class="reference internal" href="#baxter.models.weather.WeatherOb" title="baxter.models.weather.WeatherOb"><em>WeatherOb</em></a>) &#8211; List of Weather Observations</li>
+<li><strong>weather_forecasts</strong> (<a class="reference internal" href="#baxter.models.weather.WeatherFor" title="baxter.models.weather.WeatherFor"><em>WeatherFor</em></a>) &#8211; List of Weather Forecasts</li>
+<li><strong>involved</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheInvolved" title="baxter.models.avalanche.AvalancheInvolved"><em>AvalancheInvolved</em></a>) &#8211; List of Avalanches Incidents that user is involved with</li>
 </ul>
 </td>
 </tr>

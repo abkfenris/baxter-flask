@@ -57,6 +57,12 @@
         
         
             <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../public.html">Public Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../public.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../public.html#avalanche-incidents">Avalanche Incidents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../public.html#trails">Trails</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../baxter.html">Baxter package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#main-views">Main views</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#module-baxter">Module contents</a></li>
@@ -181,7 +187,8 @@
 <span class="sd">        crown (MultiLineString): MultiLineString along crown(s)</span>
 <span class="sd">        bed_surface (MultiPolygon): MultiPolygon of bed surface</span>
 <span class="sd">        debris_field (MultiPolygon): MultiPolygon of debris field</span>
-<span class="sd">        problems (list): List of associated Avalanche Problem objects</span>
+<span class="sd">        problems (AvalancheInProb): List of associated Avalanche Problem objects</span>
+<span class="sd">        involved (AvalancheInvolved): List of people involved in Avalanches</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_ins&#39;</span>
 

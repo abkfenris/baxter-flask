@@ -20,7 +20,7 @@ def trails():
     """
     query = db.session.query(Trail.name,
                              Trail.id
-                             ).filter_by(display=True)
+                             ).filter_by(display=True).order_by(Trail.name.asc())
     trails = query
     return render_template('trails.html', trails=trails)
 

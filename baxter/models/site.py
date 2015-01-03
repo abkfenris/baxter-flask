@@ -45,6 +45,10 @@ class User(db.Model, UserMixin):
         roles (list): List of role objects that the user has
         observer (bool): Is this user an official observer
         username (str): Prefered username
+        avalanche_incidents (AvalancheIn): List of Avalanche Instances
+        observations (WeatherOb): List of Weather Observations
+        weather_forecasts (WeatherFor): List of Weather Forecasts
+        involved (AvalancheInvolved): List of Avalanches Incidents that user is involved with
     """
     __tablename__ = 'users'
 
