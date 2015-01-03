@@ -19,7 +19,7 @@ Avalanche Incidents
 To view avalanche incidents select Snow > Avalanche Incidents
 from the top menu
 
-.. image:: _static/incidents-menu.png
+.. image:: _static/public-incidents-menu.png
    :scale: 50 %
 
 This will bring you to a list of incidents, ordered by date
@@ -28,3 +28,9 @@ details about that incident.
 
 Trails
 ------
+To view trails select Trails from the top menu
+
+.. image:: _static/public-trails-menu.png
+   :scale: 50 %
+
+Then select a trail from the map, or from the list to view.

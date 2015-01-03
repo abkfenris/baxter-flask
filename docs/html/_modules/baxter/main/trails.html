@@ -141,7 +141,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">query</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Trail</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                              <span class="n">Trail</span><span class="o">.</span><span class="n">id</span>
-                             <span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                             <span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">display</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Trail</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">asc</span><span class="p">())</span>
     <span class="n">trails</span> <span class="o">=</span> <span class="n">query</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;trails.html&#39;</span><span class="p">,</span> <span class="n">trails</span><span class="o">=</span><span class="n">trails</span><span class="p">)</span>
 
