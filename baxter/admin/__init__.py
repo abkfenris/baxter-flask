@@ -8,6 +8,7 @@ from flask import url_for, redirect
 from flask.ext.admin import Admin, AdminIndexView, expose
 from flask.ext.admin.base import MenuLink
 from flask.ext.admin.contrib.geoa import ModelView as _ModelView
+# from flask.ext.admin.form import rules
 from wtforms.fields import SelectField
 from sqlalchemy.event import listens_for
 from flask.ext.admin.form import (FileUploadField,
@@ -141,6 +142,21 @@ class InlineImageView(InlineFormAdmin):
 
 class InlineInvolvedView(InlineFormAdmin):
     form_widget_args = {'locations': h_w}
+    #form_rules = ['user',
+    #    rules.Header('Test Header'),
+    #    rules.FieldSet(('first', 'last'), header='Name'),
+    #    rules.FieldSet(('phone','email')),
+    #    'info',
+    #    rules.FieldSet((rules.HTML('<div class="row">'),
+    #                    'observed',
+    #                    'group',
+    #                    'caught',
+    #                    'carried',
+    #                    'burried',
+    #                    'rescuer',
+    #                    rules.HTML('</div>'))),
+    #    'locations'
+    #] # Trying to format the inline form smaller
 
 
 class UserView(ModelView):
