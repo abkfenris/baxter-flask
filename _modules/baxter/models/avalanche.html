@@ -57,13 +57,23 @@
         
         
             <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../public.html">Public Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../public.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../public.html#avalanche-incidents">Avalanche Incidents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../public.html#trails">Trails</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user.html">Baxter User Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user.html#markdown">Markdown</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../baxter.html">Baxter package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#main-views">Main views</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#module-baxter">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../models.html">Database models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#avalanche">Avalanche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.avalanche">Avalanche</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../models.html#snow">Snow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.trail">Trail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.weather">Weather</a></li>
@@ -113,8 +123,17 @@
           <div role="main">
             
   <h1>Source code for baxter.models.avalanche</h1><div class="highlight"><pre>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Avalanche related database models.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">md</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">func</span>
 <span class="kn">from</span> <span class="nn">geoalchemy2</span> <span class="kn">import</span> <span class="n">Geometry</span>
+<span class="kn">from</span> <span class="nn">geoalchemy2.shape</span> <span class="kn">import</span> <span class="n">to_shape</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Markup</span>
+<span class="kn">import</span> <span class="nn">markdown2</span>
 
 
 <div class="viewcode-block" id="AvalanchePath"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalanchePath">[docs]</a><span class="k">class</span> <span class="nc">AvalanchePath</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -141,11 +160,10 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Avalanche Incident</span>
 
-<span class="sd">    .. image:: _static/guitar.png</span>
-
 <span class="sd">    Arguments:</span>
 <span class="sd">        id (int): Primary key</span>
 <span class="sd">        observer_id (int): Primary foreign key for observer</span>
+<span class="sd">        observer (User): User object for observer</span>
 <span class="sd">        name (string): Name of incident</span>
 <span class="sd">        path_id (int): Forign key of Avalanche Path where incident occured</span>
 <span class="sd">        path (AvalanchePath): Object of Avalanche Path where incident occured</span>
@@ -173,7 +191,8 @@
 <span class="sd">        crown (MultiLineString): MultiLineString along crown(s)</span>
 <span class="sd">        bed_surface (MultiPolygon): MultiPolygon of bed surface</span>
 <span class="sd">        debris_field (MultiPolygon): MultiPolygon of debris field</span>
-<span class="sd">        problems (list): List of associated Avalanche Problem objects</span>
+<span class="sd">        problems (AvalancheInProb): List of associated Avalanche Problem objects</span>
+<span class="sd">        involved (AvalancheInvolved): List of people involved in Avalanches</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_ins&#39;</span>
 
@@ -214,7 +233,33 @@
     <span class="n">bed_surface</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
     <span class="n">debris_field</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
 
+<div class="viewcode-block" id="AvalancheIn.center"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a shapely.Point that is the center</span>
+<span class="sd">        of the union of the bed surface and debris field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">to_shape</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+                <span class="n">func</span><span class="o">.</span><span class="n">ST_Transform</span><span class="p">(</span>
+                  <span class="n">func</span><span class="o">.</span><span class="n">ST_Centroid</span><span class="p">(</span>
+                    <span class="n">func</span><span class="o">.</span><span class="n">ST_Union</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bed_surface</span><span class="p">,</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">debris_field</span>
+                                  <span class="p">)),</span> <span class="mi">4326</span><span class="p">))</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">center</span>
 </div>
+<div class="viewcode-block" id="AvalancheIn.l_center"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn.l_center">[docs]</a>    <span class="k">def</span> <span class="nf">l_center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a formatted string in a way that</span>
+<span class="sd">        leaflet likes for a center point</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AvalancheIn.description_md"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn.description_md">[docs]</a>    <span class="k">def</span> <span class="nf">description_md</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a flask Markup object containing the markdown for description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Markup</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+</div></div>
 <div class="viewcode-block" id="AvalancheInvolved"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheInvolved">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInvolved</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    People involved in avalanches</span>
@@ -288,6 +333,8 @@
 <div class="viewcode-block" id="AvalancheInProb"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheInProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Avalanche Incident and Problem complex connector</span>
+
+<span class="sd">    Also known as an `Association Object &lt;http://docs.sqlalchemy.org/en/latest/orm/extensions/associationproxy.html#simplifying-association-objects&gt;`_.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        id (int): Primary key for AvalancheInProb</span>
