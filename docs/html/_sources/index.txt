@@ -6,14 +6,13 @@
 Welcome to Baxter's documentation!
 ==================================
 
-.. image:: _static/guitar.png
-
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
    public
+   user
    baxter
    models
    routes

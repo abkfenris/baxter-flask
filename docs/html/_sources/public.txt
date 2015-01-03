@@ -11,7 +11,11 @@ from the park through this site.
 Getting Started
 ---------------
 
+If you are just wishing to view information, you can dive right into the site.
+This page has some basic help to navigate some of the features of the site.
 
+If you have information to submit, you will need an account. Please contact the
+Park to arrange for access.
 
 
 Avalanche Incidents
@@ -25,6 +29,20 @@ from the top menu
 This will bring you to a list of incidents, ordered by date
 (newest to oldest). From there click on an incident to view
 details about that incident.
+
+.. image:: _static/public-incident-view.png
+   :scale: 50 %
+
+An incident page will show a map if detailed geographical data is available for
+an avalanche, like the Crown, Bed Surface, and Debris Fields.
+
+1. Tabs between Description and Details
+2. The Details tab starts out with general data about the avalanche incident with more detail available below.
+3. Number of people involved in the incident
+4. Details about how the avalanche occurred.
+5. General site information.
+
+Hit Description for the observers writeup about an incident.
 
 Trails
 ------

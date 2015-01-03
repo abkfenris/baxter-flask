@@ -63,6 +63,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../public.html#trails">Trails</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user.html">Baxter User Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user.html#markdown">Markdown</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../baxter.html">Baxter package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#main-views">Main views</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#module-baxter">Module contents</a></li>
@@ -129,7 +133,33 @@
 <div class="viewcode-block" id="Trail"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail">[docs]</a><span class="k">class</span> <span class="nc">Trail</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Arguments:</span>
-
+<span class="sd">        id (int): Primary Key</span>
+<span class="sd">        geom (MultiLineString): Multilinestring in NAD 83 UTM Zone 19N for trail route</span>
+<span class="sd">        use_type (str):</span>
+<span class="sd">        comments (Text):</span>
+<span class="sd">        tid (int):</span>
+<span class="sd">        skitrail (bool): True if it is a ski trail</span>
+<span class="sd">        name (str): Trail name</span>
+<span class="sd">        length_mi (float): Length of trail in Miles</span>
+<span class="sd">        status (str):</span>
+<span class="sd">        display (bool): Show publicly if true</span>
+<span class="sd">        pubshare (bool):</span>
+<span class="sd">        gpsupdate (date): Last time the trail was followed with a GPS</span>
+<span class="sd">        gpsunit (str): Type of GPS unit used for last update</span>
+<span class="sd">        gpsuser (str): Who last followed the trail</span>
+<span class="sd">        bspaid (str):</span>
+<span class="sd">        tsid (str):</span>
+<span class="sd">        display_wu (bool):</span>
+<span class="sd">        display_wn (bool):</span>
+<span class="sd">        ttype (str): Trail type</span>
+<span class="sd">        season (str): Is access to trail only allowed during certain seasons</span>
+<span class="sd">        shape_leng (float):</span>
+<span class="sd">        tclass (str):</span>
+<span class="sd">        maintclass (str)</span>
+<span class="sd">        min_slope (float): Minimum slope of trail</span>
+<span class="sd">        max_slope (float): Maximum slope of trail</span>
+<span class="sd">        avg_slope (float): Average slope of trail</span>
+<span class="sd">        length_ft (float): Length of trail in feet</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;trails&#39;</span>
 
@@ -224,6 +254,18 @@
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        id (int): Primary Key</span>
+<span class="sd">        name (str): Name of Point of Interest</span>
+<span class="sd">        point (Point): Point object in NAD 83 UTM Zone 19N for POI</span>
+<span class="sd">        bspaid (str):</span>
+<span class="sd">        poiid (int):</span>
+<span class="sd">        poi_group (str):</span>
+<span class="sd">        poi_class (str):</span>
+<span class="sd">        poi_type (str):</span>
+<span class="sd">        remark (Text):</span>
+<span class="sd">        elev_ft (Float): Elevation of Point of Interest</span>
+<span class="sd">        public_share (bool): Is point publicly visible</span>
+<span class="sd">        site_capacity (int): How many people can visit site</span>
+<span class="sd">        facility_id (int):</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;points_of_interests&#39;</span>

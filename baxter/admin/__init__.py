@@ -51,12 +51,14 @@ except OSError:
     pass
 
 pit_path = op.join(op.dirname(op.dirname(__file__)), 'static', 'uploaded' ,'pits')
+pit_static_path = '/static/uploaded/pits/'
 try:
     os.makedirs(pit_path)
 except OSError:
     pass
 
 photo_path = op.join(op.dirname(op.dirname(__file__)), 'static', 'uploaded', 'photos')
+photo_static_path = '/static/uploaded/photos/'
 try:
     os.makedirs(photo_path)
 except OSError:
@@ -118,9 +120,11 @@ class ImageView(ModelView):
     form_extra_fields = {
         'path': ImageUploadField('Photo',
                                  base_path=photo_path,
-                                 url_relative_path='uploaded/photos/',
+                                 url_relative_path='../static/uploaded/photos/',
                                  thumbnail_size=(100, 100, True))
     }
+    column_formatters = {'path':lambda v, c, m, p: photo_static_path + m.path}
+    column_list= ('name', 'path', 'description', 'location')
 
 
 class InlineImageView(InlineFormAdmin):

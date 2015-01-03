@@ -35,8 +35,6 @@ class AvalancheIn(db.Model):
     """
     Avalanche Incident
 
-    .. image:: _static/guitar.png
-
     Arguments:
         id (int): Primary key
         observer_id (int): Primary foreign key for observer

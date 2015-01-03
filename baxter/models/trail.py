@@ -8,7 +8,33 @@ from geoalchemy2.shape import to_shape
 class Trail(db.Model):
     """
     Arguments:
-
+        id (int): Primary Key
+        geom (MultiLineString): Multilinestring in NAD 83 UTM Zone 19N for trail route
+        use_type (str):
+        comments (Text):
+        tid (int):
+        skitrail (bool): True if it is a ski trail
+        name (str): Trail name
+        length_mi (float): Length of trail in Miles
+        status (str):
+        display (bool): Show publicly if true
+        pubshare (bool):
+        gpsupdate (date): Last time the trail was followed with a GPS
+        gpsunit (str): Type of GPS unit used for last update
+        gpsuser (str): Who last followed the trail
+        bspaid (str):
+        tsid (str):
+        display_wu (bool):
+        display_wn (bool):
+        ttype (str): Trail type
+        season (str): Is access to trail only allowed during certain seasons
+        shape_leng (float):
+        tclass (str):
+        maintclass (str)
+        min_slope (float): Minimum slope of trail
+        max_slope (float): Maximum slope of trail
+        avg_slope (float): Average slope of trail
+        length_ft (float): Length of trail in feet
     """
     __tablename__ = 'trails'
 
@@ -103,6 +129,18 @@ class POI(db.Model):
 
     Arguments:
         id (int): Primary Key
+        name (str): Name of Point of Interest
+        point (Point): Point object in NAD 83 UTM Zone 19N for POI
+        bspaid (str):
+        poiid (int):
+        poi_group (str):
+        poi_class (str):
+        poi_type (str):
+        remark (Text):
+        elev_ft (Float): Elevation of Point of Interest
+        public_share (bool): Is point publicly visible
+        site_capacity (int): How many people can visit site
+        facility_id (int):
 
     """
     __tablename__ = 'points_of_interests'
