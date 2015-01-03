@@ -11,13 +11,15 @@ from flask.ext.security import Security
 from flask.ext.cache import Cache
 from config import config
 from flask_debugtoolbar import DebugToolbarExtension
-
+import markdown2
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 security = Security()
 toolbar = DebugToolbarExtension()
 cache = Cache()
+
+md = markdown2.Markdown(extras={'html-classes': {'img': 'img-responsive'}})
 
 from .models import user_datastore
 

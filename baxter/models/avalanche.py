@@ -2,11 +2,13 @@
 Avalanche related database models.
 """
 
-from .. import db
+from .. import db, md
 
 from sqlalchemy import func
 from geoalchemy2 import Geometry
 from geoalchemy2.shape import to_shape
+from flask import Markup
+import markdown2
 
 
 class AvalanchePath(db.Model):
@@ -129,6 +131,11 @@ class AvalancheIn(db.Model):
         center = self.center()
         return str(center.y) + ',' + str(center.x)
 
+    def description_md(self):
+        """
+        Returns a flask Markup object containing the markdown for description
+        """
+        return Markup(md.convert(self.description))
 
 class AvalancheInvolved(db.Model):
     """

@@ -46,7 +46,19 @@ from ..mappers import (aspects,
 # File path
 file_path = op.join(op.dirname(__file__), 'files')
 try:
-    os.mkdir(file_path)
+    os.makedirs(file_path)
+except OSError:
+    pass
+
+pit_path = op.join(op.dirname(op.dirname(__file__)), 'static', 'uploaded' ,'pits')
+try:
+    os.makedirs(pit_path)
+except OSError:
+    pass
+
+photo_path = op.join(op.dirname(op.dirname(__file__)), 'static', 'uploaded', 'photos')
+try:
+    os.makedirs(photo_path)
 except OSError:
     pass
 
@@ -56,7 +68,7 @@ except OSError:
 def del_snowpit(mapper, connection, target):
     if target.path:
         try:
-            os.remove(op.join(file_path, target.path))
+            os.remove(op.join(pit_path, target.path))
         except OSError:
             # Don't care as it doesn't exist
             pass
@@ -67,13 +79,13 @@ def del_photo(mapper, connection, target):
     if target.path:
         # Delete Image
         try:
-            os.remove(op.join(file_path, target.path))
+            os.remove(op.join(photo_path, target.path))
         except OSError:
             pass
 
         # Delete the thumbnail
         try:
-            os.remove(op.join(file_path, thumbgen_filename(target.path)))
+            os.remove(op.join(photo_path, thumbgen_filename(target.path)))
         except OSError:
             pass
 
@@ -89,7 +101,7 @@ class ModelView(_ModelView):
 class FileView(ModelView):
     form_overrides = {'path': FileUploadField}
     form_args = {'path': {'label': 'File',
-                          'base_path': file_path}}
+                          'base_path': pit_path}}
 
 
 class InlineAvalancheInProb(InlineFormAdmin):
@@ -99,13 +111,14 @@ class InlineAvalancheInProb(InlineFormAdmin):
 class InlineFileView(InlineFormAdmin):
     form_overrides = {'path': FileUploadField}
     form_args = {'path': {'label': 'File',
-                          'base_path': file_path}}
+                          'base_path': pit_path}}
 
 
 class ImageView(ModelView):
     form_extra_fields = {
         'path': ImageUploadField('Photo',
-                                 base_path=file_path,
+                                 base_path=photo_path,
+                                 url_relative_path='uploaded/photos/',
                                  thumbnail_size=(100, 100, True))
     }
 
@@ -113,7 +126,7 @@ class ImageView(ModelView):
 class InlineImageView(InlineFormAdmin):
     form_overrides = {'path': ImageUploadField}
     form_args = {'path': {'label': 'Photo',
-                          'base_path': file_path}}
+                          'base_path': photo_path}}
 
 
 class UserView(ModelView):
