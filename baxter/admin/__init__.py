@@ -28,6 +28,12 @@ from ..models import (User,
                       AvalancheInvolved, AvalancheProb,
                       AvalancheInProb,
                       Photo, SnowPit)
+from ..mappers import (aspects,
+                       triggers,
+                       triggers_add,
+                       av_problems,
+                       av_types,
+                       weak_layers)
 
 # File path
 file_path = op.join(op.dirname(__file__), 'files')
@@ -232,83 +238,13 @@ class AvalancheInView(ModelView):
                           av_problem=SelectField,
                           av_type=SelectField,
                           weak_layer=SelectField)
-    form_args = dict(
-        aspect=dict(
-            choices=[('unknown', 'Unknown'),
-                     ('N', 'North'),
-                     ('NE', 'North East'),
-                     ('E', 'East'),
-                     ('SE', 'South East'),
-                     ('S', 'South'),
-                     ('SW', 'South West'),
-                     ('W', 'West'),
-                     ('NW', 'North West')
-                     ]
-
-        ),
-        trigger=dict(
-            choices=[('unknown', 'Unknown'),
-                     ('natural', 'Natural'),
-                     ('skier', 'Skier'),
-                     ('snowboarder', 'Snowboarder'),
-                     ('snowmobiler', 'Snowmobiler'),
-                     ('snowbike', 'Snow Bike'),
-                     ('snowshoer', 'Snowshoer'),
-                     ('explosive', 'Explosive'),
-                     ('hiker', 'Hiker'),
-                     ('other', 'Other')
-                     ]
-        ),
-        trigger_add=dict(
-            choices=[('unknown', 'Unknown'),
-                     ('intentional', 'Intentionally Triggered'),
-                     ('unintentional', 'Unintentionally Triggered'),
-                     ('remote', 'Remotely Triggered'),
-                     ('cornice', 'Cornice Triggered'),
-                     ('sympathetic', 'Sympathetic Release'),
-                     ('repeater', 'Repeater')
-                     ]
-        ),
-        av_problem=dict(
-            choices=[('unknown', 'Unknown'),
-                     ('storm', 'Storm Slab'),
-                     ('persistent', 'Persistant Slab'),
-                     ('deep', 'Deep Slab'),
-                     ('wet', 'Wet Slab'),
-                     ('loosedry', 'Loose Dry Snow'),
-                     ('loosewet', 'Loose Wet Snow'),
-                     ('wind', 'Wind Slab'),
-                     ('cornice', 'Cornice'),
-                     ('glide', 'Glide')
-                     ]
-        ),
-        av_type=dict(
-            choices=[('U', 'Unknown'),
-                     ('L', 'Dry Loose'),
-                     ('SS', 'Soft Slab'),
-                     ('HS', 'Hard Slab'),
-                     ('WL', 'Wet Loose'),
-                     ('WS', 'Wet Slab'),
-                     ('C', 'Cornice Fall'),
-                     ('I', 'Ice fall'),
-                     ('SF', 'Slush flow'),
-                     ('R', 'Roof Avalanche'),
-                     ]
-        ),
-        weak_layer=dict(
-            choices=[('unknown', 'Unknown'),
-                     ('new', 'New Snow'),
-                     ('density', 'Density Change'),
-                     ('interface', 'New Snow/Old Snow Interface'),
-                     ('facets', 'Facets'),
-                     ('depth', 'Depth Hoar'),
-                     ('surface', 'Surface Hoar'),
-                     ('graupel', 'Graupel'),
-                     ('wetgrains', 'Wet Grains'),
-                     ('ground', 'Ground Interface')
-                     ]
-        )
-    )
+    form_args = {'aspect': {'choices': aspects.items()},
+                 'trigger': {'choices': triggers.items()},
+                 'trigger_add': {'choices': triggers_add.items()},
+                 'av_problem': {'choices': av_problems.items()},
+                 'av_type': {'choices': av_types.items()},
+                 'weak_layer': {'choices': weak_layers.items()}
+                 }
 
 
 class MyAdminIndexView(AdminIndexView):
