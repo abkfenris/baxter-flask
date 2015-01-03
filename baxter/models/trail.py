@@ -1,5 +1,8 @@
 from .. import db
+
+from sqlalchemy import func
 from geoalchemy2 import Geometry
+from geoalchemy2.shape import to_shape
 
 
 class Trail(db.Model):
@@ -38,11 +41,20 @@ class Trail(db.Model):
     avg_slope = db.Column(db.Float)
     length_ft = db.Column(db.Float)
 
+    def center(self):
+        center = to_shape(db.session.query(
+            func.ST_Transform(
+                func.ST_Centroid(self.geom),
+                4326)
+            ).first()[0])
+        return center
+
+    def l_center(self):
+        center = self.center()
+        return str(center.y) + ',' + str(center.x)
+
     def geojsonitem(self):
-        try:
-            geometry = geo.mapping(self.geom)
-        except AttributeError:
-            geometry = None
+        geometry = db.session.query(Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')).filter_by(id=self.id).first()[0]
         return {"type": "Feature",
                 "geometry": geometry,
                 "properties": {"name": self.name,
