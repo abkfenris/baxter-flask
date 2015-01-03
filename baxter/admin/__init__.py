@@ -188,19 +188,20 @@ class WeatherObView(ModelView):
 
 class WeatherForView(ModelView):
     form_overrides = dict(condition=SelectField)
-    form_args=dict(
-        observer=dict(query_factory=observers),
-        condition=dict(
-            choices=[('GREEN', 'Green - Favorable Conditions'),
-                     ('YELLOW', 'Yellow - Favorable but Deteriorating Conditions'),
-                     ('RED', 'Red - Above Treeline and Technical Activities Not Recomended')
-                     ]
-        )
-    )
+    form_args = {
+        'observer': {'query_factory': observers},
+        'condition': {'choices': conditions.items()}
+    }
 
 
 class TrailView(ModelView):
-    column_list = ('name', 'display', 'pubshare', 'ttype', 'tclass', 'season', 'geom')
+    column_list = ('name',
+                   'display',
+                   'pubshare',
+                   'ttype',
+                   'tclass',
+                   'season',
+                   'geom')
     column_searchable_list = ('name', 'ttype')
 
 
