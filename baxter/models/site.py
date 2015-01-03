@@ -67,6 +67,10 @@ class User(db.Model, UserMixin):
     last = db.Column(db.String(80))
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        if self.first is not None and self.last is not None:
+            return '%s %s' % (self.first, self.last)
+        elif self.username is not None:
+            return '%s' % self.username
+        return '%s' % self.email
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)

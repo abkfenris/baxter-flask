@@ -30,6 +30,9 @@ class AvalanchePath(db.Model):
     path = db.Column(Geometry('POLYGON', 926919))
     aspect = db.Column(db.String(40))
 
+    def __repr__(self):
+        return '%s' % self.name
+
 
 class AvalancheIn(db.Model):
     """
@@ -202,7 +205,7 @@ class AvalancheProb(db.Model):
     photo = db.Column(db.String(160))
 
     def __repr__(self):
-        return self.name
+        return '%s' % self.name
 
 
 class AvalancheInProb(db.Model):

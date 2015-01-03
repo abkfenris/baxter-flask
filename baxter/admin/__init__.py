@@ -64,6 +64,8 @@ try:
 except OSError:
     pass
 
+# height and width for map editing fields
+h_w = {'data-height': 400, 'data-width': 600}
 
 # Delete Hook for SnowPit, delete file if model is deleted
 @listens_for(SnowPit, 'after_delete')
@@ -104,7 +106,8 @@ class FileView(ModelView):
     form_overrides = {'path': FileUploadField}
     form_args = {'path': {'label': 'File',
                           'base_path': pit_path}}
-
+    column_formatters = {'path': lambda v, c, m, p: pit_static_path + m.path}
+    column_list = ('name', 'path', 'location', 'description')
 
 class InlineAvalancheInProb(InlineFormAdmin):
     pass
@@ -114,6 +117,7 @@ class InlineFileView(InlineFormAdmin):
     form_overrides = {'path': FileUploadField}
     form_args = {'path': {'label': 'File',
                           'base_path': pit_path}}
+    form_widget_args = {'location': h_w}
 
 
 class ImageView(ModelView):
@@ -123,14 +127,20 @@ class ImageView(ModelView):
                                  url_relative_path='../static/uploaded/photos/',
                                  thumbnail_size=(100, 100, True))
     }
-    column_formatters = {'path':lambda v, c, m, p: photo_static_path + m.path}
-    column_list= ('name', 'path', 'description', 'location')
+    # Make the full linkable photo path show up on the list view
+    column_formatters = {'path': lambda v, c, m, p: photo_static_path + m.path}
+    column_list = ('name', 'path', 'description', 'location')
 
 
 class InlineImageView(InlineFormAdmin):
     form_overrides = {'path': ImageUploadField}
     form_args = {'path': {'label': 'Photo',
                           'base_path': photo_path}}
+    form_widget_args = {'location': h_w}
+
+
+class InlineInvolvedView(InlineFormAdmin):
+    form_widget_args = {'locations': h_w}
 
 
 class UserView(ModelView):
@@ -174,7 +184,7 @@ class WeatherForView(ModelView):
 
 
 class TrailView(ModelView):
-    column_exclude_list = ('geom')
+    column_list = ('name', 'display', 'pubshare', 'ttype', 'tclass', 'season', 'geom')
     column_searchable_list = ('name', 'ttype')
 
 
@@ -199,7 +209,7 @@ class AvalancheProbView(ModelView):
 #        return form_class
 
 class AvalancheInView(ModelView):
-    inline_models = (AvalancheInvolved,
+    inline_models = (InlineInvolvedView(AvalancheInvolved),
                      InlineFileView(SnowPit),
                      InlineImageView(Photo),
                      InlineAvalancheInProb(AvalancheInProb))
@@ -214,8 +224,13 @@ class AvalancheInView(ModelView):
                  'trigger_add': {'choices': triggers_add.items()},
                  'av_problem': {'choices': av_problems.items()},
                  'av_type': {'choices': av_types.items()},
-                 'weak_layer': {'choices': weak_layers.items()}
+                 'weak_layer': {'choices': weak_layers.items()},
+                 'observer': {'query_factory':observers}
                  }
+    form_widget_args = {'crown': h_w,
+                        'bed_surface': h_w,
+                        'debris_field': h_w}
+    column_list = ('name', 'occurence_date', 'depth', 'width', 'vertical', 'aspect', 'observer', 'bed_surface', 'debris_field')
 
 
 class MyAdminIndexView(AdminIndexView):
@@ -250,7 +265,7 @@ admin.add_view(WeatherForView(WeatherFor, db.session,
                               category="Weather",
                               endpoint='admin.weatherfor',
                               url='weatherfor'))
-admin.add_view(ModelView(Trail, db.session,
+admin.add_view(TrailView(Trail, db.session,
                          name="Trails",
                          category="Geospatial",
                          endpoint='admin.trail',
