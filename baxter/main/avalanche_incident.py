@@ -10,6 +10,12 @@ from flask import (render_template,
 
 from . import main
 from .. import db
+from ..mappers import (aspects,
+                       triggers,
+                       triggers_add,
+                       av_problems,
+                       av_types,
+                       weak_layers)
 from ..models import AvalancheIn
 
 
@@ -33,4 +39,11 @@ def incident(id):
     Show a single incident
     """
     incident = AvalancheIn.query.get_or_404(id)
-    return render_template('avalanche-incident.html', incident=incident)
+    return render_template('avalanche-incident.html',
+                           incident=incident,
+                           aspects=aspects,
+                           triggers=triggers,
+                           triggers_add=triggers_add,
+                           av_problems=av_problems,
+                           av_types=av_types,
+                           weak_layers=weak_layers)

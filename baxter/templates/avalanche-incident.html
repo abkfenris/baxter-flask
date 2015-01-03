@@ -83,23 +83,23 @@ map.addControl(new L.Control.Layers( baseMaps, {}));
                     <ul>
                         <li>Caught: {{ incident.people_caught }}</li>
                         <li>Carried: {{ incident.people_carried }}</li>
-                        <li>Partially Burried: {{ incident.people_burried_part }}</li>
-                        <li>Fully Burried: {{ incident.people_burried_full }}</li>
+                        <li>Partially Burried: {{ incident.people_buried_part }}</li>
+                        <li>Fully Burried: {{ incident.people_buried_full }}</li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-3">
                     <h5>Avalanche</h5>
                     <ul>
-                        <li>Type: {{ incident.av_type }}</li>
-                        <li>Trigger: {{ incident.trigger }}</li>
-                        <li>Trigger info: {{ incident.trigger_add }}</li>
-                        <li>Weak layer: {{ incident.weak_layer }}</li>
+                        <li>Type: {{ av_types[incident.av_type] }}</li>
+                        <li>Trigger: {{ triggers[incident.trigger] }}</li>
+                        <li>Trigger info: {{ triggers_add[incident.trigger_add] }}</li>
+                        <li>Weak layer: {{ weak_layers[incident.weak_layer] }}</li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-3">
                     <h5>Site</h5>
                     <ul>
-                        <li>Slope Aspect: {{ incident.aspect }}</li>
+                        <li>Slope Aspect: {{ aspects[incident.aspect] }}</li>
                         <li>Elevation: {{ incident.elevation }}</li>
                         <li>Slope Angle: {{ incident.slope_angle }}</li>
                     </ul>
