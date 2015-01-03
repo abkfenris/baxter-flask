@@ -29,11 +29,19 @@ from ..models import (User,
                       AvalancheInProb,
                       Photo, SnowPit)
 from ..mappers import (aspects,
+                       directions,
                        triggers,
                        triggers_add,
                        av_problems,
                        av_types,
-                       weak_layers)
+                       weak_layers,
+                       conditions,
+                       sky_covers,
+                       precip_types,
+                       precip_rates,
+                       temp_trends,
+                       pressure_trends
+                       )
 
 # File path
 file_path = op.join(op.dirname(__file__), 'files')
@@ -125,68 +133,14 @@ class WeatherObView(ModelView):
                           temp_trend=SelectField,
                           pressure_trend=SelectField,
                           wind_direction=SelectField)
-    form_args = dict(
-        # Pass the choices to the SelectField
-        observer=dict(query_factory=observers),
-        sky=dict(
-            choices=[('CLR', 'Clear'),
-                     ('FEW', 'Few Clouds'),
-                     ('SCT', 'Scattered Clouds'),
-                     ('BKN', 'Broken Clouds'),
-                     ('OVC', 'Overcast'),
-                     ('X', 'Obscured')
-                     ]
-        ),
-        precip_type=dict(
-            choices=[('NO', 'No Percipitation'),
-                     ('RA', 'Rain'),
-                     ('SN', 'Snow'),
-                     ('RS', 'Mixed Rain and Snow'),
-                     ('GR', 'Gaupel and Hail'),
-                     ('ZR', 'Freezing Rain')
-                     ]
-        ),
-        precip_rate=dict(
-            choices=[('NO', 'No Precipitation'),
-                     ('S-1', 'S-1 - Very Light Snowfall (trace to .25in)'),
-                     ('S1', 'S1 - Light Snowfall (.5 in)'),
-                     ('S2', 'S2 - Moderate Snowfall (1 in)'),
-                     ('S5', 'S5 - Heavy Snowfall (2 in)'),
-                     ('S10', 'S10 - Very Heavy Snowfall (4 in)'),
-                     ('RV', 'RV - Very Light Rain (no accumulation)'),
-                     ('RL', 'RL - Light Rain'),
-                     ('RM', 'RM - Moderate Rain'),
-                     ('RH', 'RH - Heavy Rain')
-                     ]
-        ),
-        temp_trend=dict(
-            choices=[('RR', 'RR - Rising Rapidly (more than 10F)'),
-                     ('R', 'R - Rising (2-10F)'),
-                     ('S', 'S - Steady'),
-                     ('F', 'F - Falling (2-10F)'),
-                     ('FR', 'FR - Falling Rapidly (more than 10F)')
-                     ]
-        ),
-        pressure_trend=dict(
-            choices=[('RR', 'RR - Rising Rapidly (greater than 2 mb)'),
-                     ('R', 'R - Rising (less than 2 mb)'),
-                     ('S', 'S - Steady (less than 1 mb in 3 hours'),
-                     ('F', 'F - Falling (less than 2 mb)'),
-                     ('FR', 'FR - Falling Rapidly (more than 2 mb)')
-                     ]
-        ),
-        wind_direction=dict(
-            choices=[('N', 'North'),
-                     ('NE', 'North East'),
-                     ('E', 'East'),
-                     ('SE', 'South East'),
-                     ('S', 'South'),
-                     ('SW', 'South West'),
-                     ('W', 'West'),
-                     ('NW', 'North West')
-                     ]
-        )
-    )
+    form_args = {'observer': {'query_factory': observers},
+                 'sky': {'choices': sky_covers.items()},
+                 'precip_type': {'choices': precip_types.items()},
+                 'precip_rate': {'choices': precip_rates.items()},
+                 'temp_trend': {'choices': temp_trends.items()},
+                 'pressure_trend': {'choices': pressure_trends.items()},
+                 'wind_direction': {'choices': directions.items()}
+                 }
 
 
 class WeatherForView(ModelView):
@@ -261,7 +215,9 @@ class AuthenticatedMenuLink(MenuLink):
         return current_user.is_authenticated()
 
 
-admin = Admin(name='Baxter Data', index_view=MyAdminIndexView(), template_mode='bootstrap3')
+admin = Admin(name='Baxter Data',
+              index_view=MyAdminIndexView(),
+              template_mode='bootstrap3')
 
 admin.add_view(UserView(User, db.session,
                         name="Users",
