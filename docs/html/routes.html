@@ -119,6 +119,12 @@
 <div class="section" id="browseable-routes">
 <h2>Browseable routes<a class="headerlink" href="#browseable-routes" title="Permalink to this headline">¶</a></h2>
 <dl class="get">
+<dt id="get--avalanche-incident-">
+<code class="descname">GET </code><code class="descname">/avalanche/incident/</code><a class="headerlink" href="#get--avalanche-incident-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show all incidents</p>
+</dd></dl>
+
+<dl class="get">
 <dt id="get--trails-">
 <code class="descname">GET </code><code class="descname">/trails/</code><a class="headerlink" href="#get--trails-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show all trails</p>
@@ -131,6 +137,12 @@
 </dd></dl>
 
 <dl class="get">
+<dt id="get--avalanche-incident-(int-id)">
+<code class="descname">GET </code><code class="descname">/avalanche/incident/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--avalanche-incident-(int-id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show a single incident</p>
+</dd></dl>
+
+<dl class="get">
 <dt id="get--trails-(id)-">
 <code class="descname">GET </code><code class="descname">/trails/</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><code class="descname">/</code><a class="headerlink" href="#get--trails-(id)-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show a single trail</p>
@@ -140,9 +152,27 @@
 <div class="section" id="api-routes">
 <h2>API routes<a class="headerlink" href="#api-routes" title="Permalink to this headline">¶</a></h2>
 <dl class="get">
+<dt id="get--api-1.0-avalanche-incident-">
+<code class="descname">GET </code><code class="descname">/api/1.0/avalanche/incident/</code><a class="headerlink" href="#get--api-1.0-avalanche-incident-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geojson for all avalanche incidents</p>
+</dd></dl>
+
+<dl class="get">
 <dt id="get--api-1.0-trails-">
 <code class="descname">GET </code><code class="descname">/api/1.0/trails/</code><a class="headerlink" href="#get--api-1.0-trails-" title="Permalink to this definition">¶</a></dt>
 <dd><p>Show all trails</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-avalanche-incident-(int-id)-parts">
+<code class="descname">GET </code><code class="descname">/api/1.0/avalanche/incident/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><code class="descname">/parts</code><a class="headerlink" href="#get--api-1.0-avalanche-incident-(int-id)-parts" title="Permalink to this definition">¶</a></dt>
+<dd><p>return geojson for individual avalanche incident</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-avalanche-incident-(int-id)-">
+<code class="descname">GET </code><code class="descname">/api/1.0/avalanche/incident/</code><span class="sig-paren">(</span><em class="property">int: </em><em>id</em><span class="sig-paren">)</span><code class="descname">/</code><a class="headerlink" href="#get--api-1.0-avalanche-incident-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>return geojson for individual avalanche incident</p>
 </dd></dl>
 
 <dl class="get">

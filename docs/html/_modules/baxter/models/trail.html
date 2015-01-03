@@ -114,7 +114,10 @@
             
   <h1>Source code for baxter.models.trail</h1><div class="highlight"><pre>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">func</span>
 <span class="kn">from</span> <span class="nn">geoalchemy2</span> <span class="kn">import</span> <span class="n">Geometry</span>
+<span class="kn">from</span> <span class="nn">geoalchemy2.shape</span> <span class="kn">import</span> <span class="n">to_shape</span>
 
 
 <div class="viewcode-block" id="Trail"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail">[docs]</a><span class="k">class</span> <span class="nc">Trail</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -153,11 +156,30 @@
     <span class="n">avg_slope</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
     <span class="n">length_ft</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">geometry</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">mapping</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geom</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="n">geometry</span> <span class="o">=</span> <span class="bp">None</span>
+<div class="viewcode-block" id="Trail.center"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a shapely.Point that is the center of the trail</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">to_shape</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">ST_Transform</span><span class="p">(</span>
+                <span class="n">func</span><span class="o">.</span><span class="n">ST_Centroid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geom</span><span class="p">),</span>
+                <span class="mi">4326</span><span class="p">)</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">center</span>
+</div>
+<div class="viewcode-block" id="Trail.l_center"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail.l_center">[docs]</a>    <span class="k">def</span> <span class="nf">l_center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a formatted string in a way that</span>
+<span class="sd">        leaflet likes for a center point</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Trail.geojsonitem"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail.geojsonitem">[docs]</a>    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a geojson Feature for a trail</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Trail</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">ST_Transform</span><span class="p">(</span><span class="mi">4326</span><span class="p">)</span><span class="o">.</span><span class="n">ST_AsGeoJSON</span><span class="p">()</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s">&#39;geojson&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">{</span><span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;Feature&quot;</span><span class="p">,</span>
                 <span class="s">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">geometry</span><span class="p">,</span>
                 <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -189,7 +211,7 @@
                                <span class="p">}</span>
                 <span class="p">}</span>
 
-</div>
+</div></div>
 <div class="viewcode-block" id="POI"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.POI">[docs]</a><span class="k">class</span> <span class="nc">POI</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Points of Interest</span>
@@ -214,7 +236,10 @@
     <span class="n">site_capacity</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">facility_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="POI.geojsonitem"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.POI.geojsonitem">[docs]</a>    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a geojson Feature for Point of Interest</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">geometry</span> <span class="o">=</span> <span class="n">geo</span><span class="o">.</span><span class="n">mapping</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">point</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -224,7 +249,7 @@
                 <span class="s">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
                     <span class="p">}</span>
-                <span class="p">}</span></div>
+                <span class="p">}</span></div></div>
 </pre></div>
 
           </div>

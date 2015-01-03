@@ -119,7 +119,7 @@
 </div>
 <div class="section" id="module-baxter.models.avalanche">
 <span id="avalanche"></span><h2>Avalanche<a class="headerlink" href="#module-baxter.models.avalanche" title="Permalink to this headline">¶</a></h2>
-<p>Avalanche related models</p>
+<p>Avalanche related database models.</p>
 <dl class="class">
 <dt id="baxter.models.avalanche.AvalancheIn">
 <em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheIn</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn" title="Permalink to this definition">¶</a></dt>
@@ -133,6 +133,7 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>id</strong> (<em>int</em>) &#8211; Primary key</li>
 <li><strong>observer_id</strong> (<em>int</em>) &#8211; Primary foreign key for observer</li>
+<li><strong>observer</strong> (<a class="reference internal" href="#baxter.models.site.User" title="baxter.models.site.User"><em>User</em></a>) &#8211; User object for observer</li>
 <li><strong>name</strong> (<em>string</em>) &#8211; Name of incident</li>
 <li><strong>path_id</strong> (<em>int</em>) &#8211; Forign key of Avalanche Path where incident occured</li>
 <li><strong>path</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalanchePath" title="baxter.models.avalanche.AvalanchePath"><em>AvalanchePath</em></a>) &#8211; Object of Avalanche Path where incident occured</li>
@@ -165,6 +166,20 @@
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="baxter.models.avalanche.AvalancheIn.center">
+<code class="descname">center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a shapely.Point that is the center
+of the union of the bed surface and debris field</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baxter.models.avalanche.AvalancheIn.l_center">
+<code class="descname">l_center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn.l_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.l_center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a formatted string in a way that
+leaflet likes for a center point</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -300,6 +315,12 @@
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="baxter.models.trail.POI.geojsonitem">
+<code class="descname">geojsonitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#POI.geojsonitem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.POI.geojsonitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a geojson Feature for Point of Interest</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -307,6 +328,25 @@
 <em class="property">class </em><code class="descclassname">baxter.models.trail.</code><code class="descname">Trail</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
 <p>Arguments:</p>
+<dl class="method">
+<dt id="baxter.models.trail.Trail.center">
+<code class="descname">center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a shapely.Point that is the center of the trail</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baxter.models.trail.Trail.geojsonitem">
+<code class="descname">geojsonitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail.geojsonitem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.geojsonitem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a geojson Feature for a trail</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baxter.models.trail.Trail.l_center">
+<code class="descname">l_center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail.l_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.l_center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a formatted string in a way that
+leaflet likes for a center point</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

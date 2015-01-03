@@ -38,6 +38,7 @@ class AvalancheIn(db.Model):
     Arguments:
         id (int): Primary key
         observer_id (int): Primary foreign key for observer
+        observer (User): User object for observer
         name (string): Name of incident
         path_id (int): Forign key of Avalanche Path where incident occured
         path (AvalanchePath): Object of Avalanche Path where incident occured
@@ -107,6 +108,10 @@ class AvalancheIn(db.Model):
     debris_field = db.Column(Geometry('MULTIPOLYGON', 926919))
 
     def center(self):
+        """
+        Return a shapely.Point that is the center
+        of the union of the bed surface and debris field
+        """
         center = to_shape(db.session.query(
                 func.ST_Transform(
                   func.ST_Centroid(
@@ -116,6 +121,10 @@ class AvalancheIn(db.Model):
         return center
 
     def l_center(self):
+        """
+        Return a formatted string in a way that
+        leaflet likes for a center point
+        """
         center = self.center()
         return str(center.y) + ',' + str(center.x)
 

@@ -42,6 +42,9 @@ class Trail(db.Model):
     length_ft = db.Column(db.Float)
 
     def center(self):
+        """
+        Return a shapely.Point that is the center of the trail
+        """
         center = to_shape(db.session.query(
             func.ST_Transform(
                 func.ST_Centroid(self.geom),
@@ -50,10 +53,17 @@ class Trail(db.Model):
         return center
 
     def l_center(self):
+        """
+        Return a formatted string in a way that
+        leaflet likes for a center point
+        """
         center = self.center()
         return str(center.y) + ',' + str(center.x)
 
     def geojsonitem(self):
+        """
+        Return a geojson Feature for a trail
+        """
         geometry = db.session.query(Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')).filter_by(id=self.id).first()[0]
         return {"type": "Feature",
                 "geometry": geometry,
@@ -112,6 +122,9 @@ class POI(db.Model):
     facility_id = db.Column(db.Integer)
 
     def geojsonitem(self):
+        """
+        Return a geojson Feature for Point of Interest
+        """
         try:
             geometry = geo.mapping(self.point)
         except AttributeError:
