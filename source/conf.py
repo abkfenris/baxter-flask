@@ -15,7 +15,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('.'))
+sys.path.append(os.path.abspath('.'))  # required so that automodules can figure out where to start
 
 import sphinx_rtd_theme
 

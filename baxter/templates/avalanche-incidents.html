@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Avalanche Incidents{% endblock %}
+
+
+
+
+{% block content %}
+<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+    <div class="container">
+        <h1>Avalanche Incidents</h1>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="list-group">
+        {% for incident in incidents %}
+        <a href="" class="list-group-item">{{ incident.name }} - {{ incident.occurence_date.strftime('%Y-%m-%d') }}</a>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}

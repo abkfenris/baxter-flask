@@ -5,7 +5,6 @@ Database models
 
 Avalanche
 ---------
-Database models that are related to avalanches.
 
 .. automodule:: baxter.models.avalanche
     :members:

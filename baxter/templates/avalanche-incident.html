@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}{{ trail.name }}{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script>
+<script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
+<script src="https://raw.githubusercontent.com/shramov/leaflet-plugins/master/layer/tile/Google.js"></script>
+<script>
+var map = L.map('map').setView([46.05,-68.94], 11);
+
+var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/{{ config['MAPBOX_MAP_ID'] }}/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; [...]',
+    maxZoom: 18
+})
+
+mapbox.addTo(map);
+
+var ggl = new L.Google();
+var ggl2 = new L.Google('TERRAIN');
+
+var baseMaps = {
+    "MapBox": mapbox,
+    "Google Satellite": ggl,
+    "Google Terrain": ggl2
+}
+
+function popUp(feature, layer) {
+    layer.bindPopup(feature.properties.name);
+}
+
+var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.trail', id=trail.id ) }}", {onEachFeature:popUp});
+geojsonLayer.addTo(map);
+var geojsonTrails = new L.GeoJSON.AJAX("{{ url_for('api.list_trails' ) }}", {onEachFeature:popUp});
+
+var layers = {
+    '{{ trail.name }}': geojsonLayer,
+    'All Trails': geojsonTrails,
+}
+
+map.addControl(new L.Control.Layers( baseMaps, layers));
+
+
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
+    <div class="container">
+        <h1>{{ trail.name }}</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div id="map" style="height: 600px;"></div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+{% endblock %}

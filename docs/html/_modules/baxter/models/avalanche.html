@@ -63,7 +63,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../models.html">Database models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#avalanche">Avalanche</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.avalanche">Avalanche</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../models.html#snow">Snow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.trail">Trail</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.weather">Weather</a></li>
@@ -113,6 +113,10 @@
           <div role="main">
             
   <h1>Source code for baxter.models.avalanche</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Avalanche related models</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">db</span>
 <span class="kn">from</span> <span class="nn">geoalchemy2</span> <span class="kn">import</span> <span class="n">Geometry</span>
 
@@ -288,6 +292,8 @@
 <div class="viewcode-block" id="AvalancheInProb"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheInProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Avalanche Incident and Problem complex connector</span>
+
+<span class="sd">    Also known as an `Association Object &lt;http://docs.sqlalchemy.org/en/latest/orm/extensions/associationproxy.html#simplifying-association-objects&gt;`_.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        id (int): Primary key for AvalancheInProb</span>

@@ -1,3 +1,7 @@
+"""
+Avalanche related models
+"""
+
 from .. import db
 from geoalchemy2 import Geometry
 
@@ -173,6 +177,8 @@ class AvalancheProb(db.Model):
 class AvalancheInProb(db.Model):
     """
     Avalanche Incident and Problem complex connector
+
+    Also known as an `Association Object <http://docs.sqlalchemy.org/en/latest/orm/extensions/associationproxy.html#simplifying-association-objects>`_.
 
     Arguments:
         id (int): Primary key for AvalancheInProb
