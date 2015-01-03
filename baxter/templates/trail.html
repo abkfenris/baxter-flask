@@ -35,9 +35,13 @@ function popUp(feature, layer) {
 	layer.bindPopup(feature.properties.name);
 }
 
+function popUpTrails(feature, layer) {
+	layer.bindPopup('<a href="' + feature.properties.html + '">' + feature.properties.name + '</a>');
+}
+
 var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.trail', id=trail.id ) }}", {onEachFeature:popUp});
 geojsonLayer.addTo(map);
-var geojsonTrails = new L.GeoJSON.AJAX("{{ url_for('api.list_trails' ) }}", {onEachFeature:popUp});
+var geojsonTrails = new L.GeoJSON.AJAX("{{ url_for('api.list_trails' ) }}", {onEachFeature:popUpTrails});
 
 var layers = {
 	'{{ trail.name }}': geojsonLayer,

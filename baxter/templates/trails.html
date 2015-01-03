@@ -34,7 +34,7 @@ var baseMaps = {
 map.addControl(new L.Control.Layers( baseMaps, {}));
 
 function popUp(feature, layer) {
-	layer.bindPopup(feature.properties.name);
+	layer.bindPopup('<a href="' + feature.properties.html + '">' + feature.properties.name + '</a>');
 }
 
 var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.list_trails' ) }}", {onEachFeature:popUp});

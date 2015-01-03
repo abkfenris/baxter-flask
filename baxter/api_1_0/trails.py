@@ -48,7 +48,8 @@ def list_trails():
             'properties': {
                 'name': trail.name,
                 'id': trail.id,
-                'url': url_for('.trail', id=trail.id)
+                'url': url_for('.trail', id=trail.id),
+                'html': url_for('main.trail', id=trail.id)
             },
             'geometry': json.loads(trail.geojson)
         })
