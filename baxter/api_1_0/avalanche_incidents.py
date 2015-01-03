@@ -91,6 +91,48 @@ def incident(id):
     })
 
 
+@api.route('/avalanche/incident/<int:id>/parts')
+def incident_parts(id):
+    """
+    return geojson for individual avalanche incident
+    """
+    query = db.session.query(AvalancheIn.name,
+            AvalancheIn.id,
+            AvalancheIn.crown.ST_Transform(4326).ST_AsGeoJSON().label('crown'),
+            AvalancheIn.bed_surface.ST_Transform(4326).ST_AsGeoJSON().label('bed_surface'),
+            AvalancheIn.debris_field.ST_Transform(4326).ST_AsGeoJSON().label('debris_field'),
+            AvalancheIn.bed_surface.ST_Union(AvalancheIn.debris_field).ST_Transform(4326).ST_AsGeoJSON().label('geojson')
+            ).filter_by(id=id)
+
+    incident = query[0]
+    return jsonify({
+        'type': 'FeatureCollection',
+        'features': [
+            {
+                'type': 'Feature',
+                'properties': {
+                    'structure': 'crown'
+                },
+                'geometry': json.loads(incident.crown)
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'structure': 'bed surface'
+                },
+                'geometry': json.loads(incident.bed_surface)
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'structure': 'debris field'
+                },
+                'geometry': json.loads(incident.debris_field)
+            }
+        ]
+    })
+
+
 @api.route('/avalanche/incident/')
 def incidents():
     """

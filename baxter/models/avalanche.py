@@ -1,9 +1,12 @@
 """
-Avalanche related models
+Avalanche related database models.
 """
 
 from .. import db
+
+from sqlalchemy import func
 from geoalchemy2 import Geometry
+from geoalchemy2.shape import to_shape
 
 
 class AvalanchePath(db.Model):
@@ -102,6 +105,19 @@ class AvalancheIn(db.Model):
     crown = db.Column(Geometry('MULTILINESTRING', 926919))
     bed_surface = db.Column(Geometry('MULTIPOLYGON', 926919))
     debris_field = db.Column(Geometry('MULTIPOLYGON', 926919))
+
+    def center(self):
+        center = to_shape(db.session.query(
+                func.ST_Transform(
+                  func.ST_Centroid(
+                    func.ST_Union(self.bed_surface,
+                                  self.debris_field
+                                  )), 4326)).first()[0])
+        return center
+
+    def l_center(self):
+        center = self.center()
+        return str(center.y) + ',' + str(center.x)
 
 
 class AvalancheInvolved(db.Model):

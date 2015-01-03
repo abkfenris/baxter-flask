@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ trail.name }}{% endblock %}
+{% block title %}{{ incident.name }}{% endblock %}
 
 {% block styles %}
 {{ super() }}
@@ -13,7 +13,7 @@
 <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
 <script src="https://raw.githubusercontent.com/shramov/leaflet-plugins/master/layer/tile/Google.js"></script>
 <script>
-var map = L.map('map').setView([46.05,-68.94], 11);
+var map = L.map('map').setView([{{ incident.l_center() }}], 14);
 
 var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/{{ config['MAPBOX_MAP_ID'] }}/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; [...]',
@@ -32,19 +32,15 @@ var baseMaps = {
 }
 
 function popUp(feature, layer) {
-    layer.bindPopup(feature.properties.name);
+    layer.bindPopup(feature.properties.structure);
 }
 
-var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.trail', id=trail.id ) }}", {onEachFeature:popUp});
+var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.incident_parts', id=incident.id ) }}", {onEachFeature:popUp});
 geojsonLayer.addTo(map);
-var geojsonTrails = new L.GeoJSON.AJAX("{{ url_for('api.list_trails' ) }}", {onEachFeature:popUp});
 
-var layers = {
-    '{{ trail.name }}': geojsonLayer,
-    'All Trails': geojsonTrails,
-}
+map.fitBounds(geojsonLayer.getBounds());
 
-map.addControl(new L.Control.Layers( baseMaps, layers));
+map.addControl(new L.Control.Layers( baseMaps, {}));
 
 
 
@@ -55,13 +51,62 @@ map.addControl(new L.Control.Layers( baseMaps, layers));
 {% block content %}
 <div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
     <div class="container">
-        <h1>{{ trail.name }}</h1>
+        <h1>{{ incident.name }} - {{ incident.occurence_date.strftime('%Y-%m-%d') }}</h1>
     </div>
 </div>
 
 <div class="container">
     <div id="map" style="height: 600px;"></div>
-
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        <li><a href="#description" data-toggle="tab">Description</a></li>
+        <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+    </ul>
+    <!-- Tab contents -->
+    <div class="tab-content">
+        <div class="tab-pane" id="description">
+            <div class="container">
+                {{ incident.description }}
+            </div>
+        </div>
+        <div class="tab-pane active" id="details">
+            <div class="row">
+                <h4>Avalanche Details</h4>
+                <ul>
+                    <li>Location: {{ incident.location }}</li>
+                    <li>Date: {{ incident.occurence_date.strftime('%Y/%m/%d') }}</li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-3">
+                    <h5>Number</h5>
+                    <ul>
+                        <li>Caught: {{ incident.people_caught }}</li>
+                        <li>Carried: {{ incident.people_carried }}</li>
+                        <li>Partially Burried: {{ incident.people_burried_part }}</li>
+                        <li>Fully Burried: {{ incident.people_burried_full }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-3">
+                    <h5>Avalanche</h5>
+                    <ul>
+                        <li>Type: {{ incident.av_type }}</li>
+                        <li>Trigger: {{ incident.trigger }}</li>
+                        <li>Trigger info: {{ incident.trigger_add }}</li>
+                        <li>Weak layer: {{ incident.weak_layer }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-3">
+                    <h5>Site</h5>
+                    <ul>
+                        <li>Slope Aspect: {{ incident.aspect }}</li>
+                        <li>Elevation: {{ incident.elevation }}</li>
+                        <li>Slope Angle: {{ incident.slope_angle }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </div>
