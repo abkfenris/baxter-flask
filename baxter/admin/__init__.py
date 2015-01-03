@@ -245,7 +245,10 @@ class AvalancheInView(ModelView):
                  }
     form_widget_args = {'crown': h_w,
                         'bed_surface': h_w,
-                        'debris_field': h_w}
+                        'debris_field': h_w,
+                        'description': {
+                            'rows': 15
+                        }}
     column_list = ('name', 'occurence_date', 'depth', 'width', 'vertical', 'aspect', 'observer', 'bed_surface', 'debris_field')
 
 
