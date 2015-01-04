@@ -18,10 +18,12 @@ def trails():
     """
     Show all trails
     """
-    query = db.session.query(Trail.name,
-                             Trail.id
-                             ).filter_by(display=True).order_by(Trail.name.asc())
-    trails = query
+    trails = db.session.query(Trail.name,
+                             Trail.id,
+                             Trail.season,
+                             Trail.skitrail,
+                             Trail.length_mi
+                             ).filter_by(display=True, tclass='ACTIVE').order_by(Trail.name.asc())
     return render_template('trails.html', trails=trails)
 
 

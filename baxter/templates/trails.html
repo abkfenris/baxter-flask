@@ -55,20 +55,35 @@ geojsonLayer.addTo(map);
 	</div>
 
 	<div class="container">
-		<div id="map" style="height: 600px;"></div>
-
-		<div class="list-group">
-			{% for trail in trails %}
-			<a href="{{ url_for('main.trail', id=trail.id) }}" class="list-group-item">{{ trail.name }}</a>
-			{% endfor %}
+		<div id="map" class="row" style="height: 600px;"></div>
+		<div class="row top-buffer">
+			<div class="col-md-8">
+				<table class="table table-hover">
+					<thead>
+						<tr><th>Trail Name</th><th>Season</th><th>Length</th><th>Ski Trail</th></tr>
+					</thead>
+					<tbody>
+						{% for trail in trails %}
+						<tr><th><a href="{{ url_for('main.trail', id=trail.id) }}">{{ trail.name }}</a></th><td>{{ trail.season|capitalize }}</td><td>{{ trail.length_mi|round(1, 'ceil') }} mi</td><td>{% if trail.skitrail %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% endif %}</td></tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Hiking in Baxter State Park</h3>
+					</div>
+					<div class="panel-body">
+						<p>Our hiking trails are the heart and soul of Baxter State Park and the Park has over 200 miles of hiking trails in some of the wildest and most spectacular terrain in New England. Some of our trails are over 100 years old and the Park provides a variety of hiking trails from an easy hike to Big and Little Niagara Falls to a strenuous all-day climb to Baxter Peak.</p>
+						<p>The Park was intended by Percival Baxter to be "available for those who love nature and are willing to walk and make an effort to get close to nature." Our hiking trails are very primitive, with many rocks and roots, even on the flattest terrain. Visitors should have sturdy footwear and be prepared for obstacles including boulders and stream crossings. Please consult an up-to-date map for elevation gains or stream crossings on trails. As a wilderness Park, bridges are rarely found across streams.</p>
+					</div>
+				</div>
+			</div>
 		</div>
-
-
 	</div>
 
   </div>
 
-</div>
-</div>
 
 {% endblock %}
