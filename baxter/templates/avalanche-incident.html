@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}{{ incident.name }}{% endblock %}
 
+{% block body_attribs %} class="baxter-avalanche-incident"{% endblock %}
+
+
 {% block styles %}
 {{ super() }}
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
