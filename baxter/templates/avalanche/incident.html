@@ -83,25 +83,35 @@ map.addControl(new L.Control.Layers( baseMaps, {}));
                 <ul>
                     <li>Location: {{ incident.location }}</li>
                     <li>Date: {{ incident.occurence_date.strftime('%Y/%m/%d') }}</li>
+                    {% if not incident.summary is none %}
+                    <li>{{ incident.summary }}</li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="row">
                 <div class="col-md-4 col-sm-3">
-                    <h5>Number</h5>
+                    <h5>People involved</h5>
                     <ul>
                         <li>Caught: {{ incident.people_caught }}</li>
                         <li>Carried: {{ incident.people_carried }}</li>
+                        <li>Injuried: {{ incident.people_injured }}</li>
                         <li>Partially Burried: {{ incident.people_buried_part }}</li>
                         <li>Fully Burried: {{ incident.people_buried_full }}</li>
+                        <li>Killed: {{ incident.people_killed }}</li>
+                        <li>Rescuers: {{ incident.people_rescuer }}</li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-3">
                     <h5>Avalanche</h5>
                     <ul>
+                        <li>Depth: {{ incident.depth }}</li>
+                        <li>Width: {{ incident.width }}</li>
                         <li>Type: {{ av_types[incident.av_type] }}</li>
                         <li>Trigger: {{ triggers[incident.trigger] }}</li>
                         <li>Trigger info: {{ triggers_add[incident.trigger_add] }}</li>
                         <li>Weak layer: {{ weak_layers[incident.weak_layer] }}</li>
+                        <li>Size relative: {{ relative }}</li>
+                        <li>Size destructive: {{ destructive }}</li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-sm-3">
@@ -110,6 +120,9 @@ map.addControl(new L.Control.Layers( baseMaps, {}));
                         <li>Slope Aspect: {{ aspects[incident.aspect] }}</li>
                         <li>Elevation: {{ incident.elevation }}</li>
                         <li>Slope Angle: {{ incident.slope_angle }}</li>
+                        {% if not incident.location is none %}
+                        <li>{{ incident.location }}</li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

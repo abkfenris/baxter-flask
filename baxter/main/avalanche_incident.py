@@ -15,7 +15,9 @@ from ..mappers import (aspects,
                        triggers_add,
                        av_problems,
                        av_types,
-                       weak_layers)
+                       weak_layers,
+                       avalanche_relative,
+                       avalanche_destructive)
 from ..models import AvalancheIn
 
 
@@ -30,7 +32,7 @@ def avalanche_incidents():
                              AvalancheIn.location
                              ).order_by(AvalancheIn.occurence_date.desc())
     incidents = query
-    return render_template('avalanche-incidents.html', incidents=incidents)
+    return render_template('avalanche/incidents.html', incidents=incidents)
 
 
 @main.route('/avalanche/incident/<int:id>')
@@ -39,11 +41,21 @@ def avalanche_incident(id):
     Show a single incident
     """
     incident = AvalancheIn.query.get_or_404(id)
-    return render_template('avalanche-incident.html',
+    try:
+        relative = avalanche_relative[str(incident.size_relative)]
+    except KeyError:
+        relative = 'Unknown'
+    try:
+        destructive = avalanche_destructive[str(incident.size_desctructive)]
+    except KeyError:
+        destructive = 'Unknown'
+    return render_template('avalanche/incident.html',
                            incident=incident,
                            aspects=aspects,
                            triggers=triggers,
                            triggers_add=triggers_add,
                            av_problems=av_problems,
                            av_types=av_types,
-                           weak_layers=weak_layers)
+                           weak_layers=weak_layers,
+                           relative=relative,
+                           destructive=destructive)
