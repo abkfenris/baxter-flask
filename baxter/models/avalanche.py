@@ -29,6 +29,7 @@ class AvalanchePath(db.Model):
     description = db.Column(db.Text)
     path = db.Column(Geometry('POLYGON', 926919))
     aspect = db.Column(db.String(40))
+    display = db.Column(db.Boolean)
 
     def center(self):
         """
@@ -185,6 +186,12 @@ class AvalancheIn(db.Model):
         Returns a flask Markup object containing the markdown for description
         """
         return Markup(md.convert(self.description))
+
+    def __repr__(self):
+        try:
+            return self.name + ' ' + self.occurence_date.strftime('%Y-%m-%d')
+        except:
+            super()
 
 class AvalancheInvolved(db.Model):
     """
