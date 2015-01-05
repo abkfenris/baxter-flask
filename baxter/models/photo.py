@@ -2,10 +2,10 @@ from .. import db
 from geoalchemy2 import Geometry
 
 
-#AvalancheIn_Photo = db.Table('avalanche_ins_photo',
-#        db.Column('avalanche_ins_id', db.Integer, db.ForeignKey('avalanche_ins.id')),
-#        db.Column('photo_id', db.Integer, db.ForeignKey('photo.id')),
-#)
+avalanche_ins_photo = db.Table('avalanche_ins_photo',
+        db.Column('avalanche_ins_id', db.Integer, db.ForeignKey('avalanche_ins.id')),
+        db.Column('photo_id', db.Integer, db.ForeignKey('photoss.id')),
+)
 
 
 class Photo(db.Model):
@@ -27,8 +27,8 @@ class Photo(db.Model):
     location = db.Column(Geometry("POINT", 926919))
     description = db.Column(db.Text)
 
-    #incident_id = db.Column(db.Integer, db.ForeignKey('avalanche_ins.id'))
-    #incident = db.relationship('AvalancheIn', backref='photos')
+    incident = db.relationship('AvalancheIn', secondary=avalanche_ins_photo,
+            backref=db.backref('photos', lazy='dynamic'))
 
     def __unicode__(self):
         return self.name
