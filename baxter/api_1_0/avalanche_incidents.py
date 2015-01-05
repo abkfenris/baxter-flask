@@ -12,6 +12,7 @@ from ..models import AvalancheIn
 
 
 @api.route('/avalanche/incident/<int:id>/')
+@cache.cached()
 def incident(id):
     """
     return geojson for individual avalanche incident
@@ -112,6 +113,7 @@ def incident(id):
 
 
 @api.route('/avalanche/incident/<int:id>/parts')
+@cache.cached()
 def incident_parts(id):
     """
     return geojson for individual avalanche incident
@@ -169,6 +171,7 @@ def incident_parts(id):
 
 
 @api.route('/avalanche/incident/')
+@cache.cached()
 def incidents():
     """
     Geojson for all avalanche incidents

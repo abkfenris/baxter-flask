@@ -11,6 +11,7 @@ from .. import cache
 from ..models import Trail
 
 @api.route('/trail/<int:id>/')
+@cache.cached()
 def trail(id):
     """
     Show individual trail *id*
