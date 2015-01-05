@@ -30,6 +30,32 @@ class AvalanchePath(db.Model):
     path = db.Column(Geometry('POLYGON', 926919))
     aspect = db.Column(db.String(40))
 
+    def center(self):
+        """
+        Returns a shapely.Point that is the center of the Avalanche Path
+        """
+        center = to_shape(db.session.query(
+            func.ST_Transform(
+                func.ST_Centroid(self.path),
+                4326
+            )
+        ).first()[0])
+        return center
+
+    def l_center(self):
+        """
+        Returns a formatted string in a way that
+        leaflet likes for a center point
+        """
+        center = self.center()
+        return str(center.y) + ',' + str(center.x)
+
+    def description_md(self):
+        """
+        Returns a flask Markup object containing the markdown for description
+        """
+        return Markup(md.convert(self.description))
+
     def __repr__(self):
         return '%s' % self.name
 

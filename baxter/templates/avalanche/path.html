@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Avalanche Paths{% endblock %}
+{% block title %}{{ path.name }}{% endblock %}
 
-{% block body_attribs %} class="baxter-avalanche-paths"{% endblock %}
+{% block body_attribs %} class="baxter-avalanche-path"{% endblock %}
 
 {% block styles %}
 {{ super() }}
@@ -10,13 +10,12 @@
 
 {% block scripts %}
 {{ super() }}
-
 <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 <script src="https://raw.github.com/calvinmetcalf/leaflet-ajax/master/dist/leaflet.ajax.min.js"></script>
 <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
 <script src="https://raw.githubusercontent.com/shramov/leaflet-plugins/master/layer/tile/Google.js"></script>
 <script>
-var map = L.map('map').setView([46.0,-68.94], 11);
+var map = L.map('map').setView([{{ path.l_center() }}], 14);
 
 var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/{{ config['MAPBOX_MAP_ID'] }}/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; [...]',
@@ -34,35 +33,41 @@ var baseMaps = {
     "Google Terrain": ggl2
 }
 
-map.addControl(new L.Control.Layers( baseMaps, {}));
-
 function popUp(feature, layer) {
+    layer.bindPopup(feature.properties.name);
+}
+
+function popUpTrails(feature, layer) {
     layer.bindPopup('<a href="' + feature.properties.html + '">' + feature.properties.name + '</a>');
 }
 
-var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.avalanche_paths' ) }}", {onEachFeature:popUp});
+var geojsonLayer = new L.GeoJSON.AJAX("{{ url_for('api.avalanche_path', id=path.id ) }}", {onEachFeature:popUp});
 geojsonLayer.addTo(map);
-</script>
+var geojsonPaths = new L.GeoJSON.AJAX("{{ url_for('api.avalanche_paths' ) }}", {onEachFeature:popUpTrails});
 
+var layers = {
+    '{{ path.name }}': geojsonLayer,
+    'All Avalanche Paths': geojsonPaths,
+}
+
+map.addControl(new L.Control.Layers( baseMaps, layers));
+
+
+
+
+</script>
 {% endblock %}
 
 {% block content %}
-<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header-avalanche-path') }}); background-size: 100%;">
-    <div class="container">
-        <h1>Avalanche Paths</h1>
-    </div>
-</div>
-
 <div class="container">
-    <div id="map" class="row" style="height: 600px;"></div>
+    <div class="row">
+        <div id="map" style="height: 600px;"></div>
+    </div>
 
     <div class="row top-buffer">
         <div class="col-md-8">
-            <div class="list-group">
-                {% for path in paths %}
-                    <a href="{{ url_for('main.avalanche_path', id=path.id) }}" class="list-group-item">{{ path.name }}</a>
-                {% endfor %}
-            </div>
+            <h1>{{ path.name }}</h1>
+            {{ path.description_md() }}
         </div>
 
         <div class="col-md-4">
