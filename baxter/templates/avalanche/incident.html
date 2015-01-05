@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ incident.name }}{% endblock %}
+{% block title %}{{ incident.name }} - {{ incident.occurence_date.strftime('%Y-%m-%d') }}{% endblock %}
 
 {% block body_attribs %} class="baxter-avalanche-incident"{% endblock %}
 
@@ -54,79 +54,81 @@ map.addControl(new L.Control.Layers( baseMaps, {}));
 {% endblock %}
 
 {% block content %}
-<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header.jpg' ) }}); background-size: 100%;">
-    <div class="container">
+<div class="container">
+    <div class="row">
+        {% if not incident.debris_field is none and not incident.bed_surface is none %}
+        <div id="map" style="height: 400px;"></div>
+        {% endif %}
+    </div>
+
+    <div class="row">
         <h1>{{ incident.name }} - {{ incident.occurence_date.strftime('%Y-%m-%d') }}</h1>
     </div>
-</div>
+    <div class="row">
+        <!-- Nav tabs -->
 
-<div class="container">
-    {% if not incident.debris_field is none and not incident.bed_surface is none %}
-    <div id="map" style="height: 400px;"></div>
-    {% endif %}
-
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
-        <li><a href="#description" data-toggle="tab">Description</a></li>
-        <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
-    </ul>
-    <!-- Tab contents -->
-    <div class="tab-content">
-        <div class="tab-pane" id="description">
-            <div class="container">
-                {{ incident.description_md() }}
-            </div>
-        </div>
-        <div class="tab-pane active" id="details">
-            <div class="row">
-                <h4>Avalanche Details</h4>
-                <ul>
-                    <li>Location: {{ incident.location }}</li>
-                    <li>Date: {{ incident.occurence_date.strftime('%Y/%m/%d') }}</li>
-                    {% if not incident.summary is none %}
-                    <li>{{ incident.summary }}</li>
-                    {% endif %}
-                </ul>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-sm-3">
-                    <h5>People involved</h5>
-                    <ul>
-                        <li>Caught: {{ incident.people_caught }}</li>
-                        <li>Carried: {{ incident.people_carried }}</li>
-                        <li>Injuried: {{ incident.people_injured }}</li>
-                        <li>Partially Burried: {{ incident.people_buried_part }}</li>
-                        <li>Fully Burried: {{ incident.people_buried_full }}</li>
-                        <li>Killed: {{ incident.people_killed }}</li>
-                        <li>Rescuers: {{ incident.people_rescuer }}</li>
-                    </ul>
+        <ul class="nav nav-tabs">
+            <li><a href="#description" data-toggle="tab">Description</a></li>
+            <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+        </ul>
+        <!-- Tab contents -->
+        <div class="tab-content">
+            <div class="tab-pane" id="description">
+                <div class="container">
+                    {{ incident.description_md() }}
                 </div>
-                <div class="col-md-4 col-sm-3">
-                    <h5>Avalanche</h5>
+            </div>
+            <div class="tab-pane active" id="details">
+                <div class="row">
+                    <h4>Avalanche Details</h4>
                     <ul>
-                        {% if not incident.path is none %}
-                        <li>Path: <a href="{{ url_for('.avalanche_path', id=incident.path.id)}}">{{ incident.path.name }}</a></li>
-                        {% endif %}
-                        <li>Depth: {{ incident.depth }}</li>
-                        <li>Width: {{ incident.width }}</li>
-                        <li>Type: {{ av_types[incident.av_type] }}</li>
-                        <li>Trigger: {{ triggers[incident.trigger] }}</li>
-                        <li>Trigger info: {{ triggers_add[incident.trigger_add] }}</li>
-                        <li>Weak layer: {{ weak_layers[incident.weak_layer] }}</li>
-                        <li>Size relative: {{ relative }}</li>
-                        <li>Size destructive: {{ destructive }}</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 col-sm-3">
-                    <h5>Site</h5>
-                    <ul>
-                        <li>Slope Aspect: {{ aspects[incident.aspect] }}</li>
-                        <li>Elevation: {{ incident.elevation }}</li>
-                        <li>Slope Angle: {{ incident.slope_angle }}</li>
-                        {% if not incident.location is none %}
-                        <li>{{ incident.location }}</li>
+                        <li>Location: {{ incident.location }}</li>
+                        <li>Date: {{ incident.occurence_date.strftime('%Y/%m/%d') }}</li>
+                        {% if not incident.summary is none %}
+                        <li>{{ incident.summary }}</li>
                         {% endif %}
                     </ul>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-3">
+                        <h5>People involved</h5>
+                        <ul>
+                            <li>Caught: {{ incident.people_caught }}</li>
+                            <li>Carried: {{ incident.people_carried }}</li>
+                            <li>Injuried: {{ incident.people_injured }}</li>
+                            <li>Partially Burried: {{ incident.people_buried_part }}</li>
+                            <li>Fully Burried: {{ incident.people_buried_full }}</li>
+                            <li>Killed: {{ incident.people_killed }}</li>
+                            <li>Rescuers: {{ incident.people_rescuer }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-sm-3">
+                        <h5>Avalanche</h5>
+                        <ul>
+                            {% if not incident.path is none %}
+                            <li>Path: <a href="{{ url_for('.avalanche_path', id=incident.path.id)}}">{{ incident.path.name }}</a></li>
+                            {% endif %}
+                            <li>Depth: {{ incident.depth }}</li>
+                            <li>Width: {{ incident.width }}</li>
+                            <li>Type: {{ av_types[incident.av_type] }}</li>
+                            <li>Trigger: {{ triggers[incident.trigger] }}</li>
+                            <li>Trigger info: {{ triggers_add[incident.trigger_add] }}</li>
+                            <li>Weak layer: {{ weak_layers[incident.weak_layer] }}</li>
+                            <li>Size relative: {{ relative }}</li>
+                            <li>Size destructive: {{ destructive }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-sm-3">
+                        <h5>Site</h5>
+                        <ul>
+                            <li>Slope Aspect: {{ aspects[incident.aspect] }}</li>
+                            <li>Elevation: {{ incident.elevation }}</li>
+                            <li>Slope Angle: {{ incident.slope_angle }}</li>
+                            {% if not incident.location is none %}
+                            <li>{{ incident.location }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
