@@ -41,7 +41,9 @@ from ..mappers import (aspects,
                        precip_types,
                        precip_rates,
                        temp_trends,
-                       pressure_trends
+                       pressure_trends,
+                       avalanche_relative,
+                       avalanche_destructive
                        )
 
 # File path
@@ -235,13 +237,17 @@ class AvalancheInView(ModelView):
                           trigger_add=SelectField,
                           av_problem=SelectField,
                           av_type=SelectField,
-                          weak_layer=SelectField)
+                          weak_layer=SelectField,
+                          size_relative=SelectField,
+                          size_desctructive=SelectField)
     form_args = {'aspect': {'choices': aspects.items()},
                  'trigger': {'choices': triggers.items()},
                  'trigger_add': {'choices': triggers_add.items()},
                  'av_problem': {'choices': av_problems.items()},
                  'av_type': {'choices': av_types.items()},
                  'weak_layer': {'choices': weak_layers.items()},
+                 'size_relative': {'choices': avalanche_relative.items()},
+                 'size_desctructive': {'choices': avalanche_destructive.items()},
                  'observer': {'query_factory':observers}
                  }
     form_widget_args = {'crown': h_w,

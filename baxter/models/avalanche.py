@@ -71,6 +71,7 @@ class AvalancheIn(db.Model):
         name (string): Name of incident
         path_id (int): Forign key of Avalanche Path where incident occured
         path (AvalanchePath): Object of Avalanche Path where incident occured
+        display (bool): Display incident publicly
         observation_date (datetime): Date observer visited incident site
         occurence_date (datetime): Date incident occured
         location (text): Description of incident location
@@ -81,17 +82,25 @@ class AvalancheIn(db.Model):
         av_problem (string): Avalanche problem type
         av_type (string): Avalanche type
         weak_layer (string): Weak layer type
+        size_relative (float): Slide size relative to path
+        size_destructive (float): Destructive force of slide
         depth (float): Depth of displaced snowpack
         width (float): Width of bed surface
         vertical (float): Vertical distance that the slide ran
         slope_angle (float): Steepest Slope Angle
         people_caught (int): Number of people caught by slide
         people_carried (int): Number of people carried by slide
+        people_injuried (int): Number of people injured by slide
         people_buried_part (int): Number of people partially burried
         people_buried_full (int): Number of people totally burried
+        people_killed (int): Number of people killed by slide
+        people_rescuer (int): Number of rescuers involved
+        group_activity (str): Activity that group was involved in
+        group_travel (str): Group travel method
         snow_profile (text): Description of snowpack
         image (str): DEPRICATED, use photo function
         description (text): Description of slide
+        summary (text): Short summary of slide
         crown (MultiLineString): MultiLineString along crown(s)
         bed_surface (MultiPolygon): MultiPolygon of bed surface
         debris_field (MultiPolygon): MultiPolygon of debris field
@@ -109,6 +118,8 @@ class AvalancheIn(db.Model):
     path_id = db.Column(db.Integer, db.ForeignKey('avalanche_paths.id'))
     path = db.relationship('AvalanchePath', backref='incidents')
 
+    display = db.Column(db.Boolean)
+
     observation_date = db.Column(db.DateTime)
     occurence_date = db.Column(db.DateTime)
     location = db.Column(db.Text)
@@ -120,18 +131,29 @@ class AvalancheIn(db.Model):
     av_problem = db.Column(db.String(40))
     av_type = db.Column(db.String(40))
     weak_layer = db.Column(db.String(40))
+    size_relative = db.Column(db.Float)
+    size_desctructive = db.Column(db.Float)
 
     depth = db.Column(db.Float)
     width = db.Column(db.Float)
     vertical = db.Column(db.Float)
     slope_angle = db.Column(db.Float())
+
     people_caught = db.Column(db.Integer)
     people_carried = db.Column(db.Integer)
+    people_injured = db.Column(db.Integer)
     people_buried_part = db.Column(db.Integer)
     people_buried_full = db.Column(db.Integer)
+    people_killed = db.Column(db.Integer)
+    people_rescuer = db.Column(db.Integer)
+
+    group_activity = db.Column(db.String(40))
+    group_travel = db.Column(db.String(40))
+
     snow_profile = db.Column(db.Text)
     image = db.Column(db.String(160))
     description = db.Column(db.Text)
+    summary = db.Column(db.Text)
 
     crown = db.Column(Geometry('MULTILINESTRING', 926919))
     bed_surface = db.Column(Geometry('MULTIPOLYGON', 926919))

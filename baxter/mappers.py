@@ -128,3 +128,21 @@ pressure_trends = OrderedDict([('RR', 'RR - Rising Rapidly (greater than 2 mb)')
                                ('F', 'F - Falling (less than 2 mb)'),
                                ('FR', 'FR - Falling Rapidly (more than 2 mb)')
                                ])
+
+avalanche_relative = OrderedDict([('0', 'Unknown'),
+                                  ('1.0', 'R1 - Very small, relative to the path'),
+                                  ('2.0', 'R2 - Small, relative to the path'),
+                                  ('3.0', 'R3 - Medium, relative to the path'),
+                                  ('4.0', 'R4 - Large, relative to the path'),
+                                  ('5.0', 'R5 - Major of maximum, relative to the path')])
+
+avalanche_destructive = OrderedDict([('0', 'Unknown'),
+                                     ('1.0', 'D1 - Relatively Harmless to people (<10 t or 10 m)'),
+                                     ('1.5', 'D1.5'),
+                                     ('2.0', 'D2 - Could bury, injure, or kill a person (100 t or 100 m)'),
+                                     ('2.5', 'D2.5'),
+                                     ('3.0', 'D3 - Could bury and destroy a car, damage a truck, destroy a wood frame house, or break a few trees (1000 t or 1000 m)'),
+                                     ('3.5', 'D3.5'),
+                                     ('4.0', 'D4 - Could destroy a railway car, large truck, several 104 t 2,000 m buildings, or a substantial amount of forest (10000 t or 2000 m)'),
+                                     ('4.5', 'D4.5'),
+                                     ('5.0', 'D5 - Could gouge the landscape. Largest snow avalanche known (100000 t or 3000 m)')])
