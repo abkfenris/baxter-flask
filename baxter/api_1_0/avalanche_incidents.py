@@ -103,7 +103,7 @@ def incident(id):
                     'vertical': incident.vertical,
                     'slope angle': incident.slope_angle,
                     'description': incident.description,
-                    'html': url_for('main.incident', id=incident.id)
+                    'html': url_for('main.avalanche_incident', id=incident.id)
                 },
                 'geometry': {}
             }
@@ -195,7 +195,7 @@ def incidents():
                 'id': incident.id,
                 'occurance date': incident.occurence_date,
                 'url': url_for('.incident', id=incident.id),
-                'html': url_for('main.incident', id=incident.id)
+                'html': url_for('main.avalanche_incident', id=incident.id)
             },
             'geometry': geojson
         })

@@ -20,7 +20,7 @@ from ..models import AvalancheIn
 
 
 @main.route('/avalanche/incident/')
-def incidents():
+def avalanche_incidents():
     """
     Show all incidents
     """
@@ -34,7 +34,7 @@ def incidents():
 
 
 @main.route('/avalanche/incident/<int:id>')
-def incident(id):
+def avalanche_incident(id):
     """
     Show a single incident
     """
