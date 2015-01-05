@@ -9,4 +9,4 @@ from flask import Blueprint  # , jsonify, url_for
 
 api = Blueprint('api', __name__)
 
-from . import trails, avalanche_incidents
+from . import trails, avalanche_incidents, avalanche_paths

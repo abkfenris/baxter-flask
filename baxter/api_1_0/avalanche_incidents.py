@@ -40,6 +40,25 @@ def incident(id):
             ).filter_by(id=id)
 
     incident = query[0]
+
+    # Testing geojson in case a it hasn't been created
+    try:
+        crown = json.loads(incident.crown)
+    except TypeError:
+        crown = {}
+    try:
+        bed_surface = json.loads(incident.bed_surface)
+    except TypeError:
+        bed_surface = {}
+    try:
+        debris_field = json.loads(incident.debris_field)
+    except TypeError:
+        debris_field = {}
+    try:
+        geojson = json.loads(incident.geojson)
+    except TypeError:
+        geojson = {}
+
     return jsonify({
         'type': 'FeatureCollection',
         'features': [
@@ -48,21 +67,21 @@ def incident(id):
                 'properties': {
                     'structure': 'crown'
                 },
-                'geometry': json.loads(incident.crown)
+                'geometry': crown
             },
             {
                 'type': 'Feature',
                 'properties': {
                     'structure': 'bed surface'
                 },
-                'geometry': json.loads(incident.bed_surface)
+                'geometry': bed_surface
             },
             {
                 'type': 'Feature',
                 'properties': {
                     'structure': 'debris field'
                 },
-                'geometry': json.loads(incident.debris_field)
+                'geometry': debris_field
             },
             {
                 'type': 'Feature',
@@ -83,9 +102,10 @@ def incident(id):
                     'width': incident.width,
                     'vertical': incident.vertical,
                     'slope angle': incident.slope_angle,
-                    'description': incident.description
+                    'description': incident.description,
+                    'html': url_for('main.incident', id=incident.id)
                 },
-                'geometry': json.loads(incident.geojson)
+                'geometry': {}
             }
         ]
     })
@@ -105,6 +125,21 @@ def incident_parts(id):
             ).filter_by(id=id)
 
     incident = query[0]
+
+    # Testing geojson in case a it hasn't been created
+    try:
+        crown = json.loads(incident.crown)
+    except TypeError:
+        crown = {}
+    try:
+        bed_surface = json.loads(incident.bed_surface)
+    except TypeError:
+        bed_surface = {}
+    try:
+        debris_field = json.loads(incident.debris_field)
+    except TypeError:
+        debris_field = {}
+
     return jsonify({
         'type': 'FeatureCollection',
         'features': [
@@ -113,21 +148,21 @@ def incident_parts(id):
                 'properties': {
                     'structure': 'crown'
                 },
-                'geometry': json.loads(incident.crown)
+                'geometry': crown
             },
             {
                 'type': 'Feature',
                 'properties': {
                     'structure': 'bed surface'
                 },
-                'geometry': json.loads(incident.bed_surface)
+                'geometry': bed_surface
             },
             {
                 'type': 'Feature',
                 'properties': {
                     'structure': 'debris field'
                 },
-                'geometry': json.loads(incident.debris_field)
+                'geometry': debris_field
             }
         ]
     })
@@ -143,22 +178,28 @@ def incidents():
             AvalancheIn.name,
             AvalancheIn.bed_surface.ST_Union(AvalancheIn.debris_field).ST_Transform(4326).ST_AsGeoJSON().label('geojson')
             )
+
     incidents = []
     for incident in query:
+
+        # make sure geojson doesn't explode everything
         try:
             geojson = json.loads(incident.geojson)
         except:
-            geojson = []
+            geojson = {}
+
         incidents.append({
             'type': 'Feature',
             'properties': {
                 'name': incident.name,
                 'id': incident.id,
                 'occurance date': incident.occurence_date,
-                'url': url_for('.incident', id=incident.id)
+                'url': url_for('.incident', id=incident.id),
+                'html': url_for('main.incident', id=incident.id)
             },
             'geometry': geojson
         })
+
     return jsonify({
         'type': 'FeatureCollection',
         'features': incidents

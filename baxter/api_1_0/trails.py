@@ -10,7 +10,7 @@ from .. import db
 from .. import cache
 from ..models import Trail
 
-@api.route('/trails/<id>')
+@api.route('/trail/<int:id>/')
 def trail(id):
     """
     Show individual trail *id*
@@ -19,18 +19,25 @@ def trail(id):
             Trail.id,
             Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')
             ).filter_by(id=id,display=True)
+    trail = query[0]
+
+    # keep geojson from exploding everything if it doesn't exist
+    try:
+        geojson = json.loads(trail.geojson)
+    except TypeError:
+        geojson = {}
 
     return jsonify({
         'type': 'Feature',
         'properties': {
-            'name': query[0].name,
-            'id': query[0].id
+            'name': trail.name,
+            'id': trail.id
         },
-        'geometry': json.loads(query[0].geojson)
+        'geometry': geojson
     })
 
 
-@api.route('/trails/')
+@api.route('/trail/')
 @cache.cached()
 def list_trails():
     """
@@ -43,6 +50,13 @@ def list_trails():
 
     trails = []
     for trail in query:
+
+        # make it so that a lack of geojson doesn't explode everything
+        try:
+            geojson = json.loads(trail.geojson)
+        except TypeError:
+            geojson = {}
+
         trails.append({
             'type': 'Feature',
             'properties': {
@@ -51,8 +65,9 @@ def list_trails():
                 'url': url_for('.trail', id=trail.id),
                 'html': url_for('main.trail', id=trail.id)
             },
-            'geometry': json.loads(trail.geojson)
+            'geometry': geojson
         })
+
     return jsonify({
         'type': 'FeatureCollection',
         'features': trails
