@@ -21,6 +21,8 @@ class AvalanchePath(db.Model):
         description (text): Description of path
         path (Polygon): Avalanche Path
         incidents (List): List of Avalanche Incidents
+        display (bool): Display path publicly
+        incidents (AvlancheIn): List of Avalanche Incidents that occured on path
     """
     __tablename__ = 'avalanche_paths'
 

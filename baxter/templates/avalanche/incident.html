@@ -104,6 +104,9 @@ map.addControl(new L.Control.Layers( baseMaps, {}));
                 <div class="col-md-4 col-sm-3">
                     <h5>Avalanche</h5>
                     <ul>
+                        {% if not incident.path is none %}
+                        <li>Path: <a href="{{ url_for('.avalanche_path', id=incident.path.id)}}">{{ incident.path.name }}</a></li>
+                        {% endif %}
                         <li>Depth: {{ incident.depth }}</li>
                         <li>Width: {{ incident.width }}</li>
                         <li>Type: {{ av_types[incident.av_type] }}</li>
