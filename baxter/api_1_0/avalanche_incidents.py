@@ -145,6 +145,10 @@ def incidents():
             )
     incidents = []
     for incident in query:
+        try:
+            geojson = json.loads(incident.geojson)
+        except:
+            geojson = []
         incidents.append({
             'type': 'Feature',
             'properties': {
@@ -153,7 +157,7 @@ def incidents():
                 'occurance date': incident.occurence_date,
                 'url': url_for('.incident', id=incident.id)
             },
-            'geometry': json.loads(incident.geojson)
+            'geometry': geojson
         })
     return jsonify({
         'type': 'FeatureCollection',
