@@ -2,6 +2,12 @@ from .. import db
 from geoalchemy2 import Geometry
 
 
+avalanche_ins_snowpit = db.Table('avalanche_ins_snowpit',
+        db.Column('avalanche_ins_id', db.Integer, db.ForeignKey('avalanche_ins.id')),
+        db.Column('snowpit_id', db.Integer, db.ForeignKey('snowpits.id')),
+)
+
+
 class SnowPit(db.Model):
     """
     Snowpit
@@ -21,8 +27,8 @@ class SnowPit(db.Model):
     location = db.Column(Geometry("POINT", 926919))
     description = db.Column(db.Text)
 
-    incident_id = db.Column(db.Integer, db.ForeignKey('avalanche_ins.id'))
-    incident = db.relationship('AvalancheIn', backref='snowpit')
+    incident = db.relationship('AvalancheIn', secondary=avalanche_ins_snowpit,
+            backref=db.backref('snowpits', lazy='dynamic'))
 
     def __unicode__(self):
-        return self.name
+        return str(self.name)
