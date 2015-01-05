@@ -6,13 +6,21 @@
 {% block content %}
 	<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header-index.jpg' ) }}); background-size: 100%;">
   		<div class="container">
-	  		<h1>Baxter Data</h1>
+	  		<h1>data.Baxter State Park</h1>
   		</div>
 	</div>
 
 	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<h2>Welcome to data.Baxter State Park.</h2>
+				<p>There's not a lot of this homepage right now but we're working on that.</p>
+				<p>Meanwhile, check out <a href="{{ url_for('.trails')}}">trail information</a>, or about <a href="{{ url_for('.avalanche_paths') }}">avalanche paths</a> and <a href="{{ url_for('.avalanche_incidents') }}">incidents</a> in the park.</p>
+			</div>
+			<div class="col-md-8">
 
-
+			</div>
+		</div>
 	</div>
   </div>
 
