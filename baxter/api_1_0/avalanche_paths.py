@@ -12,7 +12,7 @@ from ..models import AvalanchePath
 
 
 @api.route('/avalanche/path/<int:id>/')
-def path(id):
+def avalanche_path(id):
     """
     return geojson for individual avalanche path
     """
@@ -44,7 +44,7 @@ def path(id):
 
 
 @api.route('/avalanche/path/')
-def paths():
+def avalanche_paths():
     """
     Geojson for all avalanche paths
     """
@@ -67,7 +67,8 @@ def paths():
             'properties': {
                 'name': path.name,
                 'id': path.id,
-                'url': url_for('.path', id=path.id)
+                'url': url_for('.avalanche_path', id=path.id),
+                'html': url_for('main.avalanche_path', id=path.id)
             },
             'geometry': geometry
         })

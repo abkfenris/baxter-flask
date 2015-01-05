@@ -9,4 +9,5 @@ main = Blueprint('main', __name__)
 from . import (views,
                errors,
                trails,
-               avalanche_incident)
+               avalanche_incident,
+               avalanche_path)
