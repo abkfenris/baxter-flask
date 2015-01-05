@@ -228,7 +228,6 @@ class AvalancheProbView(ModelView):
 class AvalancheInView(ModelView):
     inline_models = (InlineInvolvedView(AvalancheInvolved),
                      InlineFileView(SnowPit),
-                     InlineImageView(Photo),
                      InlineAvalancheInProb(AvalancheInProb))
     form_overrides = dict(aspect=SelectField,
                           trigger=SelectField,
