@@ -7,6 +7,11 @@ avalanche_ins_photo = db.Table('avalanche_ins_photo',
         db.Column('photo_id', db.Integer, db.ForeignKey('photoss.id')),
 )
 
+snowpit_photo = db.Table('snowpits_photo',
+        db.Column('snowpit_id', db.Integer, db.ForeignKey('snowpits.id')),
+        db.Column('photo_id', db.Integer, db.ForeignKey('photoss.id')),
+)
+
 
 class Photo(db.Model):
     """
@@ -28,6 +33,9 @@ class Photo(db.Model):
     description = db.Column(db.Text)
 
     incident = db.relationship('AvalancheIn', secondary=avalanche_ins_photo,
+            backref=db.backref('photos', lazy='dynamic'))
+
+    snowpits = db.relationship('SnowPit', secondary=snowpit_photo,
             backref=db.backref('photos', lazy='dynamic'))
 
     def __unicode__(self):

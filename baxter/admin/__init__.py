@@ -105,13 +105,6 @@ class ModelView(_ModelView):
         return redirect(url_for('security.login'))
 
 
-class FileView(ModelView):
-    form_overrides = {'path': FileUploadField}
-    form_args = {'path': {'label': 'File',
-                          'base_path': pit_path}}
-    column_formatters = {'path': lambda v, c, m, p: pit_static_path + m.path}
-    column_list = ('name', 'path', 'location', 'description')
-
 class InlineAvalancheInProb(InlineFormAdmin):
     pass
 
@@ -159,6 +152,15 @@ class InlineInvolvedView(InlineFormAdmin):
     #                    rules.HTML('</div>'))),
     #    'locations'
     #] # Trying to format the inline form smaller
+
+
+class FileView(ModelView):
+    form_overrides = {'path': FileUploadField}
+    form_args = {'path': {'label': 'File',
+                          'base_path': pit_path}}
+    column_formatters = {'path': lambda v, c, m, p: pit_static_path + m.path}
+    column_list = ('name', 'path', 'location', 'description')
+    inline_models = ( InlineImageView(Photo),)
 
 
 class UserView(ModelView):
