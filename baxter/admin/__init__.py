@@ -207,6 +207,7 @@ class TrailView(ModelView):
                    'season',
                    'geom')
     column_searchable_list = ('name', 'ttype')
+    inline_models = ( InlineImageView(Photo),)
 
 
 class AvalancheProbView(ModelView):

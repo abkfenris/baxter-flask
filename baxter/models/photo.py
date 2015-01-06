@@ -12,6 +12,11 @@ snowpit_photo = db.Table('snowpits_photo',
         db.Column('photo_id', db.Integer, db.ForeignKey('photoss.id')),
 )
 
+trails_photo = db.Table('trails_photo',
+        db.Column('trail_id', db.Integer, db.ForeignKey('trails.id')),
+        db.Column('photo_id', db.Integer, db.ForeignKey('photoss.id')),
+)
+
 
 class Photo(db.Model):
     """
@@ -36,6 +41,9 @@ class Photo(db.Model):
             backref=db.backref('photos', lazy='dynamic'))
 
     snowpits = db.relationship('SnowPit', secondary=snowpit_photo,
+            backref=db.backref('photos', lazy='dynamic'))
+
+    trails = db.relationship('Trail', secondary=trails_photo,
             backref=db.backref('photos', lazy='dynamic'))
 
     def __unicode__(self):
