@@ -17,3 +17,7 @@ class TestFrontend(TestCase):
     def test_login(self):
         rv = self.app.test_client().get('/admin/', follow_redirects=True)
         assert 'Login' in rv.data
+
+    def test_trails_view(self):
+        rv = self.app.test_client().get('/trails/')
+        assert 'Trails</h1>' in rv.data

@@ -1,6 +1,6 @@
 from tests import TestCase
 
-from baxter.models import Role, User
+from baxter.models import Role, User, Trail
 from baxter import db
 
 
@@ -28,3 +28,7 @@ class TestFrontend(TestCase):
         user = User.query.filter_by(email='test@domain.com').first()
         print user.roles
         assert len(user.roles) is 1
+
+    def test_trails_count(self):
+        count = Trail.query.count()
+        assert count == 1

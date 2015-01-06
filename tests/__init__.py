@@ -3,10 +3,10 @@ Unit testing base using Flask-testing
 https://github.com/imwilsonxu/fbone/blob/master/tests/__init__.py
 """
 
-from flask.ext.testing import TestCase as Base, Twill
+from flask.ext.testing import TestCase as Base
 
 from baxter import create_app, db, create_db_and_roles
-from baxter.models import Role, User, user_datastore
+from baxter.models import Role, User, Trail, user_datastore
 
 
 class TestCase(Base):
@@ -37,6 +37,13 @@ class TestCase(Base):
         user_datastore.add_role_to_user('test@domain.com', 'admin')
         db.session.commit()
 
+    def init_trails(self):
+        """
+        Creates a few trails
+        """
+        trail = Trail(name='Test trail')
+        db.session.add(trail)
+        db.session.commit()
 
     def setUp(self):
         """
@@ -44,6 +51,7 @@ class TestCase(Base):
         """
         db.create_all()
         self.init_data()
+        self.init_trails()
 
     def tearDown(self):
         """
