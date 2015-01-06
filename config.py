@@ -24,6 +24,8 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/baxter_testing'
+    CACHE_TYPE = 'simple'
+    CACHE_DEFAULT_TIMEOUT = 50
 
 
 class ProductionConfig(Config):
