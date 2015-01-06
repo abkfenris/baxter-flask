@@ -23,6 +23,17 @@ md = markdown2.Markdown(extras={'html-classes': {'img': 'img-responsive'}})
 
 from .models import user_datastore
 
+def create_db_and_roles():
+    db.create_all()
+    from .models import Role
+    contrib = Role(name='contributor', description='Contributor Role')
+    user = Role(name='user', description='User Role')
+    admin = Role(name='admin', description='Admin Role')
+    db.session.add(contrib)
+    db.session.add(user)
+    db.session.add(admin)
+    db.session.commit()
+
 
 def create_app(config_name):
     app = Flask(__name__)
