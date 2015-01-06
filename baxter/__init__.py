@@ -24,6 +24,9 @@ md = markdown2.Markdown(extras={'html-classes': {'img': 'img-responsive'}})
 from .models import user_datastore
 
 def create_db_and_roles():
+    """
+    Creates the database and Roles for admin, user, and contributor
+    """
     db.create_all()
     from .models import Role
     contrib = Role(name='contributor', description='Contributor Role')
@@ -36,6 +39,9 @@ def create_db_and_roles():
 
 
 def create_app(config_name):
+    """
+    Creates the flask app with config
+    """
     app = Flask(__name__)
     app.config.from_object(config[config_name])
 
