@@ -1,6 +1,6 @@
 from tests import TestCase
 
-from baxter.models import Role
+from baxter.models import Role, User
 from baxter import db
 
 
@@ -11,7 +11,6 @@ class TestFrontend(TestCase):
     def test_roles_count(self):
         #print 'test_roles_count'
         assert Role.query.count() == 2
-        db.session.commit()
 
     def test_roles(self):
         #print 'test roles'
@@ -19,4 +18,13 @@ class TestFrontend(TestCase):
         #print 'query'
         assert role is not None
         #print 'assert'
-        db.session.commit()
+
+    def test_users_count(self):
+        count = User.query.count()
+        print count
+        assert count == 1
+
+    def test_user_roles(self):
+        user = User.query.filter_by(email='test@domain.com').first()
+        print user.roles
+        assert len(user.roles) is 1

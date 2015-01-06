@@ -32,6 +32,10 @@ class TestCase(Base):
         db.session.commit()
         user_r = user_datastore.find_or_create_role('user')
         db.session.commit()
+        admin_u = user_datastore.create_user(email='test@domain.com', password='testing')
+        db.session.commit()
+        user_datastore.add_role_to_user('test@domain.com', 'admin')
+        db.session.commit()
 
 
     def setUp(self):
@@ -45,6 +49,7 @@ class TestCase(Base):
         """
         Cleans up db session and drop all tables.
         """
+        db.session.remove()
         db.drop_all()
 
     def login(self, username, password):
