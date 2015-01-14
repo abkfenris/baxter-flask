@@ -28,3 +28,5 @@ passlib==1.6.2
 wsgiref==0.1.2
 psycopg2
 py-bcrypt
+gunicorn
+fiona
