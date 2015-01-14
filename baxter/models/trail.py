@@ -35,6 +35,7 @@ class Trail(db.Model):
         max_slope (float): Maximum slope of trail
         avg_slope (float): Average slope of trail
         length_ft (float): Length of trail in feet
+        description (Text): Description of trail
     """
     __tablename__ = 'trails'
 
@@ -66,6 +67,7 @@ class Trail(db.Model):
     max_slope = db.Column(db.Float)
     avg_slope = db.Column(db.Float)
     length_ft = db.Column(db.Float)
+    description = db.Column(db.Text)
 
     def center(self):
         """
