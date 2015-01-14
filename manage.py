@@ -20,7 +20,10 @@ from flask.ext.script import Manager, Shell
 import config
 from flask.ext.migrate import Migrate, MigrateCommand
 
-app = create_app('default')
+if os.environ.get('BAXTER_FLASK_ENV') is 'prod':
+    app = create_app('production')
+else:
+    app = create_app('default')
 manager = Manager(app)
 migrate = Migrate(app, db)
 
