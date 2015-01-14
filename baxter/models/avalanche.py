@@ -29,7 +29,7 @@ class AvalanchePath(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     description = db.Column(db.Text)
-    path = db.Column(Geometry('POLYGON', 926919))
+    path = db.Column(Geometry('POLYGON', 26919))
     aspect = db.Column(db.String(40))
     display = db.Column(db.Boolean)
 
@@ -158,9 +158,9 @@ class AvalancheIn(db.Model):
     description = db.Column(db.Text)
     summary = db.Column(db.Text)
 
-    crown = db.Column(Geometry('MULTILINESTRING', 926919))
-    bed_surface = db.Column(Geometry('MULTIPOLYGON', 926919))
-    debris_field = db.Column(Geometry('MULTIPOLYGON', 926919))
+    crown = db.Column(Geometry('MULTILINESTRING', 26919))
+    bed_surface = db.Column(Geometry('MULTIPOLYGON', 26919))
+    debris_field = db.Column(Geometry('MULTIPOLYGON', 26919))
 
     def center(self):
         """
@@ -241,7 +241,7 @@ class AvalancheInvolved(db.Model):
     burried = db.Column(db.Boolean)
     rescuer = db.Column(db.Boolean)
 
-    locations = db.Column(Geometry('MULTIPOINT', 926919))
+    locations = db.Column(Geometry('MULTIPOINT', 26919))
 
 
 class AvalancheProb(db.Model):

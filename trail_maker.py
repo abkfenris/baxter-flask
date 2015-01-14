@@ -47,7 +47,7 @@ def trail_maker(trail):
     	geom = MultiLineString([shape(trail['geometry'])])
     else:
     	geom = shape(trail['geometry'])
-    t = Trail(geom=from_shape(geom, srid=926919),
+    t = Trail(geom=from_shape(geom, srid=26919),
               use_type=trail['properties']['USE_TYPE'],
               comments=trail['properties']['COMMENTS'],
               tid=trail['properties']['TID'],
@@ -83,7 +83,7 @@ def poi_maker(poi):
         public_share = False
     
     p = POI(name=poi['properties']['POI_Name'],
-            point=from_shape(shape(poi['geometry']),srid=926919),
+            point=from_shape(shape(poi['geometry']),srid=26919),
             public_share=public_share,
             bspaid=poi['properties']['BSPAID'],
             poiid=poi['properties']['POIID'],

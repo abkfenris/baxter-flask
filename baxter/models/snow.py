@@ -26,7 +26,7 @@ class SnowPit(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode(64))
     path = db.Column(db.Unicode(128))
-    location = db.Column(Geometry("POINT", 926919))
+    location = db.Column(Geometry("POINT", 26919))
     elevation = db.Column(db.Integer)
     aspect = db.Column(db.String(40))
     description = db.Column(db.Text)

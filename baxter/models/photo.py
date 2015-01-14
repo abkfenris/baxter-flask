@@ -34,7 +34,7 @@ class Photo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Unicode(64))
     path = db.Column(db.Unicode(128))
-    location = db.Column(Geometry("POINT", 926919))
+    location = db.Column(Geometry("POINT", 26919))
     description = db.Column(db.Text)
 
     incident = db.relationship('AvalancheIn', secondary=avalanche_ins_photo,

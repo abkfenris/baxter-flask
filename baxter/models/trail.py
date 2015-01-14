@@ -40,7 +40,7 @@ class Trail(db.Model):
     __tablename__ = 'trails'
 
     id = db.Column(db.Integer, primary_key=True)
-    geom = db.Column(Geometry('MULTILINESTRING', 926919))
+    geom = db.Column(Geometry('MULTILINESTRING', 26919))
     use_type = db.Column(db.String(40))
     comments = db.Text()
     tid = db.Column(db.Integer)
@@ -149,7 +149,7 @@ class POI(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40))
-    point = db.Column(Geometry("POINT", 926919))
+    point = db.Column(Geometry("POINT", 26919))
     bspaid = db.Column(db.String(40))
     poiid = db.Column(db.Integer)
     poi_group = db.Column(db.String(40))
