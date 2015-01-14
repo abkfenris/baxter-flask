@@ -20,7 +20,7 @@ from flask.ext.script import Manager, Shell
 import config
 from flask.ext.migrate import Migrate, MigrateCommand
 
-if os.environ.get('BAXTER_FLASK_ENV') is 'prod':
+if os.environ.get('BAXTER_FLASK_ENV') == 'prod':
     app = create_app('production')
 else:
     app = create_app('default')
