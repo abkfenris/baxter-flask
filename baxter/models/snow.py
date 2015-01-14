@@ -17,6 +17,8 @@ class SnowPit(db.Model):
         name (unicode): Descriptive name of snow pit data
         path (unicode): filename
         location (Point): Point in NAD 83 UTM Zone 19N for snow pit
+        elevation (int): Elevation of pit
+        aspect (string): Aspect the slope faces
         description (Text): Description of snow pit
     """
     __tablename__ = 'snowpits'
@@ -25,6 +27,8 @@ class SnowPit(db.Model):
     name = db.Column(db.Unicode(64))
     path = db.Column(db.Unicode(128))
     location = db.Column(Geometry("POINT", 926919))
+    elevation = db.Column(db.Integer)
+    aspect = db.Column(db.String(40))
     description = db.Column(db.Text)
 
     incident = db.relationship('AvalancheIn', secondary=avalanche_ins_snowpit,

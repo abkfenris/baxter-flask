@@ -110,9 +110,11 @@ class InlineAvalancheInProb(InlineFormAdmin):
 
 
 class InlineFileView(InlineFormAdmin):
-    form_overrides = {'path': FileUploadField}
+    form_overrides = {'path': FileUploadField,
+                      'aspect': SelectField}
     form_args = {'path': {'label': 'File',
-                          'base_path': pit_path}}
+                          'base_path': pit_path},
+                 'aspect': {'choices': aspects.items()}}
     form_widget_args = {'location': h_w}
 
 
@@ -155,9 +157,11 @@ class InlineInvolvedView(InlineFormAdmin):
 
 
 class FileView(ModelView):
-    form_overrides = {'path': FileUploadField}
+    form_overrides = {'path': FileUploadField,
+                      'aspect': SelectField}
     form_args = {'path': {'label': 'File',
-                          'base_path': pit_path}}
+                          'base_path': pit_path},
+                 'aspect': {'choices': aspects.items()}}
     column_formatters = {'path': lambda v, c, m, p: pit_static_path + m.path}
     column_list = ('name', 'path', 'location', 'description')
     inline_models = ( InlineImageView(Photo),)
