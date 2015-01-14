@@ -83,15 +83,15 @@ map.addControl(new L.Control.Layers( baseMaps, {}));
             <div class="tab-pane active" id="details">
                 <div class="row">
                     <div class="col-md-12">
-                    <h4>Avalanche Details</h4>
-                    <ul>
-                        <li>Location: {{ incident.location }}</li>
-                        <li>Date: {{ incident.occurence_date.strftime('%Y/%m/%d') }}</li>
-                        {% if not incident.summary is none %}
-                        <li>{{ incident.summary }}</li>
-                        {% endif %}
-                    </ul>
-                </div>
+                        <h4>Avalanche Details</h4>
+                        <ul>
+                            <li>Location: {{ incident.location }}</li>
+                            <li>Date: {{ incident.occurence_date.strftime('%Y/%m/%d') }}</li>
+                            {% if not incident.summary is none %}
+                            <li>{{ incident.summary }}</li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-sm-3">
