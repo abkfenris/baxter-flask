@@ -1,0 +1,6 @@
+[submodule "baxter/static/lib/leaflet-ajax"]
+	path = baxter/static/lib/leaflet-ajax
+	url = https://github.com/calvinmetcalf/leaflet-ajax
+[submodule "baxter/static/lib/leaflet-plugins"]
+	path = baxter/static/lib/leaflet-plugins
+	url = https://github.com/shramov/leaflet-plugins.git
