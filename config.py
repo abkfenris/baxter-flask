@@ -29,7 +29,8 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/baxter'
+    SQLALCHEMY_DATABASE_URI = (os.environ.get('BAXTER_DB') or
+                               'postgresql://localhost/baxter')
     CACHE_TYPE = 'simple'
     CACHE_DEFAULT_TIMEOUT = 120
     CACHE_KEY_PREFIX = 'b_'
