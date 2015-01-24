@@ -3,8 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Baxter's documentation!
-==================================
+Welcome to data.Baxter's documentation!
+=======================================
+
+Currently the site is in testing at `baxter.alexkerney.com <http://baxter.alexkerney.com>`_.
+The goal for the project is to document avalanches that have occured in Baxter
+State Park. 
+
+Most people will be looking to start with the :doc:`public`, while those
+contributing will probably be looking at :doc:`user`.
+
+If you are looking to adapt this code for another use, spin it up on another
+server, or access the :doc:`developers/api` checkout the :doc:`developers/index`.
 
 Contents:
 
