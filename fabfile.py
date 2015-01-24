@@ -5,8 +5,9 @@ Copy fabhosts-example.py to fabhosts.py and add host configurations for
 your deployment.
 """
 
-from fabric.api import cd, env, lcd, put, prompt, local, sudo
+from fabric.api import cd, env, lcd, put, prompt, local, sudo, prefix
 from fabric.contrib.files import exists
+from fabric.contrib.console import confirm
 
 try:
     from fabhosts import prod
@@ -19,7 +20,7 @@ local_app_dir = '.'
 local_flask_dir = local_app_dir + '/baxter'
 local_config_dir = local_app_dir + '/server-config'
 
-remote_app_dir = '/home/www'
+remote_app_dir = '/home/www/baxter-flask'
 remote_git_dir = '/home/git'
 remote_flask_dir = remote_app_dir + '/baxter'
 remote_nginx_dir = '/etc/nginx/sites-enabled'
@@ -170,6 +171,18 @@ def run_app():
         sudo('supervisorctl start baxter_flask')
 
 
+def create_roles():
+    """
+    Create roles for users
+    """
+    with cd(remote_app_dir):
+        with prefix('source /home/www/baxter-flask/server-config/host-export'):
+            with prefix('source /home/www/env/bin/activate'):
+                sudo('python manage.py user create_role -n admin')
+                sudo('python manage.py user create_role -n user')
+                sudo('python manage.py user create_role -n contributor')
+
+
 def deploy():
     """
     1. Commit and push new flask files to production
@@ -199,3 +212,18 @@ def status():
     Is the app live?
     """
     sudo('supervisorctl status')
+
+
+def add_baxter_user():
+    """
+    Add a user to the website
+    """
+    with cd(remote_app_dir):
+        with prefix('source /home/www/baxter-flask/server-config/host-export'):
+            with prefix('source /home/www/env/bin/activate'):
+                email = prompt('Email address:')
+                password = prompt('Password:')
+                admin = confirm('Is {0} an admin?'.format(email))
+                sudo('python manage.py user create_user -e {0} -p {1} -a y'.format(email, password))
+                if admin:
+                    sudo('python manage.py user add_role -u {0} -r admin'.format(email))
