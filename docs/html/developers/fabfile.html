@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>&lt;no title&gt; &mdash; Baxter 0.1 documentation</title>
+  <title>fabfile.py &mdash; Baxter 0.1 documentation</title>
   
 
   
@@ -28,7 +28,9 @@
   
 
   
-    <link rel="top" title="Baxter 0.1 documentation" href="../index.html"/> 
+    <link rel="top" title="Baxter 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Developer Documentation" href="index.html"/>
+        <link rel="prev" title="Manage.py" href="manage.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -55,7 +57,7 @@
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
         
-            <ul>
+            <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../public.html">Public Help</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../public.html#getting-started">Getting Started</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../public.html#avalanche-incidents">Avalanche Incidents</a></li>
@@ -66,11 +68,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../user.html#markdown">Markdown</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Developer Documentation</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="baxter.html">Baxter package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models.html">Database models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="routes.html">HTTP Routes for site</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage.html">Manage.py</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">fabfile.py</a></li>
 </ul>
 </li>
 </ul>
@@ -96,7 +99,9 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html">Docs</a> &raquo;</li>
       
-    <li>&lt;no title&gt;</li>
+          <li><a href="index.html">Developer Documentation</a> &raquo;</li>
+      
+    <li>fabfile.py</li>
       <li class="wy-breadcrumbs-aside">
         
           <a href="../_sources/developers/fabfile.txt" rel="nofollow"> View page source</a>
@@ -107,10 +112,41 @@
 </div>
           <div role="main">
             
-  
+  <div class="section" id="fabfile-py">
+<h1>fabfile.py<a class="headerlink" href="#fabfile-py" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://www.fabfile.org">Fabric</a> is basically a makefile, except has server
+management built in. Being able to run <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">prod</span> <span class="pre">deploy</span></tt> to send your latest
+modification to the server is sweet.</p>
+<div class="section" id="hosts">
+<h2>Hosts<a class="headerlink" href="#hosts" title="Permalink to this headline">¶</a></h2>
+<p>Fabric seems to work best when you can login into a host with ssh keys, and
+have sudo rights. So that the <tt class="docutils literal"><span class="pre">fabfile.py</span></tt> can be in source control, but
+host information can be left out, the fabfile can get hosts from <tt class="docutils literal"><span class="pre">fabhosts.py</span></tt>.</p>
+<p>To create <tt class="docutils literal"><span class="pre">fabhost.py</span></tt> either copy and modify <tt class="docutils literal"><span class="pre">fabhost-example.py</span></tt> or write
+along these lines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span>
+
+
+<span class="k">def</span> <span class="nf">prod</span><span class="p">():</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&#39;user&#39;</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s">&#39;host.com&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+
 
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="manage.html" class="btn btn-neutral" title="Manage.py"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

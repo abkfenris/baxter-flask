@@ -1,4 +1,4 @@
-Manage.py
+manage.py
 =========
 
 During development and server setup, you can use ``manage.py`` to run the server,

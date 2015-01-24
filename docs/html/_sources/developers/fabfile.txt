@@ -1,0 +1,29 @@
+fabfile.py
+==========
+
+`Fabric <http://www.fabfile.org>`_ is basically a makefile, except has server
+management built in. Being able to run ``fab prod deploy`` to send your latest
+modification to the server is sweet.
+
+
+
+Hosts
+_____
+
+Fabric seems to work best when you can login into a host with ssh keys, and
+have sudo rights. So that the ``fabfile.py`` can be in source control, but
+host information can be left out, the fabfile can get hosts from ``fabhosts.py``.
+
+To create ``fabhost.py`` either copy and modify ``fabhost-example.py`` or write
+along these lines:
+
+.. code-block:: python
+
+    from fabric.api import env
+
+
+    def prod():
+        env.user = 'user'
+        env.hosts = [
+            'host.com',
+        ]

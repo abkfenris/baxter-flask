@@ -8,5 +8,6 @@ Developer Documentation
     models
     routes
     manage
+    fabfile
 
 Resources for developers either working to build their own derivitive or work with Baxter's API.
