@@ -158,12 +158,14 @@ Other user focused commands include ``activate_user`` and ``deactivate_user`` if
 you didn't explicitly activate a user upon account creation, or someone has been
 misbehaving.
 
+.. program:: activate_user
 .. option:: -u <name@server.com> or --user <name@server.com>
 
     Email address for the user that you wish to modify
 
 ``remove_role`` is to remove a role from a user
 
+.. program:: remove_role
 .. option:: -u <name@server.com> or --user <name@server.com>
 
     Email address for the user that you wish to remove the role from

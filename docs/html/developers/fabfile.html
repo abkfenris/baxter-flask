@@ -30,7 +30,8 @@
   
     <link rel="top" title="Baxter 0.1 documentation" href="../index.html"/>
         <link rel="up" title="Developer Documentation" href="index.html"/>
-        <link rel="prev" title="Manage.py" href="manage.html"/> 
+        <link rel="next" title="Makefile" href="makefile.html"/>
+        <link rel="prev" title="manage.py" href="manage.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -72,8 +73,11 @@
 <li class="toctree-l2"><a class="reference internal" href="baxter.html">Baxter package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="models.html">Database models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="routes.html">HTTP Routes for site</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manage.html">Manage.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage.py</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">fabfile.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makefile.html">Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_setup.html">Server Setup</a></li>
 </ul>
 </li>
 </ul>
@@ -116,7 +120,19 @@
 <h1>fabfile.py<a class="headerlink" href="#fabfile-py" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="http://www.fabfile.org">Fabric</a> is basically a makefile, except has server
 management built in. Being able to run <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">prod</span> <span class="pre">deploy</span></tt> to send your latest
-modification to the server is sweet.</p>
+modification to the server is sweet. It also is a great way to document common
+tasks that you do when managing servers, without writing the whole process up in
+Sphinx or elsewhere.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#hosts">Hosts</a></li>
+<li><a class="reference internal" href="#deploying-changes">Deploying Changes</a></li>
+<li><a class="reference internal" href="#rolling-back-changes">Rolling Back Changes</a></li>
+<li><a class="reference internal" href="#checking-server-status">Checking Server Status</a></li>
+<li><a class="reference internal" href="#running-the-server">Running the Server</a></li>
+<li><a class="reference internal" href="#adding-users-to-site">Adding Users to Site</a></li>
+<li><a class="reference internal" href="#creating-roles">Creating Roles</a></li>
+<li><a class="reference internal" href="#setting-up-a-new-server">Setting Up a New Server</a></li>
+</ul>
 <div class="section" id="hosts">
 <h2>Hosts<a class="headerlink" href="#hosts" title="Permalink to this headline">¶</a></h2>
 <p>Fabric seems to work best when you can login into a host with ssh keys, and
@@ -126,13 +142,320 @@ host information can be left out, the fabfile can get hosts from <tt class="docu
 along these lines:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">env</span>
 
-
 <span class="k">def</span> <span class="nf">prod</span><span class="p">():</span>
     <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&#39;user&#39;</span>
     <span class="n">env</span><span class="o">.</span><span class="n">hosts</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s">&#39;host.com&#39;</span><span class="p">,</span>
     <span class="p">]</span>
 </pre></div>
+</div>
+<p>Then to run fabric with those hosts, just <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">prod</span> <span class="pre">&lt;command&gt;</span></tt>.</p>
+<p>If you are awesome enough to have staging servers or other groups of server that
+you will be commanding, define another command in <tt class="docutils literal"><span class="pre">fabhosts.py</span></tt> and modify
+<tt class="docutils literal"><span class="pre">fabfile.py</span></tt> import statement</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">fabhost</span> <span class="kn">import</span> <span class="n">prod</span><span class="p">,</span> <span class="n">staging</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="section" id="deploying-changes">
+<h3>Deploying Changes<a class="headerlink" href="#deploying-changes" title="Permalink to this headline">¶</a></h3>
+<p>After making some changes to the code, they can be pushed to the server(s) with
+<tt class="docutils literal"><span class="pre">fab</span> <span class="pre">deploy</span></tt> which will ask for a commit message.</p>
+<p>Here&#8217;s what happens when I deploy the changes that I just wrote (meta much?):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>fab prod deploy
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> Executing task <span class="s1">&#39;deploy&#39;</span>
+<span class="o">[</span>localhost<span class="o">]</span> <span class="nb">local</span>: git add -A
+Commit message? Working on fabfile documentation
+<span class="o">[</span>localhost<span class="o">]</span> <span class="nb">local</span>: git commit -am <span class="s2">&quot;Working on fabfile documentation&quot;</span>
+<span class="o">[</span>master 6d52e86<span class="o">]</span> Working on fabfile documentation
+ <span class="m">40</span> files changed, <span class="m">161</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">8</span> deletions<span class="o">(</span>-<span class="o">)</span>
+ rewrite docs/doctrees/developers/fabfile.doctree <span class="o">(</span>98%<span class="o">)</span>
+ rewrite docs/doctrees/developers/index.doctree <span class="o">(</span>63%<span class="o">)</span>
+ rewrite docs/html/searchindex.js <span class="o">(</span>97%<span class="o">)</span>
+<span class="o">[</span>localhost<span class="o">]</span> <span class="nb">local</span>: git push production master
+Counting objects: 126, <span class="k">done</span>.
+Delta compression using up to <span class="m">8</span> threads.
+Compressing objects: 100% <span class="o">(</span>126/126<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: 100% <span class="o">(</span>126/126<span class="o">)</span>, 181.58 KiB <span class="p">|</span> <span class="m">0</span> bytes/s, <span class="k">done</span>.
+Total <span class="m">126</span> <span class="o">(</span>delta 75<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+To root@baxter.alexkerney.com:/home/git/baxter-flask.git
+   3d583d7..6d52e86  master -&gt; master
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> sudo: supervisorctl restart baxter_flask
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: baxter_flask: stopped
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: baxter_flask: started
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:
+
+
+Done.
+Disconnecting from baxter.alexkerney.com... <span class="k">done</span>.
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><tt class="docutils literal"><span class="pre">fab</span> <span class="pre">deploy</span></tt> does not run database migrations. If there are any changes to
+database schema, then the site should be deployed, stopped, migrated, and
+started again.</p>
+</div>
+</div>
+<div class="section" id="rolling-back-changes">
+<h3>Rolling Back Changes<a class="headerlink" href="#rolling-back-changes" title="Permalink to this headline">¶</a></h3>
+<p>Every once in a while mistakes happen. <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">rollback</span></tt> can help clean up some
+of them if they have already been deployed.</p>
+</div>
+<div class="section" id="checking-server-status">
+<h3>Checking Server Status<a class="headerlink" href="#checking-server-status" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">fab</span> <span class="pre">status</span></tt> will check the supervisor processes, nginx, postgres, and ufw
+firewall statuses.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>fab prod status
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> Executing task <span class="s1">&#39;status&#39;</span>
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> sudo: supervisorctl status
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: baxter_flask                     RUNNING    pid 19223, uptime 0:15:20
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:
+
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> sudo: service nginx status
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:  * nginx is running
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:
+
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> sudo: service postgresql status
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: 9.4/main <span class="o">(</span>port 5432<span class="o">)</span>: online
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:
+
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> sudo: service ufw status
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: ufw start/running
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:
+
+
+Done.
+Disconnecting from baxter.alexkerney.com... <span class="k">done</span>.
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-server">
+<h3>Running the Server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">fab</span> <span class="pre">run_app</span></tt> will get supervisor to kick off gunicorn and flask.</p>
+</div>
+<div class="section" id="adding-users-to-site">
+<h3>Adding Users to Site<a class="headerlink" href="#adding-users-to-site" title="Permalink to this headline">¶</a></h3>
+<p>Instead of sshing into the server and using <tt class="docutils literal"><span class="pre">manage.py</span></tt>, <tt class="docutils literal"><span class="pre">fab</span></tt> can also
+setup users with <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">add_baxter_user</span></tt>. It will ask for email address,
+password, and if that user should be an admin, which defaults to no.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>fab prod add_baxter_user
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> Executing task <span class="s1">&#39;add_baxter_user&#39;</span>
+Email address: <span class="nb">test</span>@server.com
+Password: password
+Is <span class="nb">test</span>@server.com an admin? <span class="o">[</span>y/N<span class="o">]</span> y
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> sudo: python manage.py user create_user -e <span class="nb">test</span>@server.com -p password -a y
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: User created successfully.
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: <span class="o">{</span>
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:     <span class="s2">&quot;active&quot;</span>: <span class="nb">true</span>,
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:     <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;test@server.com&quot;</span>,
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:     <span class="s2">&quot;password&quot;</span>: <span class="s2">&quot;****&quot;</span>
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: <span class="o">}</span>
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:
+
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> sudo: python manage.py user add_role -u <span class="nb">test</span>@server.com -r admin
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out: Role <span class="s1">&#39;admin&#39;</span> added to user <span class="s1">&#39;test@server.com&#39;</span> successfully
+<span class="o">[</span>baxter.alexkerney.com<span class="o">]</span> out:
+
+
+Done.
+Disconnecting from baxter.alexkerney.com... <span class="k">done</span>.
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-roles">
+<h3>Creating Roles<a class="headerlink" href="#creating-roles" title="Permalink to this headline">¶</a></h3>
+<p>Fabric can setup all the roles that the server should start with using
+<tt class="docutils literal"><span class="pre">fab</span> <span class="pre">create_roles</span></tt>.</p>
+</div>
+<div class="section" id="setting-up-a-new-server">
+<h3>Setting Up a New Server<a class="headerlink" href="#setting-up-a-new-server" title="Permalink to this headline">¶</a></h3>
+<p>At some point <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">create</span></tt> will configure a server for you, but currently only
+a few parts of it work, so running individual steps and configuring things via
+ssh is the best option. Currently none of these are tested so procede at your
+own risk.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">create</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Setup a brand new server</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">install_requirements</span><span class="p">()</span>
+    <span class="n">install_flask</span><span class="p">()</span>
+    <span class="n">configure_gunicorn</span><span class="p">()</span>
+    <span class="n">configure_nginx</span><span class="p">()</span>
+    <span class="n">configure_supervisor</span><span class="p">()</span>
+    <span class="n">configure_git</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>Install basic requirements - <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">install_requirements</span></tt></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">install_requirements</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Install required system wide packages.</span>
+
+<span class="sd">    Includes exporting some info so GDAL can be used to build in pip</span>
+<span class="sd">    http://gis.stackexchange.com/questions/28966/python-gdal-package-missing-header-file-when-installing-via-pip</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get update&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get upgrade&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y python python-dev python-pip python-virtualenv&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y nginx&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y postgresql-9.4 postgresql-9.4-postgis-2.1&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y postgresql-server-dev-9.4&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y libpq-dev&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y git&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y gdal-bin python-gdal libgdal-dev&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get install -y supervisor&#39;</span><span class="p">)</span>
+    <span class="c"># So that GDAL can be built</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;export CPLUS_INCLUDE_PATH=/usr/include/gdal&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;export C_INCLUDE_PATH=/usr/include/gdal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Setup www User</dt>
+<dd><p class="first">I believe <tt class="docutils literal"><span class="pre">chpasswd</span></tt> requires <tt class="docutils literal"><span class="pre">user:pass</span></tt> to be read in from a file.</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">create_www_user</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a user for running it</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s">&#39;Password for baxter-www user?&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;adduser --quiet baxter-www&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;chpasswd &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">password</span><span class="p">))</span>
+    <span class="c"># not finished</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Create Database and Postgres User</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">setup_database</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Setup postgres database with postgis extension</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">):</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;su postgres&#39;</span><span class="p">)</span>
+        <span class="c"># not finished</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Install Flask environment and requirements - <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">install_flask</span></tt></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">install_flask</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    1. Create project directories</span>
+<span class="sd">    2. Create and activeate a virtualenv</span>
+<span class="sd">    3. Copy Flask files to remote host</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">remote_app_dir</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;mkdir &#39;</span> <span class="o">+</span> <span class="n">remote_app_dir</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">remote_flask_dir</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;mkdir&#39;</span> <span class="o">+</span> <span class="n">remote_flask_dir</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="n">local_app_dir</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="n">remote_app_dir</span><span class="p">):</span>
+            <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;virtualenv ../env&#39;</span><span class="p">)</span>
+            <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;source ../env/bin/activate&#39;</span><span class="p">)</span>
+            <span class="n">put</span><span class="p">(</span><span class="s">&#39;*&#39;</span><span class="p">,</span> <span class="s">&#39;./&#39;</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;pip install -r requirements.txt&#39;</span><span class="p">)</span>
+            <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;pip install PIL --allow-external PIL --allow-unverified PIL&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Configure nginx site - <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">configure_nginx</span></tt></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">configure_nginx</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    1. Remove default nginx config file</span>
+<span class="sd">    2. Create new config file</span>
+<span class="sd">    3. Setup new symbolic link</span>
+<span class="sd">    4. Copy local config to remote config</span>
+<span class="sd">    5. Restart nginx</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;service nginx start&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/etc/nginx/sites-enabled/default&#39;</span><span class="p">):</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;rm /etc/nginx/sites-enabled/default&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/etc/nginx/sites-available/baxter-flask&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;touch /etc/nginx/sites-available/baxter-flask&#39;</span><span class="p">)</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ln -s /etc/nginx/sites-available/baxter-flask&#39;</span> <span class="o">+</span>
+             <span class="s">&#39; /etc/nginx/sites-enabled/baxter-flask&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="n">local_config_dir</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="n">remote_nginx_dir</span><span class="p">):</span>
+            <span class="n">put</span><span class="p">(</span><span class="s">&#39;./baxter-flask&#39;</span><span class="p">,</span> <span class="s">&#39;./&#39;</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;service nginx restart&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Make environment variables file.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Configure gunicorn starter - <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">configure_gunicorn</span></tt></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">configure_gunicorn</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    1. Setup gunicorn starter file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/home/www/gunicorn-start-baxter&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="n">remote_app_dir</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="n">local_config_dir</span><span class="p">):</span>
+                <span class="n">put</span><span class="p">(</span><span class="s">&#39;./gunicorn-start-baxter&#39;</span><span class="p">,</span> <span class="s">&#39;./&#39;</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;chmod +x gunicorn-start-baxter&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Configure Supervisor - <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">configure_supervisor</span></tt></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">configure_supervisor</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    1. Create new supervisor config file</span>
+<span class="sd">    2. Copy local config to remote config</span>
+<span class="sd">    3. Register new command</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/etc/supervisor/conf.d/baxter_flask.conf&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="n">local_config_dir</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="n">remote_supervisor_dir</span><span class="p">):</span>
+                <span class="n">put</span><span class="p">(</span><span class="s">&#39;baxter_flask.conf&#39;</span><span class="p">,</span> <span class="s">&#39;./&#39;</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;supervisorctl reread&#39;</span><span class="p">)</span>
+                <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;supervisorctl update&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Configure Git to recieve pushes and restart server for deploys - <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">configure_git</span></tt></dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">configure_git</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    1. Setup bare Git repo</span>
+<span class="sd">    2. Create post-recieve hook</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">remote_git_dir</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;mkdir &#39;</span> <span class="o">+</span> <span class="n">remote_git_dir</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="n">remote_git_dir</span><span class="p">):</span>
+            <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;mkdir baxter-flask.git&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">&#39;baxter-flask.git&#39;</span><span class="p">):</span>
+                <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;git init --bare&#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="n">lcd</span><span class="p">(</span><span class="n">local_config_dir</span><span class="p">):</span>
+                    <span class="k">with</span> <span class="n">cd</span><span class="p">(</span><span class="s">&#39;hooks&#39;</span><span class="p">):</span>
+                        <span class="n">put</span><span class="p">(</span><span class="s">&#39;./post-receive&#39;</span><span class="p">,</span> <span class="s">&#39;./&#39;</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;chmod +x post-receive&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -143,8 +466,10 @@ along these lines:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="makefile.html" class="btn btn-neutral float-right" title="Makefile"/>Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="manage.html" class="btn btn-neutral" title="Manage.py"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="manage.html" class="btn btn-neutral" title="manage.py"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

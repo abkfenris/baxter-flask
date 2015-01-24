@@ -212,6 +212,9 @@ def status():
     Is the app live?
     """
     sudo('supervisorctl status')
+    sudo('service nginx status')
+    sudo('service postgresql status')
+    sudo('service ufw status')
 
 
 def add_baxter_user():
@@ -223,7 +226,7 @@ def add_baxter_user():
             with prefix('source /home/www/env/bin/activate'):
                 email = prompt('Email address:')
                 password = prompt('Password:')
-                admin = confirm('Is {0} an admin?'.format(email))
+                admin = confirm('Is {0} an admin?'.format(email), default=False)
                 sudo('python manage.py user create_user -e {0} -p {1} -a y'.format(email, password))
                 if admin:
                     sudo('python manage.py user add_role -u {0} -r admin'.format(email))
