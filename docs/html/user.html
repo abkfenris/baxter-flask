@@ -281,32 +281,226 @@ scale down to fit the containing object they are in.</p>
 </div>
 <div class="section" id="data-types">
 <h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<p>There are several other different types of data accessible, but not everything
+currently effects editing or what the public can see.</p>
+<p>Currently hidden data types include:</p>
+<ul class="simple">
+<li>Weather Observations</li>
+<li>Weather Forecasts</li>
+<li>Points of Interest</li>
+<li>Avalanche Problems</li>
+<li>Snowpits</li>
+</ul>
+<p>Several of the data types will allow you to add related data. There will be an
+add button, and you can add several. Click the X to remove the connection.</p>
+<a class="reference internal image-reference" href="_images/user-related-data.png"><img alt="_images/user-related-data.png" src="_images/user-related-data.png" style="width: 892.0px; height: 149.0px;" /></a>
+<p>On  related data, where it may be related to several different things, you may
+have to edit the individual photo or snowpit and select the data in the drop
+down menu as it cannot be selected in the inline editor.</p>
+<a class="reference internal image-reference" href="_images/user-related-data-dropdown.png"><img alt="_images/user-related-data-dropdown.png" src="_images/user-related-data-dropdown.png" style="width: 912.0px; height: 149.0px;" /></a>
 </div>
 <div class="section" id="avalanche-incidents">
 <h2>Avalanche Incidents<a class="headerlink" href="#avalanche-incidents" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul>
+<li><p class="first">Observer</p>
+</li>
+<li><p class="first">Path</p>
+</li>
+<li><p class="first">Name</p>
+</li>
+<li><p class="first">Display</p>
+</li>
+<li><p class="first">Observation Date</p>
+</li>
+<li><p class="first">Occurence Date</p>
+</li>
+<li><p class="first">Location</p>
+</li>
+<li><p class="first">Elevation</p>
+</li>
+<li><p class="first">Aspect</p>
+</li>
+<li><p class="first">Trigger</p>
+</li>
+<li><p class="first">Trigger Additional Information</p>
+</li>
+<li><p class="first">Avalanche Problem</p>
+</li>
+<li><p class="first">Weak Layer</p>
+</li>
+<li><p class="first">Size -  Relative to Path</p>
+</li>
+<li><p class="first">Size - Destructive Force</p>
+</li>
+<li><p class="first">Depth</p>
+</li>
+<li><p class="first">Width</p>
+</li>
+<li><p class="first">Vertical</p>
+</li>
+<li><p class="first">Slope Angle</p>
+</li>
+<li><dl class="first docutils">
+<dt>Number of People Involved</dt>
+<dd><ul class="first last simple">
+<li>Caught</li>
+<li>Carried</li>
+<li>Injuried</li>
+<li>Partly Buried</li>
+<li>Fully Buried</li>
+<li>Killed</li>
+<li>Rescuers</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Group Activity</p>
+</li>
+<li><p class="first">Group Travel</p>
+</li>
+<li><p class="first">Snow Profile</p>
+</li>
+<li><p class="first">Image</p>
+</li>
+<li><p class="first">Description</p>
+</li>
+<li><p class="first">Summary</p>
+</li>
+<li><dl class="first docutils">
+<dt>Geospatial</dt>
+<dd><ul class="first last simple">
+<li>Crown</li>
+<li>Bed Surface</li>
+<li>Debris Field</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference internal" href="#involved">Involved</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#snowpits">Snowpits</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#photos">Photos</a></p>
+</li>
+<li><p class="first">Problems</p>
+</li>
+</ul>
 <div class="section" id="involved">
 <h3>Involved<a class="headerlink" href="#involved" title="Permalink to this headline">¶</a></h3>
+<p>If information is avaliable for each person involved in a slide, their contact
+info can be recorded, how they were involved, and what location/s they were at.</p>
+<a class="reference internal image-reference" href="_images/user-incident-involved.png"><img alt="_images/user-incident-involved.png" src="_images/user-incident-involved.png" style="width: 886.0px; height: 1061.0px;" /></a>
 </div>
 </div>
 <div class="section" id="avalanche-paths">
 <h2>Avalanche Paths<a class="headerlink" href="#avalanche-paths" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Name</li>
+<li>Description</li>
+<li>Path</li>
+<li>Aspect</li>
+<li>Display</li>
+<li>Incidents</li>
+</ul>
 </div>
 <div class="section" id="trails">
 <h2>Trails<a class="headerlink" href="#trails" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Geom</li>
+<li>Use Type</li>
+<li>Tid</li>
+<li>Skitrail</li>
+<li>Name</li>
+<li>Length Mi</li>
+<li>Status</li>
+<li>Display</li>
+<li>Pub Share</li>
+<li>Gpsupdate</li>
+<li>Gpsunit</li>
+<li>Gpsuser</li>
+<li>Bspaid</li>
+<li>Tsid</li>
+<li>Display Wu</li>
+<li>Display Wn</li>
+<li>Ttype</li>
+<li>Season</li>
+<li>Shape Leng</li>
+<li>Tclass</li>
+<li>Maintclass</li>
+<li>Slength</li>
+<li>Min Slope</li>
+<li>Max Slope</li>
+<li>Avg Slope</li>
+<li>Length Ft</li>
+<li>Description</li>
+<li><a class="reference internal" href="#photos">Photos</a></li>
+</ul>
 </div>
 <div class="section" id="snowpits">
 <h2>Snowpits<a class="headerlink" href="#snowpits" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Incident</li>
+<li>Name</li>
+<li>File</li>
+<li>Location</li>
+<li>Elevation</li>
+<li>Aspect</li>
+<li>Description</li>
+<li><a class="reference internal" href="#photos">Photos</a></li>
+</ul>
 </div>
 <div class="section" id="photos">
 <h2>Photos<a class="headerlink" href="#photos" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Incident</li>
+<li><a class="reference internal" href="#snowpits">Snowpits</a></li>
+<li><a class="reference internal" href="#trails">Trails</a></li>
+<li>Name</li>
+<li>Location</li>
+<li>Description</li>
+<li>Photo</li>
+</ul>
 </div>
 <div class="section" id="users">
 <h2>Users<a class="headerlink" href="#users" title="Permalink to this headline">¶</a></h2>
+<p>Users are not really a data type in and of themselves, they are for site
+management purposes. Most people will not even see this selection.</p>
 <div class="section" id="observers">
 <h3>Observers<a class="headerlink" href="#observers" title="Permalink to this headline">¶</a></h3>
+<p>Not all users are designated observers by the park. Those who are can be selected
+in Avalanche Incidents and several other places as being the source of data.</p>
 </div>
 <div class="section" id="roles">
 <h3>Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h3>
+<p>There are different levels of roles avaliable on the site. Currently there is
+not many differences between them, other than being able to manage other users,
+but contributors cannot delete information.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Admin</dt>
+<dd><p class="first last">In addition from being able to add, edit, and delete data from the site,
+Admins can also manage Users.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>User</dt>
+<dd><p class="first last">Can add, edit, and delete information on the site</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Contributor</dt>
+<dd><p class="first last">Can add and edit information in the site</p>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 </div>
 </div>

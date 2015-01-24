@@ -173,38 +173,191 @@ Currently images are only setup to be displayed at full size, but they will
 scale down to fit the containing object they are in.
 
 
+
+
+
 Data Types
 ----------
+There are several other different types of data accessible, but not everything
+currently effects editing or what the public can see.
+
+Currently hidden data types include:
+
+* Weather Observations
+* Weather Forecasts
+* Points of Interest
+* Avalanche Problems
+* Snowpits
+
+Several of the data types will allow you to add related data. There will be an
+add button, and you can add several. Click the X to remove the connection.
+
+.. image:: _static/user-related-data.png
+   :scale: 50%
+
+On  related data, where it may be related to several different things, you may
+have to edit the individual photo or snowpit and select the data in the drop
+down menu as it cannot be selected in the inline editor.
+
+.. image:: _static/user-related-data-dropdown.png
+   :scale: 50%
+
+
 
 
 Avalanche Incidents
 -------------------
+Fields:
+
+* Observer
+* Path
+* Name
+* Display
+* Observation Date
+* Occurence Date
+* Location
+* Elevation
+* Aspect
+* Trigger
+* Trigger Additional Information
+* Avalanche Problem
+* Weak Layer
+* Size -  Relative to Path
+* Size - Destructive Force
+* Depth
+* Width
+* Vertical
+* Slope Angle
+* Number of People Involved
+    * Caught
+    * Carried
+    * Injuried
+    * Partly Buried
+    * Fully Buried
+    * Killed
+    * Rescuers
+* Group Activity
+* Group Travel
+* Snow Profile
+* Image
+* Description
+* Summary
+* Geospatial
+    * Crown
+    * Bed Surface
+    * Debris Field
+* `Involved`_
+* `Snowpits`_
+* `Photos`_
+* Problems
 
 Involved
 ^^^^^^^^
+If information is avaliable for each person involved in a slide, their contact
+info can be recorded, how they were involved, and what location/s they were at.
+
+.. image:: _static/user-incident-involved.png
+   :scale: 50%
+
 
 
 Avalanche Paths
 ---------------
 
+Fields:
+
+* Name
+* Description
+* Path
+* Aspect
+* Display
+* Incidents
+
 
 Trails
 ------
+
+Fields:
+
+* Geom
+* Use Type
+* Tid
+* Skitrail
+* Name
+* Length Mi
+* Status
+* Display
+* Pub Share
+* Gpsupdate
+* Gpsunit
+* Gpsuser
+* Bspaid
+* Tsid
+* Display Wu
+* Display Wn
+* Ttype
+* Season
+* Shape Leng
+* Tclass
+* Maintclass
+* Slength
+* Min Slope
+* Max Slope
+* Avg Slope
+* Length Ft
+* Description
+* `Photos`_
 
 
 Snowpits
 --------
 
+Fields:
+
+* Incident
+* Name
+* File
+* Location
+* Elevation
+* Aspect
+* Description
+* `Photos`_
+
 
 Photos
 ------
 
+Fields:
+
+* Incident
+* `Snowpits`_
+* `Trails`_
+* Name
+* Location
+* Description
+* Photo
+
 
 Users
 -----
+Users are not really a data type in and of themselves, they are for site
+management purposes. Most people will not even see this selection.
 
 Observers
 ^^^^^^^^^
+Not all users are designated observers by the park. Those who are can be selected
+in Avalanche Incidents and several other places as being the source of data.
 
 Roles
 ^^^^^
+There are different levels of roles avaliable on the site. Currently there is
+not many differences between them, other than being able to manage other users,
+but contributors cannot delete information.
+
+* Admin
+    In addition from being able to add, edit, and delete data from the site,
+    Admins can also manage Users.
+* User
+    Can add, edit, and delete information on the site
+* Contributor
+    Can add and edit information in the site
