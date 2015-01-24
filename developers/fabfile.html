@@ -170,8 +170,9 @@ you will be commanding, define another command in <tt class="docutils literal"><
     <span class="k">pass</span>
 </pre></div>
 </div>
+</div>
 <div class="section" id="deploying-changes">
-<h3>Deploying Changes<a class="headerlink" href="#deploying-changes" title="Permalink to this headline">¶</a></h3>
+<h2>Deploying Changes<a class="headerlink" href="#deploying-changes" title="Permalink to this headline">¶</a></h2>
 <p>After making some changes to the code, they can be pushed to the server(s) with
 <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">deploy</span></tt> which will ask for a commit message.</p>
 <p>Here&#8217;s what happens when I deploy the changes that I just wrote (meta much?):</p>
@@ -211,12 +212,12 @@ started again.</p>
 </div>
 </div>
 <div class="section" id="rolling-back-changes">
-<h3>Rolling Back Changes<a class="headerlink" href="#rolling-back-changes" title="Permalink to this headline">¶</a></h3>
+<h2>Rolling Back Changes<a class="headerlink" href="#rolling-back-changes" title="Permalink to this headline">¶</a></h2>
 <p>Every once in a while mistakes happen. <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">rollback</span></tt> can help clean up some
 of them if they have already been deployed.</p>
 </div>
 <div class="section" id="checking-server-status">
-<h3>Checking Server Status<a class="headerlink" href="#checking-server-status" title="Permalink to this headline">¶</a></h3>
+<h2>Checking Server Status<a class="headerlink" href="#checking-server-status" title="Permalink to this headline">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">fab</span> <span class="pre">status</span></tt> will check the supervisor processes, nginx, postgres, and ufw
 firewall statuses.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>fab prod status
@@ -244,11 +245,11 @@ Disconnecting from baxter.alexkerney.com... <span class="k">done</span>.
 </div>
 </div>
 <div class="section" id="running-the-server">
-<h3>Running the Server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h3>
+<h2>Running the Server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h2>
 <p><tt class="docutils literal"><span class="pre">fab</span> <span class="pre">run_app</span></tt> will get supervisor to kick off gunicorn and flask.</p>
 </div>
 <div class="section" id="adding-users-to-site">
-<h3>Adding Users to Site<a class="headerlink" href="#adding-users-to-site" title="Permalink to this headline">¶</a></h3>
+<h2>Adding Users to Site<a class="headerlink" href="#adding-users-to-site" title="Permalink to this headline">¶</a></h2>
 <p>Instead of sshing into the server and using <tt class="docutils literal"><span class="pre">manage.py</span></tt>, <tt class="docutils literal"><span class="pre">fab</span></tt> can also
 setup users with <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">add_baxter_user</span></tt>. It will ask for email address,
 password, and if that user should be an admin, which defaults to no.</p>
@@ -277,12 +278,12 @@ Disconnecting from baxter.alexkerney.com... <span class="k">done</span>.
 </div>
 </div>
 <div class="section" id="creating-roles">
-<h3>Creating Roles<a class="headerlink" href="#creating-roles" title="Permalink to this headline">¶</a></h3>
+<h2>Creating Roles<a class="headerlink" href="#creating-roles" title="Permalink to this headline">¶</a></h2>
 <p>Fabric can setup all the roles that the server should start with using
 <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">create_roles</span></tt>.</p>
 </div>
 <div class="section" id="setting-up-a-new-server">
-<h3>Setting Up a New Server<a class="headerlink" href="#setting-up-a-new-server" title="Permalink to this headline">¶</a></h3>
+<h2>Setting Up a New Server<a class="headerlink" href="#setting-up-a-new-server" title="Permalink to this headline">¶</a></h2>
 <p>At some point <tt class="docutils literal"><span class="pre">fab</span> <span class="pre">create</span></tt> will configure a server for you, but currently only
 a few parts of it work, so running individual steps and configuring things via
 ssh is the best option. Currently none of these are tested so procede at your
@@ -467,7 +468,6 @@ own risk.</p>
 </dl>
 </li>
 </ol>
-</div>
 </div>
 </div>
 
