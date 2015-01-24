@@ -1,5 +1,17 @@
+"""
+Fabric commands to setup and run server
+
+Copy fabhosts-example.py to fabhosts.py and add host configurations for
+your deployment.
+"""
+
 from fabric.api import cd, env, lcd, put, prompt, local, sudo
 from fabric.contrib.files import exists
+
+try:
+    from fabhosts import prod
+except ImportError:
+    pass
 
 # config
 
