@@ -66,7 +66,17 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Baxter User Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#editing">Editing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-accounts">User Accounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-access">Database Access</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#markdown">Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-types">Data Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#avalanche-incidents">Avalanche Incidents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#avalanche-paths">Avalanche Paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trails">Trails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#snowpits">Snowpits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#photos">Photos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#users">Users</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="developers/index.html">Developer Documentation</a><ul>
@@ -120,13 +130,97 @@
 <ul class="simple">
 </ul>
 </div>
-<p>Some quick notes about using the site</p>
+<p>Contents:</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="#editing">Editing</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#user-accounts">User Accounts</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#database-access">Database Access</a></p>
+</li>
+<li><p class="first"><a class="reference external" href="https://help.github.com/articles/markdown-basics/">Markdown</a></p>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#data-types">Data Types</a></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#avalanche-incidents">Avalanche Incidents</a></li>
+<li><a class="reference internal" href="#avalanche-paths">Avalanche Paths</a></li>
+<li><a class="reference internal" href="#trails">Trails</a></li>
+<li><a class="reference internal" href="#snowpits">Snowpits</a></li>
+<li><a class="reference internal" href="#photos">Photos</a></li>
+<li><a class="reference internal" href="#users">Users</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="editing">
+<h2>Editing<a class="headerlink" href="#editing" title="Permalink to this headline">¶</a></h2>
+<p>Thanks for helping us build out or selection of data.</p>
+<p>There may be a lot of fields, but we are trying to have it each has a specific
+use. If you have some data that you believe we should be tracking, but there is
+currently not a field for please get in touch and we can discuss it. Also you
+could <a class="reference external" href="https://github.com/abkfenris/baxter-flask/issues">submit an issue</a>.</p>
+<p>Much of the admin interface is set up to be easy to use, and we are working on
+adding more help information for less obvious fields.</p>
+<p>For geospatial data there are maps where you can create lines, points, and
+polygons depending on what that specific field needs. We are looking at direct
+geospatial data upload in the future, but right now database access is also
+avaliable.</p>
+</div>
+<div class="section" id="user-accounts">
+<h2>User Accounts<a class="headerlink" href="#user-accounts" title="Permalink to this headline">¶</a></h2>
+<p>Right now it is not possible to change your password via the website. The
+horrific one given to you is what you get. Password changes and the ability to
+modify your own account is coming.</p>
+</div>
+<div class="section" id="database-access">
+<h2>Database Access<a class="headerlink" href="#database-access" title="Permalink to this headline">¶</a></h2>
+<p>If you have geospatial data in ArcGIS or QGIS and you wish to connect to the
+database and edit directly, please be in touch, and we will set you up with an
+account. Database accounts are seperate than accounts for the admin. The site is
+running a <a class="reference external" href="http://postgis.net">PostGIS</a> database on port 5432.</p>
+<p>Setup:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://resources.arcgis.com/en/help/main/10.1/index.html#/Setting_up_a_connection_to_PostgreSQL/002p0000003q000000/">ArcGIS 10.1</a></li>
+<li><a class="reference external" href="http://resources.arcgis.com/en/help/main/10.2/index.html#/Setting_up_a_connection_to_PostgreSQL/002p0000003q000000/">ArcGIS 10.2</a></li>
+<li><a class="reference external" href="http://www.gistutor.com/quantum-gis/20-intermediate-quantum-gis-tutorials/34-working-with-your-postgis-layers-using-quantum-gis-qgis.html">QGIS</a></li>
+</ul>
+</div>
 <div class="section" id="markdown">
 <h2>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h2>
 <p>In places which will generate longer text blurbs, like the description of an
 Avalanche Incident, can be formatted as <a class="reference external" href="https://help.github.com/articles/markdown-basics/">Markdown</a>.</p>
 <p>Markdown is a more human readable, and natural way of formatting text compared
 to writing html.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#paragraphs">Paragraphs</a></li>
+<li><a class="reference internal" href="#headings">Headings</a></li>
+<li><a class="reference internal" href="#lists">Lists</a></li>
+<li><a class="reference internal" href="#links">Links</a></li>
+<li><a class="reference internal" href="#images">Images</a></li>
+</ul>
+<div class="section" id="paragraphs">
+<h3>Paragraphs<a class="headerlink" href="#paragraphs" title="Permalink to this headline">¶</a></h3>
+<p>Paragraphs are followed by blank lines. Consecutive lines without a blank line
+become the same paragraph.</p>
+</div>
+<div class="section" id="headings">
+<h3>Headings<a class="headerlink" href="#headings" title="Permalink to this headline">¶</a></h3>
+<p>Headings are designated by some number of <tt class="docutils literal"><span class="pre">#</span></tt> symbols before a line of text.
+The more <tt class="docutils literal"><span class="pre">#</span></tt> symbols the less important the heading is.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Large Heading</span>
+<span class="c">## Secondary Heading</span>
+<span class="c">##### Much smaller heading</span>
+</pre></div>
+</div>
+<p>Which will become</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;h1&gt;</span>Large Heading<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Secondary Heading<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;h5&gt;</span>Much smaller heading<span class="nt">&lt;/h5&gt;</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="links">
 <h3>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h3>
 <p>Links are very easily formatted in Markdown. Just insert <tt class="docutils literal"><span class="pre">[link</span> <span class="pre">text](link</span> <span class="pre">url)</span></tt>
@@ -135,10 +229,34 @@ into the description. Example:</p>
 </pre></div>
 </div>
 <p>Will be formatted into:</p>
-<div class="highlight-python"><div class="highlight"><pre>&lt;a href=&quot;http://www.fsavalanche.org&quot;&gt;National Avalanche Center&lt;/a&gt;
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://www.fsavalanche.org&quot;</span><span class="nt">&gt;</span>National Avalanche Center<span class="nt">&lt;/a&gt;</span>
 </pre></div>
 </div>
 <p>And displayed as <a class="reference external" href="http://www.fsavalanche.org">National Avalanche Center</a></p>
+</div>
+<div class="section" id="lists">
+<h3>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h3>
+<p>For a basic unordered (bulleted) list, make sure you lead with a blank line,
+then use either a <tt class="docutils literal"><span class="pre">*</span></tt> or a <tt class="docutils literal"><span class="pre">-</span></tt> per item.</p>
+<div class="highlight-python"><div class="highlight"><pre>* Item
+* Item
+* Item
+</pre></div>
+</div>
+<p>Generates an HTML list:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Item<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Item<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Item<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</pre></div>
+</div>
+<p>Which will form:</p>
+<ul class="simple">
+<li>Item</li>
+<li>Item</li>
+<li>Item</li>
+</ul>
 </div>
 <div class="section" id="images">
 <h3>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h3>
@@ -154,10 +272,235 @@ image is uploaded to the server, and the path becomes visible.</p>
 </pre></div>
 </div>
 <p>Gets turned into this code which will nicely render an image:</p>
-<div class="highlight-python"><div class="highlight"><pre>&lt;img src=&quot;/static/uploaded/photos/IMG_2774.jpg&quot; alt=&quot;Photo of Devil&#39;s Den&quot; class=&quot;img-responsive&quot;&gt;
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;/static/uploaded/photos/IMG_2774.jpg&quot;</span> <span class="na">alt=</span><span class="s">&quot;Photo of Devil&#39;s Den&quot;</span> <span class="na">class=</span><span class="s">&quot;img-responsive&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
-<p>Currently images are only setup to be displayed at full size.</p>
+<p>Currently images are only setup to be displayed at full size, but they will
+scale down to fit the containing object they are in.</p>
+</div>
+</div>
+<div class="section" id="data-types">
+<h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<p>There are several other different types of data accessible, but not everything
+currently effects editing or what the public can see.</p>
+<p>Currently hidden data types include:</p>
+<ul class="simple">
+<li>Weather Observations</li>
+<li>Weather Forecasts</li>
+<li>Points of Interest</li>
+<li>Avalanche Problems</li>
+<li>Snowpits</li>
+</ul>
+<p>Several of the data types will allow you to add related data. There will be an
+add button, and you can add several. Click the X to remove the connection.</p>
+<a class="reference internal image-reference" href="_images/user-related-data.png"><img alt="_images/user-related-data.png" src="_images/user-related-data.png" style="width: 892.0px; height: 149.0px;" /></a>
+<p>On  related data, where it may be related to several different things, you may
+have to edit the individual photo or snowpit and select the data in the drop
+down menu as it cannot be selected in the inline editor.</p>
+<a class="reference internal image-reference" href="_images/user-related-data-dropdown.png"><img alt="_images/user-related-data-dropdown.png" src="_images/user-related-data-dropdown.png" style="width: 912.0px; height: 149.0px;" /></a>
+</div>
+<div class="section" id="avalanche-incidents">
+<h2>Avalanche Incidents<a class="headerlink" href="#avalanche-incidents" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul>
+<li><p class="first">Observer</p>
+</li>
+<li><p class="first">Path</p>
+</li>
+<li><p class="first">Name</p>
+</li>
+<li><p class="first">Display</p>
+</li>
+<li><p class="first">Observation Date</p>
+</li>
+<li><p class="first">Occurence Date</p>
+</li>
+<li><p class="first">Location</p>
+</li>
+<li><p class="first">Elevation</p>
+</li>
+<li><p class="first">Aspect</p>
+</li>
+<li><p class="first">Trigger</p>
+</li>
+<li><p class="first">Trigger Additional Information</p>
+</li>
+<li><p class="first">Avalanche Problem</p>
+</li>
+<li><p class="first">Weak Layer</p>
+</li>
+<li><p class="first">Size -  Relative to Path</p>
+</li>
+<li><p class="first">Size - Destructive Force</p>
+</li>
+<li><p class="first">Depth</p>
+</li>
+<li><p class="first">Width</p>
+</li>
+<li><p class="first">Vertical</p>
+</li>
+<li><p class="first">Slope Angle</p>
+</li>
+<li><dl class="first docutils">
+<dt>Number of People Involved</dt>
+<dd><ul class="first last simple">
+<li>Caught</li>
+<li>Carried</li>
+<li>Injuried</li>
+<li>Partly Buried</li>
+<li>Fully Buried</li>
+<li>Killed</li>
+<li>Rescuers</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Group Activity</p>
+</li>
+<li><p class="first">Group Travel</p>
+</li>
+<li><p class="first">Snow Profile</p>
+</li>
+<li><p class="first">Image</p>
+</li>
+<li><p class="first">Description</p>
+</li>
+<li><p class="first">Summary</p>
+</li>
+<li><dl class="first docutils">
+<dt>Geospatial</dt>
+<dd><ul class="first last simple">
+<li>Crown</li>
+<li>Bed Surface</li>
+<li>Debris Field</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference internal" href="#involved">Involved</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#snowpits">Snowpits</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#photos">Photos</a></p>
+</li>
+<li><p class="first">Problems</p>
+</li>
+</ul>
+<div class="section" id="involved">
+<h3>Involved<a class="headerlink" href="#involved" title="Permalink to this headline">¶</a></h3>
+<p>If information is avaliable for each person involved in a slide, their contact
+info can be recorded, how they were involved, and what location/s they were at.</p>
+<a class="reference internal image-reference" href="_images/user-incident-involved.png"><img alt="_images/user-incident-involved.png" src="_images/user-incident-involved.png" style="width: 886.0px; height: 1061.0px;" /></a>
+</div>
+</div>
+<div class="section" id="avalanche-paths">
+<h2>Avalanche Paths<a class="headerlink" href="#avalanche-paths" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Name</li>
+<li>Description</li>
+<li>Path</li>
+<li>Aspect</li>
+<li>Display</li>
+<li>Incidents</li>
+</ul>
+</div>
+<div class="section" id="trails">
+<h2>Trails<a class="headerlink" href="#trails" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Geom</li>
+<li>Use Type</li>
+<li>Tid</li>
+<li>Skitrail</li>
+<li>Name</li>
+<li>Length Mi</li>
+<li>Status</li>
+<li>Display</li>
+<li>Pub Share</li>
+<li>Gpsupdate</li>
+<li>Gpsunit</li>
+<li>Gpsuser</li>
+<li>Bspaid</li>
+<li>Tsid</li>
+<li>Display Wu</li>
+<li>Display Wn</li>
+<li>Ttype</li>
+<li>Season</li>
+<li>Shape Leng</li>
+<li>Tclass</li>
+<li>Maintclass</li>
+<li>Slength</li>
+<li>Min Slope</li>
+<li>Max Slope</li>
+<li>Avg Slope</li>
+<li>Length Ft</li>
+<li>Description</li>
+<li><a class="reference internal" href="#photos">Photos</a></li>
+</ul>
+</div>
+<div class="section" id="snowpits">
+<h2>Snowpits<a class="headerlink" href="#snowpits" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Incident</li>
+<li>Name</li>
+<li>File</li>
+<li>Location</li>
+<li>Elevation</li>
+<li>Aspect</li>
+<li>Description</li>
+<li><a class="reference internal" href="#photos">Photos</a></li>
+</ul>
+</div>
+<div class="section" id="photos">
+<h2>Photos<a class="headerlink" href="#photos" title="Permalink to this headline">¶</a></h2>
+<p>Fields:</p>
+<ul class="simple">
+<li>Incident</li>
+<li><a class="reference internal" href="#snowpits">Snowpits</a></li>
+<li><a class="reference internal" href="#trails">Trails</a></li>
+<li>Name</li>
+<li>Location</li>
+<li>Description</li>
+<li>Photo</li>
+</ul>
+</div>
+<div class="section" id="users">
+<h2>Users<a class="headerlink" href="#users" title="Permalink to this headline">¶</a></h2>
+<p>Users are not really a data type in and of themselves, they are for site
+management purposes. Most people will not even see this selection.</p>
+<div class="section" id="observers">
+<h3>Observers<a class="headerlink" href="#observers" title="Permalink to this headline">¶</a></h3>
+<p>Not all users are designated observers by the park. Those who are can be selected
+in Avalanche Incidents and several other places as being the source of data.</p>
+</div>
+<div class="section" id="roles">
+<h3>Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h3>
+<p>There are different levels of roles avaliable on the site. Currently there is
+not many differences between them, other than being able to manage other users,
+but contributors cannot delete information.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Admin</dt>
+<dd><p class="first last">In addition from being able to add, edit, and delete data from the site,
+Admins can also manage Users.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>User</dt>
+<dd><p class="first last">Can add, edit, and delete information on the site</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Contributor</dt>
+<dd><p class="first last">Can add and edit information in the site</p>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 </div>
 </div>
