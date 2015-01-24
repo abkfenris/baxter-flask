@@ -33,7 +33,7 @@ class ProductionConfig(Config):
                                'postgresql://localhost/baxter')
     CACHE_TYPE = 'simple'
     CACHE_DEFAULT_TIMEOUT = 120
-    CACHE_KEY_PREFIX = 'b_'
+    CACHE_KEY_PREFIX = 'bc_'
     CACHE_REDIS_HOST = os.environ.get('BAXTER_REDIS_HOST')
     CACHE_REDIS_PASSWORD = os.environ.get('BAXTER_REDIS_PASSWORD')
     SECURITY_PASSWORD_HASH = 'bcrypt'

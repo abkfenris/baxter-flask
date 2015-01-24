@@ -27,6 +27,11 @@ class Role(db.Model, RoleMixin):
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
 
+    def __repr__(self):
+        if self.description is not None:
+            return '{0} - {1}'.format(self.name, self.description)
+        return '{0}'.format(self.name)
+
 
 class User(db.Model, UserMixin):
     """
