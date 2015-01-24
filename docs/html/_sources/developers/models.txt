@@ -1,7 +1,15 @@
 Database models
 ===============
 
-.. toctree::
+Models:
+
+* `Avalanche`_
+* `Snow`_
+* `Trail`_
+* `Weather`_
+* `Photo`_
+* `Site`_
+
 
 Avalanche
 ---------

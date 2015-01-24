@@ -67,23 +67,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../user.html#markdown">Markdown</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../baxter.html">Baxter package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#main-views">Main views</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#module-baxter">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Database models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.avalanche">Avalanche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#snow">Snow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.trail">Trail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.weather">Weather</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.photo">Photo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#site">Site</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../routes.html">HTTP Routes for site</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../routes.html#browseable-routes">Browseable routes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../routes.html#api-routes">API routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/index.html">Developer Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/baxter.html">Baxter package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/models.html">Database models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/routes.html">HTTP Routes for site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/manage.html">Manage.py</a></li>
 </ul>
 </li>
 </ul>
@@ -130,7 +118,7 @@
 <span class="kn">from</span> <span class="nn">geoalchemy2.shape</span> <span class="kn">import</span> <span class="n">to_shape</span>
 
 
-<div class="viewcode-block" id="Trail"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail">[docs]</a><span class="k">class</span> <span class="nc">Trail</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="Trail"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.trail.Trail">[docs]</a><span class="k">class</span> <span class="nc">Trail</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Arguments:</span>
 <span class="sd">        id (int): Primary Key</span>
@@ -160,11 +148,12 @@
 <span class="sd">        max_slope (float): Maximum slope of trail</span>
 <span class="sd">        avg_slope (float): Average slope of trail</span>
 <span class="sd">        length_ft (float): Length of trail in feet</span>
+<span class="sd">        description (Text): Description of trail</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;trails&#39;</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">geom</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTILINESTRING&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTILINESTRING&#39;</span><span class="p">,</span> <span class="mi">26919</span><span class="p">))</span>
     <span class="n">use_type</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
     <span class="n">comments</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">()</span>
     <span class="n">tid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
@@ -191,8 +180,9 @@
     <span class="n">max_slope</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
     <span class="n">avg_slope</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
     <span class="n">length_ft</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Trail.center"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Trail.center"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.trail.Trail.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a shapely.Point that is the center of the trail</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -203,7 +193,7 @@
             <span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">center</span>
 </div>
-<div class="viewcode-block" id="Trail.l_center"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail.l_center">[docs]</a>    <span class="k">def</span> <span class="nf">l_center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Trail.l_center"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.trail.Trail.l_center">[docs]</a>    <span class="k">def</span> <span class="nf">l_center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a formatted string in a way that</span>
 <span class="sd">        leaflet likes for a center point</span>
@@ -211,7 +201,7 @@
         <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="Trail.geojsonitem"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.Trail.geojsonitem">[docs]</a>    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Trail.geojsonitem"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.trail.Trail.geojsonitem">[docs]</a>    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a geojson Feature for a trail</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -248,7 +238,7 @@
                 <span class="p">}</span>
 
 </div></div>
-<div class="viewcode-block" id="POI"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.POI">[docs]</a><span class="k">class</span> <span class="nc">POI</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="POI"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.trail.POI">[docs]</a><span class="k">class</span> <span class="nc">POI</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Points of Interest</span>
 
@@ -272,7 +262,7 @@
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
-    <span class="n">point</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&quot;POINT&quot;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&quot;POINT&quot;</span><span class="p">,</span> <span class="mi">26919</span><span class="p">))</span>
     <span class="n">bspaid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
     <span class="n">poiid</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">poi_group</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
@@ -284,7 +274,7 @@
     <span class="n">site_capacity</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">facility_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
 
-<div class="viewcode-block" id="POI.geojsonitem"><a class="viewcode-back" href="../../../models.html#baxter.models.trail.POI.geojsonitem">[docs]</a>    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="POI.geojsonitem"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.trail.POI.geojsonitem">[docs]</a>    <span class="k">def</span> <span class="nf">geojsonitem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a geojson Feature for Point of Interest</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -337,7 +327,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

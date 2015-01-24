@@ -13,9 +13,8 @@ Contents:
 
    public
    user
-   baxter
-   models
-   routes
+
+   developers/index
 
 
 

@@ -24,11 +24,12 @@
 
   
   
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   
 
   
-    <link rel="top" title="Baxter 0.1 documentation" href="index.html"/>
+    <link rel="top" title="Baxter 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Developer Documentation" href="index.html"/>
         <link rel="next" title="HTTP Routes for site" href="routes.html"/>
         <link rel="prev" title="Baxter package" href="baxter.html"/> 
 
@@ -44,9 +45,9 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        <a href="index.html" class="fa fa-home"> Baxter</a>
+        <a href="../index.html" class="fa fa-home"> Baxter</a>
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -58,33 +59,21 @@
         
         
             <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="public.html">Public Help</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="public.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="public.html#avalanche-incidents">Avalanche Incidents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="public.html#trails">Trails</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../public.html">Public Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../public.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../public.html#avalanche-incidents">Avalanche Incidents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../public.html#trails">Trails</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="user.html">Baxter User Help</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user.html#markdown">Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user.html">Baxter User Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user.html#markdown">Markdown</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="baxter.html">Baxter package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="baxter.html#main-views">Main views</a></li>
-<li class="toctree-l2"><a class="reference internal" href="baxter.html#module-baxter">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Database models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-baxter.models.avalanche">Avalanche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#snow">Snow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-baxter.models.trail">Trail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-baxter.models.weather">Weather</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-baxter.models.photo">Photo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#site">Site</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="routes.html">HTTP Routes for site</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="routes.html#browseable-routes">Browseable routes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routes.html#api-routes">API routes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="baxter.html">Baxter package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Database models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routes.html">HTTP Routes for site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">Manage.py</a></li>
 </ul>
 </li>
 </ul>
@@ -99,7 +88,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="index.html">Baxter</a>
+        <a href="../index.html">Baxter</a>
       </nav>
 
 
@@ -108,12 +97,14 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="index.html">Docs</a> &raquo;</li>
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Developer Documentation</a> &raquo;</li>
       
     <li>Database models</li>
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/models.txt" rel="nofollow"> View page source</a>
+          <a href="../_sources/developers/models.txt" rel="nofollow"> View page source</a>
         
       </li>
   </ul>
@@ -123,17 +114,22 @@
             
   <div class="section" id="database-models">
 <h1>Database models<a class="headerlink" href="#database-models" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
+<p>Models:</p>
 <ul class="simple">
+<li><a class="reference internal" href="#avalanche">Avalanche</a></li>
+<li><a class="reference internal" href="#snow">Snow</a></li>
+<li><a class="reference internal" href="#trail">Trail</a></li>
+<li><a class="reference internal" href="#weather">Weather</a></li>
+<li><a class="reference internal" href="#photo">Photo</a></li>
+<li><a class="reference internal" href="#site">Site</a></li>
 </ul>
-</div>
 <div class="section" id="module-baxter.models.avalanche">
 <span id="avalanche"></span><h2>Avalanche<a class="headerlink" href="#module-baxter.models.avalanche" title="Permalink to this headline">¶</a></h2>
 <p>Avalanche related database models.</p>
 <dl class="class">
 <dt id="baxter.models.avalanche.AvalancheIn">
-<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheIn</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.avalanche.</tt><tt class="descname">AvalancheIn</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalancheIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Avalanche Incident</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -142,35 +138,45 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>id</strong> (<em>int</em>) &#8211; Primary key</li>
 <li><strong>observer_id</strong> (<em>int</em>) &#8211; Primary foreign key for observer</li>
-<li><strong>observer</strong> (<a class="reference internal" href="#baxter.models.site.User" title="baxter.models.site.User"><em>User</em></a>) &#8211; User object for observer</li>
+<li><strong>observer</strong> (<em>User</em>) &#8211; User object for observer</li>
 <li><strong>name</strong> (<em>string</em>) &#8211; Name of incident</li>
 <li><strong>path_id</strong> (<em>int</em>) &#8211; Forign key of Avalanche Path where incident occured</li>
-<li><strong>path</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalanchePath" title="baxter.models.avalanche.AvalanchePath"><em>AvalanchePath</em></a>) &#8211; Object of Avalanche Path where incident occured</li>
+<li><strong>path</strong> (<em>AvalanchePath</em>) &#8211; Object of Avalanche Path where incident occured</li>
+<li><strong>display</strong> (<em>bool</em>) &#8211; Display incident publicly</li>
 <li><strong>observation_date</strong> (<em>datetime</em>) &#8211; Date observer visited incident site</li>
 <li><strong>occurence_date</strong> (<em>datetime</em>) &#8211; Date incident occured</li>
 <li><strong>location</strong> (<em>text</em>) &#8211; Description of incident location</li>
 <li><strong>elevation</strong> (<em>int</em>) &#8211; Elevation of slide path (ft)</li>
 <li><strong>aspect</strong> (<em>string</em>) &#8211; Aspect that the slide occured on</li>
 <li><strong>trigger</strong> (<em>string</em>) &#8211; Start trigger for slide</li>
+<li><strong>(string) Additional trigger information</strong> (<em>trigger_add</em>) &#8211; </li>
 <li><strong>av_problem</strong> (<em>string</em>) &#8211; Avalanche problem type</li>
 <li><strong>av_type</strong> (<em>string</em>) &#8211; Avalanche type</li>
 <li><strong>weak_layer</strong> (<em>string</em>) &#8211; Weak layer type</li>
+<li><strong>size_relative</strong> (<em>float</em>) &#8211; Slide size relative to path</li>
+<li><strong>size_destructive</strong> (<em>float</em>) &#8211; Destructive force of slide</li>
 <li><strong>depth</strong> (<em>float</em>) &#8211; Depth of displaced snowpack</li>
 <li><strong>width</strong> (<em>float</em>) &#8211; Width of bed surface</li>
 <li><strong>vertical</strong> (<em>float</em>) &#8211; Vertical distance that the slide ran</li>
 <li><strong>slope_angle</strong> (<em>float</em>) &#8211; Steepest Slope Angle</li>
 <li><strong>people_caught</strong> (<em>int</em>) &#8211; Number of people caught by slide</li>
 <li><strong>people_carried</strong> (<em>int</em>) &#8211; Number of people carried by slide</li>
+<li><strong>people_injuried</strong> (<em>int</em>) &#8211; Number of people injured by slide</li>
 <li><strong>people_buried_part</strong> (<em>int</em>) &#8211; Number of people partially burried</li>
 <li><strong>people_buried_full</strong> (<em>int</em>) &#8211; Number of people totally burried</li>
+<li><strong>people_killed</strong> (<em>int</em>) &#8211; Number of people killed by slide</li>
+<li><strong>people_rescuer</strong> (<em>int</em>) &#8211; Number of rescuers involved</li>
+<li><strong>group_activity</strong> (<em>str</em>) &#8211; Activity that group was involved in</li>
+<li><strong>group_travel</strong> (<em>str</em>) &#8211; Group travel method</li>
 <li><strong>snow_profile</strong> (<em>text</em>) &#8211; Description of snowpack</li>
 <li><strong>image</strong> (<em>str</em>) &#8211; DEPRICATED, use photo function</li>
 <li><strong>description</strong> (<em>text</em>) &#8211; Description of slide</li>
+<li><strong>summary</strong> (<em>text</em>) &#8211; Short summary of slide</li>
 <li><strong>crown</strong> (<em>MultiLineString</em>) &#8211; MultiLineString along crown(s)</li>
 <li><strong>bed_surface</strong> (<em>MultiPolygon</em>) &#8211; MultiPolygon of bed surface</li>
 <li><strong>debris_field</strong> (<em>MultiPolygon</em>) &#8211; MultiPolygon of debris field</li>
-<li><strong>problems</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheInProb" title="baxter.models.avalanche.AvalancheInProb"><em>AvalancheInProb</em></a>) &#8211; List of associated Avalanche Problem objects</li>
-<li><strong>involved</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheInvolved" title="baxter.models.avalanche.AvalancheInvolved"><em>AvalancheInvolved</em></a>) &#8211; List of people involved in Avalanches</li>
+<li><strong>problems</strong> (<em>AvalancheInProb</em>) &#8211; List of associated Avalanche Problem objects</li>
+<li><strong>involved</strong> (<em>AvalancheInvolved</em>) &#8211; List of people involved in Avalanches</li>
 </ul>
 </td>
 </tr>
@@ -178,20 +184,20 @@
 </table>
 <dl class="method">
 <dt id="baxter.models.avalanche.AvalancheIn.center">
-<code class="descname">center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.center" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">center</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalancheIn.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.center" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a shapely.Point that is the center
 of the union of the bed surface and debris field</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="baxter.models.avalanche.AvalancheIn.description_md">
-<code class="descname">description_md</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn.description_md"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.description_md" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">description_md</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalancheIn.description_md"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.description_md" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a flask Markup object containing the markdown for description</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="baxter.models.avalanche.AvalancheIn.l_center">
-<code class="descname">l_center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheIn.l_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.l_center" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">l_center</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalancheIn.l_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheIn.l_center" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a formatted string in a way that
 leaflet likes for a center point</p>
 </dd></dl>
@@ -200,8 +206,8 @@ leaflet likes for a center point</p>
 
 <dl class="class">
 <dt id="baxter.models.avalanche.AvalancheInProb">
-<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheInProb</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheInProb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheInProb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.avalanche.</tt><tt class="descname">AvalancheInProb</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalancheInProb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheInProb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Avalanche Incident and Problem complex connector</p>
 <p>Also known as an <a class="reference external" href="http://docs.sqlalchemy.org/en/latest/orm/extensions/associationproxy.html#simplifying-association-objects">Association Object</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -211,9 +217,9 @@ leaflet likes for a center point</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>id</strong> (<em>int</em>) &#8211; Primary key for AvalancheInProb</li>
 <li><strong>incident_id</strong> (<em>int</em>) &#8211; Foreign Key for associated Avalanche Incident</li>
-<li><strong>incident</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheIn" title="baxter.models.avalanche.AvalancheIn"><em>AvalancheIn</em></a>) &#8211; Object for associated Avalanche Incident</li>
+<li><strong>incident</strong> (<em>AvalancheIn</em>) &#8211; Object for associated Avalanche Incident</li>
 <li><strong>problem_id</strong> (<em>int</em>) &#8211; Foreign Key for associated Avalanche Problem</li>
-<li><strong>problem</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheProb" title="baxter.models.avalanche.AvalancheProb"><em>AvalancheProb</em></a>) &#8211; Object for associated Avalanche Problem</li>
+<li><strong>problem</strong> (<em>AvalancheProb</em>) &#8211; Object for associated Avalanche Problem</li>
 <li><strong>importance</strong> (<em>str</em>) &#8211; Rank when multiple problems, lower more important</li>
 <li><strong>aspects</strong> (<em>str</em>) &#8211; Aspects effected by slide</li>
 <li><strong>likelyhood</strong> (<em>str</em>) &#8211; Probability of occurence</li>
@@ -229,8 +235,8 @@ leaflet likes for a center point</p>
 
 <dl class="class">
 <dt id="baxter.models.avalanche.AvalancheInvolved">
-<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheInvolved</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheInvolved"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheInvolved" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.avalanche.</tt><tt class="descname">AvalancheInvolved</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalancheInvolved"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheInvolved" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>People involved in avalanches</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -239,9 +245,9 @@ leaflet likes for a center point</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>id</strong> (<em>int</em>) &#8211; Primary key</li>
 <li><strong>incident_id</strong> (<em>int</em>) &#8211; Foreign key for associated avalanche incident</li>
-<li><strong>incident</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheIn" title="baxter.models.avalanche.AvalancheIn"><em>AvalancheIn</em></a>) &#8211; Object for associated avalanche incident</li>
+<li><strong>incident</strong> (<em>AvalancheIn</em>) &#8211; Object for associated avalanche incident</li>
 <li><strong>user_id</strong> (<em>int</em>) &#8211; foreign key for associated user</li>
-<li><strong>user</strong> (<a class="reference internal" href="#baxter.models.site.User" title="baxter.models.site.User"><em>User</em></a>) &#8211; Object for associated user</li>
+<li><strong>user</strong> (<em>User</em>) &#8211; Object for associated user</li>
 <li><strong>first</strong> (<em>str</em>) &#8211; First Name</li>
 <li><strong>last</strong> (<em>str</em>) &#8211; Last Name</li>
 <li><strong>phone</strong> (<em>str</em>) &#8211; Phone Number</li>
@@ -263,8 +269,8 @@ leaflet likes for a center point</p>
 
 <dl class="class">
 <dt id="baxter.models.avalanche.AvalanchePath">
-<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalanchePath</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalanchePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalanchePath" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.avalanche.</tt><tt class="descname">AvalanchePath</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalanchePath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalanchePath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Avalanche Path</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -275,18 +281,39 @@ leaflet likes for a center point</p>
 <li><strong>name</strong> (<em>string</em>) &#8211; Path Name</li>
 <li><strong>description</strong> (<em>text</em>) &#8211; Description of path</li>
 <li><strong>path</strong> (<em>Polygon</em>) &#8211; Avalanche Path</li>
-<li><strong>incidents</strong> (<em>List</em>) &#8211; List of Avalanche Incidents</li>
+<li><strong>incidents</strong> (<em>AvlancheIn</em>) &#8211; List of Avalanche Incidents</li>
+<li><strong>display</strong> (<em>bool</em>) &#8211; Display path publicly</li>
+<li><strong>incidents</strong> &#8211; List of Avalanche Incidents that occured on path</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
+<dl class="method">
+<dt id="baxter.models.avalanche.AvalanchePath.center">
+<tt class="descname">center</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalanchePath.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalanchePath.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a shapely.Point that is the center of the Avalanche Path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baxter.models.avalanche.AvalanchePath.description_md">
+<tt class="descname">description_md</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalanchePath.description_md"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalanchePath.description_md" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a flask Markup object containing the markdown for description</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baxter.models.avalanche.AvalanchePath.l_center">
+<tt class="descname">l_center</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalanchePath.l_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalanchePath.l_center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a formatted string in a way that
+leaflet likes for a center point</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="baxter.models.avalanche.AvalancheProb">
-<em class="property">class </em><code class="descclassname">baxter.models.avalanche.</code><code class="descname">AvalancheProb</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/avalanche.html#AvalancheProb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheProb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.avalanche.</tt><tt class="descname">AvalancheProb</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/avalanche.html#AvalancheProb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.avalanche.AvalancheProb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Avalanche Problems</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -310,8 +337,8 @@ leaflet likes for a center point</p>
 <p>Database models that are related to snow.</p>
 <span class="target" id="module-baxter.models.snow"></span><dl class="class">
 <dt id="baxter.models.snow.SnowPit">
-<em class="property">class </em><code class="descclassname">baxter.models.snow.</code><code class="descname">SnowPit</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/snow.html#SnowPit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.snow.SnowPit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.snow.</tt><tt class="descname">SnowPit</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/snow.html#SnowPit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.snow.SnowPit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Snowpit</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -322,6 +349,8 @@ leaflet likes for a center point</p>
 <li><strong>name</strong> (<em>unicode</em>) &#8211; Descriptive name of snow pit data</li>
 <li><strong>path</strong> (<em>unicode</em>) &#8211; filename</li>
 <li><strong>location</strong> (<em>Point</em>) &#8211; Point in NAD 83 UTM Zone 19N for snow pit</li>
+<li><strong>elevation</strong> (<em>int</em>) &#8211; Elevation of pit</li>
+<li><strong>aspect</strong> (<em>string</em>) &#8211; Aspect the slope faces</li>
 <li><strong>description</strong> (<em>Text</em>) &#8211; Description of snow pit</li>
 </ul>
 </td>
@@ -335,8 +364,8 @@ leaflet likes for a center point</p>
 <span id="trail"></span><h2>Trail<a class="headerlink" href="#module-baxter.models.trail" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="baxter.models.trail.POI">
-<em class="property">class </em><code class="descclassname">baxter.models.trail.</code><code class="descname">POI</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#POI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.POI" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.trail.</tt><tt class="descname">POI</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/trail.html#POI"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.POI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Points of Interest</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -346,9 +375,16 @@ leaflet likes for a center point</p>
 <li><strong>id</strong> (<em>int</em>) &#8211; Primary Key</li>
 <li><strong>name</strong> (<em>str</em>) &#8211; Name of Point of Interest</li>
 <li><strong>point</strong> (<em>Point</em>) &#8211; Point object in NAD 83 UTM Zone 19N for POI</li>
+<li><strong>bspaid</strong> (<em>str</em>) &#8211; </li>
+<li><strong>poiid</strong> (<em>int</em>) &#8211; </li>
+<li><strong>poi_group</strong> (<em>str</em>) &#8211; </li>
+<li><strong>poi_class</strong> (<em>str</em>) &#8211; </li>
+<li><strong>poi_type</strong> (<em>str</em>) &#8211; </li>
+<li><strong>remark</strong> (<em>Text</em>) &#8211; </li>
 <li><strong>elev_ft</strong> (<em>Float</em>) &#8211; Elevation of Point of Interest</li>
 <li><strong>public_share</strong> (<em>bool</em>) &#8211; Is point publicly visible</li>
 <li><strong>site_capacity</strong> (<em>int</em>) &#8211; How many people can visit site</li>
+<li><strong>facility_id</strong> (<em>int</em>) &#8211; </li>
 </ul>
 </td>
 </tr>
@@ -356,7 +392,7 @@ leaflet likes for a center point</p>
 </table>
 <dl class="method">
 <dt id="baxter.models.trail.POI.geojsonitem">
-<code class="descname">geojsonitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#POI.geojsonitem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.POI.geojsonitem" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">geojsonitem</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/trail.html#POI.geojsonitem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.POI.geojsonitem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a geojson Feature for Point of Interest</p>
 </dd></dl>
 
@@ -364,8 +400,8 @@ leaflet likes for a center point</p>
 
 <dl class="class">
 <dt id="baxter.models.trail.Trail">
-<em class="property">class </em><code class="descclassname">baxter.models.trail.</code><code class="descname">Trail</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.trail.</tt><tt class="descname">Trail</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/trail.html#Trail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -373,19 +409,32 @@ leaflet likes for a center point</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>id</strong> (<em>int</em>) &#8211; Primary Key</li>
 <li><strong>geom</strong> (<em>MultiLineString</em>) &#8211; Multilinestring in NAD 83 UTM Zone 19N for trail route</li>
+<li><strong>use_type</strong> (<em>str</em>) &#8211; </li>
+<li><strong>comments</strong> (<em>Text</em>) &#8211; </li>
+<li><strong>tid</strong> (<em>int</em>) &#8211; </li>
 <li><strong>skitrail</strong> (<em>bool</em>) &#8211; True if it is a ski trail</li>
 <li><strong>name</strong> (<em>str</em>) &#8211; Trail name</li>
 <li><strong>length_mi</strong> (<em>float</em>) &#8211; Length of trail in Miles</li>
+<li><strong>status</strong> (<em>str</em>) &#8211; </li>
 <li><strong>display</strong> (<em>bool</em>) &#8211; Show publicly if true</li>
+<li><strong>pubshare</strong> (<em>bool</em>) &#8211; </li>
 <li><strong>gpsupdate</strong> (<em>date</em>) &#8211; Last time the trail was followed with a GPS</li>
 <li><strong>gpsunit</strong> (<em>str</em>) &#8211; Type of GPS unit used for last update</li>
 <li><strong>gpsuser</strong> (<em>str</em>) &#8211; Who last followed the trail</li>
+<li><strong>bspaid</strong> (<em>str</em>) &#8211; </li>
+<li><strong>tsid</strong> (<em>str</em>) &#8211; </li>
+<li><strong>display_wu</strong> (<em>bool</em>) &#8211; </li>
+<li><strong>display_wn</strong> (<em>bool</em>) &#8211; </li>
 <li><strong>ttype</strong> (<em>str</em>) &#8211; Trail type</li>
 <li><strong>season</strong> (<em>str</em>) &#8211; Is access to trail only allowed during certain seasons</li>
+<li><strong>shape_leng</strong> (<em>float</em>) &#8211; </li>
+<li><strong>tclass</strong> (<em>str</em>) &#8211; </li>
+<li><strong>(str)</strong> (<em>maintclass</em>) &#8211; </li>
 <li><strong>min_slope</strong> (<em>float</em>) &#8211; Minimum slope of trail</li>
 <li><strong>max_slope</strong> (<em>float</em>) &#8211; Maximum slope of trail</li>
 <li><strong>avg_slope</strong> (<em>float</em>) &#8211; Average slope of trail</li>
 <li><strong>length_ft</strong> (<em>float</em>) &#8211; Length of trail in feet</li>
+<li><strong>description</strong> (<em>Text</em>) &#8211; Description of trail</li>
 </ul>
 </td>
 </tr>
@@ -393,19 +442,19 @@ leaflet likes for a center point</p>
 </table>
 <dl class="method">
 <dt id="baxter.models.trail.Trail.center">
-<code class="descname">center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.center" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">center</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/trail.html#Trail.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.center" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a shapely.Point that is the center of the trail</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="baxter.models.trail.Trail.geojsonitem">
-<code class="descname">geojsonitem</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail.geojsonitem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.geojsonitem" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">geojsonitem</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/trail.html#Trail.geojsonitem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.geojsonitem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a geojson Feature for a trail</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="baxter.models.trail.Trail.l_center">
-<code class="descname">l_center</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/trail.html#Trail.l_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.l_center" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">l_center</tt><big>(</big><big>)</big><a class="reference internal" href="../_modules/baxter/models/trail.html#Trail.l_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.trail.Trail.l_center" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a formatted string in a way that
 leaflet likes for a center point</p>
 </dd></dl>
@@ -417,8 +466,8 @@ leaflet likes for a center point</p>
 <span id="weather"></span><h2>Weather<a class="headerlink" href="#module-baxter.models.weather" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="baxter.models.weather.WeatherFor">
-<em class="property">class </em><code class="descclassname">baxter.models.weather.</code><code class="descname">WeatherFor</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/weather.html#WeatherFor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.weather.WeatherFor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.weather.</tt><tt class="descname">WeatherFor</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/weather.html#WeatherFor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.weather.WeatherFor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Weather Forecast</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -445,8 +494,8 @@ leaflet likes for a center point</p>
 
 <dl class="class">
 <dt id="baxter.models.weather.WeatherOb">
-<em class="property">class </em><code class="descclassname">baxter.models.weather.</code><code class="descname">WeatherOb</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/weather.html#WeatherOb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.weather.WeatherOb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.weather.</tt><tt class="descname">WeatherOb</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/weather.html#WeatherOb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.weather.WeatherOb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
 <p>Weather Observation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -473,6 +522,19 @@ leaflet likes for a center point</p>
 <li><strong>snow_depth</strong> (<em>float</em>) &#8211; Height of snow depth</li>
 <li><strong>snow_24</strong> (<em>float</em>) &#8211; 24 hour snow depth</li>
 <li><strong>snow_storm</strong> (<em>float</em>) &#8211; Storm snow depth</li>
+<li><strong>snow_8_temp</strong> (<em>float</em>) &#8211; </li>
+<li><strong>snow_density</strong> (<em>float</em>) &#8211; </li>
+<li><strong>snow_foot_pen</strong> &#8211; </li>
+<li><strong>snow_ram_pen</strong> &#8211; </li>
+<li><strong>snow_surface_form</strong> &#8211; </li>
+<li><strong>snow_surface_size</strong> &#8211; </li>
+<li><strong>snow_blowing_extent</strong> &#8211; </li>
+<li><strong>snow_blowing_direct</strong> &#8211; </li>
+<li><strong>snow_water_equil</strong> &#8211; </li>
+<li><strong>rain_24</strong> (<em>float</em>) &#8211; </li>
+<li><strong>rain_precip?</strong> &#8211; </li>
+<li><strong>water_new_g?</strong> &#8211; </li>
+<li><strong>water_new_mm</strong> &#8211; </li>
 </ul>
 </td>
 </tr>
@@ -485,8 +547,9 @@ leaflet likes for a center point</p>
 <span id="photo"></span><h2>Photo<a class="headerlink" href="#module-baxter.models.photo" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="baxter.models.photo.Photo">
-<em class="property">class </em><code class="descclassname">baxter.models.photo.</code><code class="descname">Photo</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/photo.html#Photo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.photo.Photo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.photo.</tt><tt class="descname">Photo</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/photo.html#Photo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.photo.Photo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt></p>
+<p>Photo</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -510,8 +573,8 @@ leaflet likes for a center point</p>
 <p>Database models that are used throughout the site.</p>
 <span class="target" id="module-baxter.models.site"></span><dl class="class">
 <dt id="baxter.models.site.Role">
-<em class="property">class </em><code class="descclassname">baxter.models.site.</code><code class="descname">Role</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/site.html#Role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.site.Role" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code>, <code class="xref py py-class docutils literal"><span class="pre">flask_security.core.RoleMixin</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.site.</tt><tt class="descname">Role</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/site.html#Role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.site.Role" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">flask_security.core.RoleMixin</span></tt></p>
 <p>Role Model</p>
 <p>Using Flask-Security&#8217;s RoleMixin</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -531,8 +594,8 @@ leaflet likes for a center point</p>
 
 <dl class="class">
 <dt id="baxter.models.site.User">
-<em class="property">class </em><code class="descclassname">baxter.models.site.</code><code class="descname">User</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/baxter/models/site.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.site.User" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></code>, <code class="xref py py-class docutils literal"><span class="pre">flask_security.core.UserMixin</span></code></p>
+<em class="property">class </em><tt class="descclassname">baxter.models.site.</tt><tt class="descname">User</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/baxter/models/site.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#baxter.models.site.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask_sqlalchemy.Model</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">flask_security.core.UserMixin</span></tt></p>
 <p>User model</p>
 <p>Using Flask-Security&#8217;s UserMixin</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -550,10 +613,10 @@ leaflet likes for a center point</p>
 <li><strong>roles</strong> (<em>list</em>) &#8211; List of role objects that the user has</li>
 <li><strong>observer</strong> (<em>bool</em>) &#8211; Is this user an official observer</li>
 <li><strong>username</strong> &#8211; Prefered username</li>
-<li><strong>avalanche_incidents</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheIn" title="baxter.models.avalanche.AvalancheIn"><em>AvalancheIn</em></a>) &#8211; List of Avalanche Instances</li>
-<li><strong>observations</strong> (<a class="reference internal" href="#baxter.models.weather.WeatherOb" title="baxter.models.weather.WeatherOb"><em>WeatherOb</em></a>) &#8211; List of Weather Observations</li>
-<li><strong>weather_forecasts</strong> (<a class="reference internal" href="#baxter.models.weather.WeatherFor" title="baxter.models.weather.WeatherFor"><em>WeatherFor</em></a>) &#8211; List of Weather Forecasts</li>
-<li><strong>involved</strong> (<a class="reference internal" href="#baxter.models.avalanche.AvalancheInvolved" title="baxter.models.avalanche.AvalancheInvolved"><em>AvalancheInvolved</em></a>) &#8211; List of Avalanches Incidents that user is involved with</li>
+<li><strong>avalanche_incidents</strong> (<em>AvalancheIn</em>) &#8211; List of Avalanche Instances</li>
+<li><strong>observations</strong> (<em>WeatherOb</em>) &#8211; List of Weather Observations</li>
+<li><strong>weather_forecasts</strong> (<em>WeatherFor</em>) &#8211; List of Weather Forecasts</li>
+<li><strong>involved</strong> (<em>AvalancheInvolved</em>) &#8211; List of Avalanches Incidents that user is involved with</li>
 </ul>
 </td>
 </tr>
@@ -601,23 +664,23 @@ leaflet likes for a center point</p>
 
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
+            URL_ROOT:'../',
             VERSION:'0.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
         };
     </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
   
   
-    <script type="text/javascript" src="_static/js/theme.js"></script>
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
   
 
   
