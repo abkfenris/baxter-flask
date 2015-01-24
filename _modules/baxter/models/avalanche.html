@@ -67,23 +67,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../user.html#markdown">Markdown</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../baxter.html">Baxter package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#main-views">Main views</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../baxter.html#module-baxter">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Database models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.avalanche">Avalanche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#snow">Snow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.trail">Trail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.weather">Weather</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#module-baxter.models.photo">Photo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../models.html#site">Site</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../../routes.html">HTTP Routes for site</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../routes.html#browseable-routes">Browseable routes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../routes.html#api-routes">API routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../developers/index.html">Developer Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/baxter.html">Baxter package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/models.html">Database models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/routes.html">HTTP Routes for site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/manage.html">manage.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/fabfile.html">fabfile.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/makefile.html">Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../developers/server_setup.html">Server Setup</a></li>
 </ul>
 </li>
 </ul>
@@ -136,7 +128,7 @@
 <span class="kn">import</span> <span class="nn">markdown2</span>
 
 
-<div class="viewcode-block" id="AvalanchePath"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalanchePath">[docs]</a><span class="k">class</span> <span class="nc">AvalanchePath</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="AvalanchePath"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalanchePath">[docs]</a><span class="k">class</span> <span class="nc">AvalanchePath</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Avalanche Path</span>
 
@@ -146,17 +138,49 @@
 <span class="sd">        description (text): Description of path</span>
 <span class="sd">        path (Polygon): Avalanche Path</span>
 <span class="sd">        incidents (List): List of Avalanche Incidents</span>
+<span class="sd">        display (bool): Display path publicly</span>
+<span class="sd">        incidents (AvlancheIn): List of Avalanche Incidents that occured on path</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;avalanche_paths&#39;</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
     <span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;POLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;POLYGON&#39;</span><span class="p">,</span> <span class="mi">26919</span><span class="p">))</span>
     <span class="n">aspect</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">display</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AvalanchePath.center"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalanchePath.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a shapely.Point that is the center of the Avalanche Path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">to_shape</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">ST_Transform</span><span class="p">(</span>
+                <span class="n">func</span><span class="o">.</span><span class="n">ST_Centroid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">),</span>
+                <span class="mi">4326</span>
+            <span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">center</span>
+</div>
+<div class="viewcode-block" id="AvalanchePath.l_center"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalanchePath.l_center">[docs]</a>    <span class="k">def</span> <span class="nf">l_center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a formatted string in a way that</span>
+<span class="sd">        leaflet likes for a center point</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="AvalanchePath.description_md"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalanchePath.description_md">[docs]</a>    <span class="k">def</span> <span class="nf">description_md</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a flask Markup object containing the markdown for description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Markup</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
 </div>
-<div class="viewcode-block" id="AvalancheIn"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn">[docs]</a><span class="k">class</span> <span class="nc">AvalancheIn</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="AvalancheIn"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalancheIn">[docs]</a><span class="k">class</span> <span class="nc">AvalancheIn</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Avalanche Incident</span>
 
@@ -167,6 +191,7 @@
 <span class="sd">        name (string): Name of incident</span>
 <span class="sd">        path_id (int): Forign key of Avalanche Path where incident occured</span>
 <span class="sd">        path (AvalanchePath): Object of Avalanche Path where incident occured</span>
+<span class="sd">        display (bool): Display incident publicly</span>
 <span class="sd">        observation_date (datetime): Date observer visited incident site</span>
 <span class="sd">        occurence_date (datetime): Date incident occured</span>
 <span class="sd">        location (text): Description of incident location</span>
@@ -177,17 +202,25 @@
 <span class="sd">        av_problem (string): Avalanche problem type</span>
 <span class="sd">        av_type (string): Avalanche type</span>
 <span class="sd">        weak_layer (string): Weak layer type</span>
+<span class="sd">        size_relative (float): Slide size relative to path</span>
+<span class="sd">        size_destructive (float): Destructive force of slide</span>
 <span class="sd">        depth (float): Depth of displaced snowpack</span>
 <span class="sd">        width (float): Width of bed surface</span>
 <span class="sd">        vertical (float): Vertical distance that the slide ran</span>
 <span class="sd">        slope_angle (float): Steepest Slope Angle</span>
 <span class="sd">        people_caught (int): Number of people caught by slide</span>
 <span class="sd">        people_carried (int): Number of people carried by slide</span>
+<span class="sd">        people_injuried (int): Number of people injured by slide</span>
 <span class="sd">        people_buried_part (int): Number of people partially burried</span>
 <span class="sd">        people_buried_full (int): Number of people totally burried</span>
+<span class="sd">        people_killed (int): Number of people killed by slide</span>
+<span class="sd">        people_rescuer (int): Number of rescuers involved</span>
+<span class="sd">        group_activity (str): Activity that group was involved in</span>
+<span class="sd">        group_travel (str): Group travel method</span>
 <span class="sd">        snow_profile (text): Description of snowpack</span>
 <span class="sd">        image (str): DEPRICATED, use photo function</span>
 <span class="sd">        description (text): Description of slide</span>
+<span class="sd">        summary (text): Short summary of slide</span>
 <span class="sd">        crown (MultiLineString): MultiLineString along crown(s)</span>
 <span class="sd">        bed_surface (MultiPolygon): MultiPolygon of bed surface</span>
 <span class="sd">        debris_field (MultiPolygon): MultiPolygon of debris field</span>
@@ -205,6 +238,8 @@
     <span class="n">path_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">&#39;avalanche_paths.id&#39;</span><span class="p">))</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s">&#39;AvalanchePath&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s">&#39;incidents&#39;</span><span class="p">)</span>
 
+    <span class="n">display</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
+
     <span class="n">observation_date</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
     <span class="n">occurence_date</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">)</span>
     <span class="n">location</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
@@ -216,24 +251,35 @@
     <span class="n">av_problem</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
     <span class="n">av_type</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
     <span class="n">weak_layer</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">size_relative</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">size_desctructive</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
 
     <span class="n">depth</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
     <span class="n">width</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
     <span class="n">vertical</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
     <span class="n">slope_angle</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">())</span>
+
     <span class="n">people_caught</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">people_carried</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">people_injured</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">people_buried_part</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
     <span class="n">people_buried_full</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">people_killed</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">people_rescuer</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+
+    <span class="n">group_activity</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+    <span class="n">group_travel</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">40</span><span class="p">))</span>
+
     <span class="n">snow_profile</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">160</span><span class="p">))</span>
     <span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">summary</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 
-    <span class="n">crown</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTILINESTRING&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
-    <span class="n">bed_surface</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
-    <span class="n">debris_field</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">crown</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTILINESTRING&#39;</span><span class="p">,</span> <span class="mi">26919</span><span class="p">))</span>
+    <span class="n">bed_surface</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">26919</span><span class="p">))</span>
+    <span class="n">debris_field</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOLYGON&#39;</span><span class="p">,</span> <span class="mi">26919</span><span class="p">))</span>
 
-<div class="viewcode-block" id="AvalancheIn.center"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AvalancheIn.center"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalancheIn.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a shapely.Point that is the center</span>
 <span class="sd">        of the union of the bed surface and debris field</span>
@@ -246,7 +292,7 @@
                                   <span class="p">)),</span> <span class="mi">4326</span><span class="p">))</span><span class="o">.</span><span class="n">first</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">center</span>
 </div>
-<div class="viewcode-block" id="AvalancheIn.l_center"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn.l_center">[docs]</a>    <span class="k">def</span> <span class="nf">l_center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AvalancheIn.l_center"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalancheIn.l_center">[docs]</a>    <span class="k">def</span> <span class="nf">l_center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a formatted string in a way that</span>
 <span class="sd">        leaflet likes for a center point</span>
@@ -254,13 +300,19 @@
         <span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;,&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">center</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
 </div>
-<div class="viewcode-block" id="AvalancheIn.description_md"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheIn.description_md">[docs]</a>    <span class="k">def</span> <span class="nf">description_md</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="AvalancheIn.description_md"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalancheIn.description_md">[docs]</a>    <span class="k">def</span> <span class="nf">description_md</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a flask Markup object containing the markdown for description</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Markup</span><span class="p">(</span><span class="n">md</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
-</div></div>
-<div class="viewcode-block" id="AvalancheInvolved"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheInvolved">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInvolved</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">occurence_date</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="AvalancheInvolved"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalancheInvolved">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInvolved</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    People involved in avalanches</span>
 
@@ -306,10 +358,10 @@
     <span class="n">burried</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
     <span class="n">rescuer</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">)</span>
 
-    <span class="n">locations</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOINT&#39;</span><span class="p">,</span> <span class="mi">926919</span><span class="p">))</span>
+    <span class="n">locations</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">Geometry</span><span class="p">(</span><span class="s">&#39;MULTIPOINT&#39;</span><span class="p">,</span> <span class="mi">26919</span><span class="p">))</span>
 
 </div>
-<div class="viewcode-block" id="AvalancheProb"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="AvalancheProb"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalancheProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Avalanche Problems</span>
 
@@ -327,10 +379,10 @@
     <span class="n">photo</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">160</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
 
 </div>
-<div class="viewcode-block" id="AvalancheInProb"><a class="viewcode-back" href="../../../models.html#baxter.models.avalanche.AvalancheInProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="viewcode-block" id="AvalancheInProb"><a class="viewcode-back" href="../../../developers/models.html#baxter.models.avalanche.AvalancheInProb">[docs]</a><span class="k">class</span> <span class="nc">AvalancheInProb</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Avalanche Incident and Problem complex connector</span>
 
@@ -417,7 +469,7 @@
       <script type="text/javascript" src="../../../_static/jquery.js"></script>
       <script type="text/javascript" src="../../../_static/underscore.js"></script>
       <script type="text/javascript" src="../../../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

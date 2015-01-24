@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>manage.py &mdash; Baxter 0.1 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="Baxter 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="Developer Documentation" href="index.html"/>
+        <link rel="next" title="fabfile.py" href="fabfile.html"/>
+        <link rel="prev" title="API" href="api.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> Baxter</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../public.html">Public Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../public.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../public.html#avalanche-incidents">Avalanche Incidents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../public.html#trails">Trails</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../user.html">Baxter User Help</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user.html#markdown">Markdown</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developer Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="baxter.html">Baxter package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">Database models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routes.html">HTTP Routes for site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">manage.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fabfile.html">fabfile.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="makefile.html">Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server_setup.html">Server Setup</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Baxter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Developer Documentation</a> &raquo;</li>
+      
+    <li>manage.py</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/developers/manage.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="manage-py">
+<h1>manage.py<a class="headerlink" href="#manage-py" title="Permalink to this headline">¶</a></h1>
+<p>During development and server setup, you can use <tt class="docutils literal"><span class="pre">manage.py</span></tt> to run the server,
+setup users, modify the database, and see http routes. Also makes it easy to get
+a Python or IPython shell with an app context.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="#running-the-server">Running the Server</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#listing-http-routes">Listing HTTP Routes</a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#opening-a-shell">Opening a Shell</a></p>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#working-with-users-and-roles">Working with Users and Roles</a></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#roles">Roles</a></li>
+<li><a class="reference internal" href="#users">Users</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference internal" href="#database-operations">Database Operations</a></p>
+</li>
+</ul>
+<div class="section" id="running-the-server">
+<h2>Running the Server<a class="headerlink" href="#running-the-server" title="Permalink to this headline">¶</a></h2>
+<p>To quickly launch the server use <tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span></tt></p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py runserver
+ * Running on http://127.0.0.1:5000/
+ * Restarting with reloader
+</pre></div>
+</div>
+</div>
+<div class="section" id="listing-http-routes">
+<h2>Listing HTTP Routes<a class="headerlink" href="#listing-http-routes" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">list_routes</span></tt> will list the blueprints, HTTP methods, and the
+endpoints that are avaliable.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py list_routes
+main.avalanche_incident                            HEAD,OPTIONS,GET     /avalanche/incident/&lt;int:id&gt;
+main.avalanche_incidents                           HEAD,OPTIONS,GET     /avalanche/incident/
+main.avalanche_path                                HEAD,OPTIONS,GET     /avalanche/path/&lt;id&gt;/
+main.avalanche_paths                               HEAD,OPTIONS,GET     /avalanche/path/
+main.index                                         HEAD,OPTIONS,GET     /
+main.trail                                         HEAD,OPTIONS,GET     /trails/&lt;id&gt;/
+main.trails                                        HEAD,OPTIONS,GET     /trails/
+...
+</pre></div>
+</div>
+</div>
+<div class="section" id="opening-a-shell">
+<h2>Opening a Shell<a class="headerlink" href="#opening-a-shell" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">manage.py</span></tt> can open a Python or IPython (default if avaliable) shell, with
+many things imported:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">app</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">db</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">User</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">Role</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">WeatherOb</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">WeatherFor</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">Trail</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">POI</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">AvalnchePath</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">AvalancheInvolved</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">AvlancheIn</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">AvalancheProb</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">AvalancheInProb</span></tt></li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py shell
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-users-and-roles">
+<h2>Working with Users and Roles<a class="headerlink" href="#working-with-users-and-roles" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">manage.py</span></tt> is able to manage users and roles on the server.</p>
+<div class="section" id="roles">
+<h3>Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h3>
+<p>Before a user can be assigned a role, the role must exist, so create one with
+<tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">user</span> <span class="pre">create_role</span></tt></p>
+<dl class="option">
+<dt id="cmdoption-create_role-n">
+<span id="cmdoption-create_role--name"></span><tt class="descname">-n</tt><tt class="descclassname"> &lt;name&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--name</tt><tt class="descclassname"> &lt;name&gt;</tt><a class="headerlink" href="#cmdoption-create_role-n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of role</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-create_role-d">
+<span id="cmdoption-create_role--description"></span><tt class="descname">-d</tt><tt class="descclassname"> &lt;description&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--description</tt><tt class="descclassname"> &lt;description&gt;</tt><a class="headerlink" href="#cmdoption-create_role-d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of role</p>
+</dd></dl>
+
+<p>For example, to create an admin role:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py user create_role -n admin
+
+Role admin created successfully.
+</pre></div>
+</div>
+<p>Right now only an <tt class="docutils literal"><span class="pre">admin</span></tt> role is defined on the site, but others will be
+setup in the future.</p>
+</div>
+<div class="section" id="users">
+<h3>Users<a class="headerlink" href="#users" title="Permalink to this headline">¶</a></h3>
+<p>You can create a user without <a class="reference internal" href="#roles">Roles</a> existing, but it makes sense to have them
+setup first. Once roles are setup <tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">user</span> <span class="pre">create_user</span></tt> allows
+you to create a new account based on an email address.</p>
+<dl class="option">
+<dt id="cmdoption-create_user-u">
+<span id="cmdoption-create_user--user"></span><tt class="descname">-u</tt><tt class="descclassname"> &lt;name&#64;server.com&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--user</tt><tt class="descclassname"> &lt;name&#64;server.com&gt;</tt><a class="headerlink" href="#cmdoption-create_user-u" title="Permalink to this definition">¶</a></dt>
+<dd><p>User name</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-create_user-p">
+<span id="cmdoption-create_user--password"></span><tt class="descname">-p</tt><tt class="descclassname"> &lt;password&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--password</tt><tt class="descclassname"> &lt;password&gt;</tt><a class="headerlink" href="#cmdoption-create_user-p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Password</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-create_user-a">
+<span id="cmdoption-create_user--active"></span><tt class="descname">-a</tt><tt class="descclassname"> &lt;y&gt; or &lt;active&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--active</tt><tt class="descclassname"> &lt;y&gt; or &lt;active&gt;</tt><a class="headerlink" href="#cmdoption-create_user-a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the user activated and allowed to log in?</p>
+</dd></dl>
+
+<p>For example, to add and activate a user:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py user create_user -u <span class="nb">test</span>@server.com -p password -y a
+
+User created sucessfully.
+<span class="o">{</span>
+    <span class="s2">&quot;active&quot;</span>: <span class="nb">true</span>,
+    <span class="s2">&quot;email&quot;</span>: <span class="s2">&quot;test@server.com&quot;</span>,
+    <span class="s2">&quot;password&quot;</span>: <span class="s2">&quot;****&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>To give a user a specific role <tt class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">user</span> <span class="pre">add_role</span></tt> is used</p>
+<dl class="option">
+<dt id="cmdoption-create_user-u">
+<tt class="descname">-u</tt><tt class="descclassname"> &lt;name&#64;server.com&gt; or --user &lt;name&#64;server.com&gt;</tt><a class="headerlink" href="#cmdoption-create_user-u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Email address for user that you wish to add the role too</p>
+</dd></dl>
+
+<p>If we wanted the user that we just created to be an admin:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>python manage.py user add_role -u <span class="nb">test</span>@server.com -r admin
+Role <span class="s1">&#39;admin&#39;</span> added to user <span class="s1">&#39;test@server.com&#39;</span> successfully
+</pre></div>
+</div>
+<p>Other user focused commands include <tt class="docutils literal"><span class="pre">activate_user</span></tt> and <tt class="docutils literal"><span class="pre">deactivate_user</span></tt> if
+you didn&#8217;t explicitly activate a user upon account creation, or someone has been
+misbehaving.</p>
+<dl class="option">
+<dt id="cmdoption-activate_user-u">
+<tt class="descname">-u</tt><tt class="descclassname"> &lt;name&#64;server.com&gt; or --user &lt;name&#64;server.com&gt;</tt><a class="headerlink" href="#cmdoption-activate_user-u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Email address for the user that you wish to modify</p>
+</dd></dl>
+
+<p><tt class="docutils literal"><span class="pre">remove_role</span></tt> is to remove a role from a user</p>
+<dl class="option">
+<dt id="cmdoption-remove_role-u">
+<tt class="descname">-u</tt><tt class="descclassname"> &lt;name&#64;server.com&gt; or --user &lt;name&#64;server.com&gt;</tt><a class="headerlink" href="#cmdoption-remove_role-u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Email address for the user that you wish to remove the role from</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="database-operations">
+<h2>Database Operations<a class="headerlink" href="#database-operations" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">manage.py</span></tt> also handles modification and setup of the database, based on code
+changes. Each change creates a new migration file.</p>
+<p>See <a class="reference external" href="http://flask-migrate.readthedocs.org">flask-Migrate</a> for more information.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fabfile.html" class="btn btn-neutral float-right" title="fabfile.py"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="api.html" class="btn btn-neutral" title="API"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Alex Kerney.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -67,23 +67,15 @@
 <li class="toctree-l2"><a class="reference internal" href="user.html#markdown">Markdown</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="baxter.html">Baxter package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="baxter.html#main-views">Main views</a></li>
-<li class="toctree-l2"><a class="reference internal" href="baxter.html#module-baxter">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="models.html">Database models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="models.html#module-baxter.models.avalanche">Avalanche</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html#snow">Snow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html#module-baxter.models.trail">Trail</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html#module-baxter.models.weather">Weather</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html#module-baxter.models.photo">Photo</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html#site">Site</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="routes.html">HTTP Routes for site</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="routes.html#browseable-routes">Browseable routes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="routes.html#api-routes">API routes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Developer Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="developers/baxter.html">Baxter package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers/models.html">Database models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers/routes.html">HTTP Routes for site</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers/api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers/manage.html">manage.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers/fabfile.html">fabfile.py</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers/makefile.html">Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developers/server_setup.html">Server Setup</a></li>
 </ul>
 </li>
 </ul>
@@ -122,7 +114,8 @@
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
- <a href="#A"><strong>A</strong></a>
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
@@ -137,29 +130,122 @@
  | <a href="#W"><strong>W</strong></a>
  
 </div>
+<h2 id="Symbols">Symbols</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    -a &lt;y&gt; or &lt;active&gt;, --active &lt;y&gt; or &lt;active&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-a">create_user command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -d &lt;description&gt;, --description &lt;description&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-create_role-d">create_role command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -n &lt;name&gt;, --name &lt;name&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-create_role-n">create_role command line option</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt>
+    -p &lt;password&gt;, --password &lt;password&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-p">create_user command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-activate_user-u">activate_user command line option</a>
+  </dt>
+
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-u">create_user command line option</a>
+  </dt>
+
+        
+  <dt><a href="developers/manage.html#cmdoption-remove_role-u">remove_role command line option</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    -u &lt;name@server.com&gt;, --user &lt;name@server.com&gt;
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-u">create_user command line option</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.avalanche.AvalancheIn">AvalancheIn (class in baxter.models.avalanche)</a>
+  <dt>
+    activate_user command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-activate_user-u">-u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalancheIn">AvalancheIn (class in baxter.models.avalanche)</a>
   </dt>
 
       
-  <dt><a href="models.html#baxter.models.avalanche.AvalancheInProb">AvalancheInProb (class in baxter.models.avalanche)</a>
-  </dt>
-
-      
-  <dt><a href="models.html#baxter.models.avalanche.AvalancheInvolved">AvalancheInvolved (class in baxter.models.avalanche)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalancheInProb">AvalancheInProb (class in baxter.models.avalanche)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.avalanche.AvalanchePath">AvalanchePath (class in baxter.models.avalanche)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalancheInvolved">AvalancheInvolved (class in baxter.models.avalanche)</a>
   </dt>
 
       
-  <dt><a href="models.html#baxter.models.avalanche.AvalancheProb">AvalancheProb (class in baxter.models.avalanche)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalanchePath">AvalanchePath (class in baxter.models.avalanche)</a>
+  </dt>
+
+      
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalancheProb">AvalancheProb (class in baxter.models.avalanche)</a>
   </dt>
 
   </dl></td>
@@ -169,41 +255,41 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="baxter.html#module-baxter">baxter (module)</a>
+  <dt><a href="developers/baxter.html#module-baxter">baxter (module)</a>
   </dt>
 
       
-  <dt><a href="baxter.html#module-baxter.main.trails">baxter.main.trails (module)</a>
+  <dt><a href="developers/baxter.html#module-baxter.main.trails">baxter.main.trails (module)</a>
   </dt>
 
       
-  <dt><a href="baxter.html#module-baxter.main.views">baxter.main.views (module)</a>
+  <dt><a href="developers/baxter.html#module-baxter.main.views">baxter.main.views (module)</a>
   </dt>
 
       
-  <dt><a href="models.html#module-baxter.models.avalanche">baxter.models.avalanche (module)</a>
+  <dt><a href="developers/models.html#module-baxter.models.avalanche">baxter.models.avalanche (module)</a>
   </dt>
 
       
-  <dt><a href="models.html#module-baxter.models.photo">baxter.models.photo (module)</a>
+  <dt><a href="developers/models.html#module-baxter.models.photo">baxter.models.photo (module)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#module-baxter.models.site">baxter.models.site (module)</a>
+  <dt><a href="developers/models.html#module-baxter.models.site">baxter.models.site (module)</a>
   </dt>
 
       
-  <dt><a href="models.html#module-baxter.models.snow">baxter.models.snow (module)</a>
+  <dt><a href="developers/models.html#module-baxter.models.snow">baxter.models.snow (module)</a>
   </dt>
 
       
-  <dt><a href="models.html#module-baxter.models.trail">baxter.models.trail (module)</a>
+  <dt><a href="developers/models.html#module-baxter.models.trail">baxter.models.trail (module)</a>
   </dt>
 
       
-  <dt><a href="models.html#module-baxter.models.weather">baxter.models.weather (module)</a>
+  <dt><a href="developers/models.html#module-baxter.models.weather">baxter.models.weather (module)</a>
   </dt>
 
   </dl></td>
@@ -213,21 +299,67 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.avalanche.AvalancheIn.center">center() (baxter.models.avalanche.AvalancheIn method)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalancheIn.center">center() (baxter.models.avalanche.AvalancheIn method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="models.html#baxter.models.trail.Trail.center">(baxter.models.trail.Trail method)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalanchePath.center">(baxter.models.avalanche.AvalanchePath method)</a>
+  </dt>
+
+        
+  <dt><a href="developers/models.html#baxter.models.trail.Trail.center">(baxter.models.trail.Trail method)</a>
   </dt>
 
       </dl></dd>
+      
+  <dt><a href="developers/baxter.html#baxter.create_app">create_app() (in module baxter)</a>
+  </dt>
+
+      
+  <dt><a href="developers/baxter.html#baxter.create_db_and_roles">create_db_and_roles() (in module baxter)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="baxter.html#baxter.create_app">create_app() (in module baxter)</a>
+  <dt>
+    create_role command line option
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-create_role-d">-d &lt;description&gt;, --description &lt;description&gt;</a>
+  </dt>
+
+        
+  <dt><a href="developers/manage.html#cmdoption-create_role-n">-n &lt;name&gt;, --name &lt;name&gt;</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt>
+    create_user command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-a">-a &lt;y&gt; or &lt;active&gt;, --active &lt;y&gt; or &lt;active&gt;</a>
+  </dt>
+
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-p">-p &lt;password&gt;, --password &lt;password&gt;</a>
+  </dt>
+
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-u">-u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;</a>
+  </dt>
+
+        
+  <dt><a href="developers/manage.html#cmdoption-create_user-u">-u &lt;name@server.com&gt;, --user &lt;name@server.com&gt;</a>
+  </dt>
+
+      </dl></dd>
   </dl></td>
 </tr></table>
 
@@ -235,9 +367,15 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.avalanche.AvalancheIn.description_md">description_md() (baxter.models.avalanche.AvalancheIn method)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalancheIn.description_md">description_md() (baxter.models.avalanche.AvalancheIn method)</a>
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalanchePath.description_md">(baxter.models.avalanche.AvalanchePath method)</a>
+  </dt>
+
+      </dl></dd>
   </dl></td>
 </tr></table>
 
@@ -245,12 +383,12 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.trail.POI.geojsonitem">geojsonitem() (baxter.models.trail.POI method)</a>
+  <dt><a href="developers/models.html#baxter.models.trail.POI.geojsonitem">geojsonitem() (baxter.models.trail.POI method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="models.html#baxter.models.trail.Trail.geojsonitem">(baxter.models.trail.Trail method)</a>
+  <dt><a href="developers/models.html#baxter.models.trail.Trail.geojsonitem">(baxter.models.trail.Trail method)</a>
   </dt>
 
       </dl></dd>
@@ -261,7 +399,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="baxter.html#baxter.main.views.index">index() (in module baxter.main.views)</a>
+  <dt><a href="developers/baxter.html#baxter.main.views.index">index() (in module baxter.main.views)</a>
   </dt>
 
   </dl></td>
@@ -271,12 +409,16 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.avalanche.AvalancheIn.l_center">l_center() (baxter.models.avalanche.AvalancheIn method)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalancheIn.l_center">l_center() (baxter.models.avalanche.AvalancheIn method)</a>
   </dt>
 
       <dd><dl>
         
-  <dt><a href="models.html#baxter.models.trail.Trail.l_center">(baxter.models.trail.Trail method)</a>
+  <dt><a href="developers/models.html#baxter.models.avalanche.AvalanchePath.l_center">(baxter.models.avalanche.AvalanchePath method)</a>
+  </dt>
+
+        
+  <dt><a href="developers/models.html#baxter.models.trail.Trail.l_center">(baxter.models.trail.Trail method)</a>
   </dt>
 
       </dl></dd>
@@ -287,13 +429,13 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.photo.Photo">Photo (class in baxter.models.photo)</a>
+  <dt><a href="developers/models.html#baxter.models.photo.Photo">Photo (class in baxter.models.photo)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.trail.POI">POI (class in baxter.models.trail)</a>
+  <dt><a href="developers/models.html#baxter.models.trail.POI">POI (class in baxter.models.trail)</a>
   </dt>
 
   </dl></td>
@@ -303,7 +445,20 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.site.Role">Role (class in baxter.models.site)</a>
+  <dt>
+    remove_role command line option
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="developers/manage.html#cmdoption-remove_role-u">-u &lt;name@server.com&gt; or --user &lt;name@server.com&gt;</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="developers/models.html#baxter.models.site.Role">Role (class in baxter.models.site)</a>
   </dt>
 
   </dl></td>
@@ -313,7 +468,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.snow.SnowPit">SnowPit (class in baxter.models.snow)</a>
+  <dt><a href="developers/models.html#baxter.models.snow.SnowPit">SnowPit (class in baxter.models.snow)</a>
   </dt>
 
   </dl></td>
@@ -323,17 +478,17 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.trail.Trail">Trail (class in baxter.models.trail)</a>
+  <dt><a href="developers/models.html#baxter.models.trail.Trail">Trail (class in baxter.models.trail)</a>
   </dt>
 
       
-  <dt><a href="baxter.html#baxter.main.trails.trail">trail() (in module baxter.main.trails)</a>
+  <dt><a href="developers/baxter.html#baxter.main.trails.trail">trail() (in module baxter.main.trails)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="baxter.html#baxter.main.trails.trails">trails() (in module baxter.main.trails)</a>
+  <dt><a href="developers/baxter.html#baxter.main.trails.trails">trails() (in module baxter.main.trails)</a>
   </dt>
 
   </dl></td>
@@ -343,7 +498,7 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.site.User">User (class in baxter.models.site)</a>
+  <dt><a href="developers/models.html#baxter.models.site.User">User (class in baxter.models.site)</a>
   </dt>
 
   </dl></td>
@@ -353,13 +508,13 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.weather.WeatherFor">WeatherFor (class in baxter.models.weather)</a>
+  <dt><a href="developers/models.html#baxter.models.weather.WeatherFor">WeatherFor (class in baxter.models.weather)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="models.html#baxter.models.weather.WeatherOb">WeatherOb (class in baxter.models.weather)</a>
+  <dt><a href="developers/models.html#baxter.models.weather.WeatherOb">WeatherOb (class in baxter.models.weather)</a>
   </dt>
 
   </dl></td>
@@ -404,7 +559,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
