@@ -12,6 +12,15 @@ remote_supervisor_dir = '/etc/supervisor/conf.d'
 
 # tasks
 
+
+def run_app():
+    """
+    Run the app
+    """
+    with cd(remote_flask_dir):
+        sudo('supervisorctl start baxter_flask')
+
+
 def deploy():
     """
     1. Commit and push new flask files to production
@@ -24,6 +33,7 @@ def deploy():
         local('git push production master')
         sudo('supervisorctl restart baxter_flask')
 
+
 def rollback():
     """
     1. Quick rollback in case of error
@@ -33,6 +43,7 @@ def rollback():
         local('git revert master --no-edit')
         local('git push production master')
         sudo('supervisorctl restart baxter_flask')
+
 
 def status():
     """
