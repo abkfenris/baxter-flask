@@ -1,0 +1,19 @@
+#!/bin/bash
+
+##############################################################
+### Modify with the correct exports for this host and save ###
+### as host-export in the server-config folder             ###
+###                                                        ###
+### This is kept seperate from the gunicorn starter so     ###
+### you can export these variables via the script for      ###
+### manage.py or other commands via 'source host-export'   ###
+##############################################################
+
+# Exports
+
+export BAXTER_DB=postgresql://user:pass@host/database
+export BAXTER_REDIS_HOST=words
+export BAXTER_REDIS_PASSWORD=more_words
+export SECRET_KEY=other_words
+export MAPBOX_MAP_ID=something_else
+export BAXTER_FLASK_ENV=prod

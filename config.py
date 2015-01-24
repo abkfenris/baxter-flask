@@ -34,8 +34,8 @@ class ProductionConfig(Config):
     CACHE_TYPE = 'simple'
     CACHE_DEFAULT_TIMEOUT = 120
     CACHE_KEY_PREFIX = 'b_'
-    CACHE_REDIS_HOST = ''
-    CACHE_REDIS_PASSWORD = ''
+    CACHE_REDIS_HOST = os.environ.get('BAXTER_REDIS_HOST')
+    CACHE_REDIS_PASSWORD = os.environ.get('BAXTER_REDIS_PASSWORD')
     SECURITY_PASSWORD_HASH = 'bcrypt'
     SECURITY_PASSWORD_SALT = (os.environ.get('SECRET_KEY') or
                   'vwk67hNn6Uxd[C3B^9o=3X*G3oUK4yzYiTrwRrA;)zm[9]8]&p')
