@@ -3,7 +3,19 @@ Baxter User Help
 
 .. toctree::
 
-Some quick notes about using the site
+Contents:
+
+* `Editing`_
+* `User Accounts`_
+* `Database Access`_
+* `Markdown`_
+* `Data Types`_
+    * `Avalanche Incidents`_
+    * `Avalanche Paths`_
+    * `Trails`_
+    * `Snowpits`_
+    * `Photos`_
+    * `Users`_
 
 
 Editing
@@ -39,8 +51,8 @@ Database Access
 ---------------
 If you have geospatial data in ArcGIS or QGIS and you wish to connect to the
 database and edit directly, please be in touch, and we will set you up with an
-account. The site is running a `PostGIS <http://postgis.net>`_ database on port
-5432.
+account. Database accounts are seperate than accounts for the admin. The site is
+running a `PostGIS <http://postgis.net>`_ database on port 5432.
 
 Setup:
 
@@ -58,6 +70,12 @@ Avalanche Incident, can be formatted as `Markdown <https://help.github.com/artic
 
 Markdown is a more human readable, and natural way of formatting text compared
 to writing html.
+
+* `Paragraphs`_
+* `Headings`_
+* `Lists`_
+* `Links`_
+* `Images`_
 
 
 Paragraphs
@@ -155,7 +173,8 @@ Currently images are only setup to be displayed at full size, but they will
 scale down to fit the containing object they are in.
 
 
-
+Data Types
+----------
 
 
 Avalanche Incidents
@@ -177,7 +196,7 @@ Snowpits
 --------
 
 
-Images
+Photos
 ------
 
 
