@@ -21,6 +21,7 @@ def avalanche_paths():
     paths = db.session.query(AvalanchePath.name,
                              AvalanchePath.id,
                              ).order_by(AvalanchePath.name.asc())
+    current_app.logger.debug('Avalanche path list')
     return render_template('avalanche/paths.html', paths=paths)
 
 
@@ -30,4 +31,5 @@ def avalanche_path(id):
     Show a single trail
     """
     path = AvalanchePath.query.get_or_404(id)
+    current_app.logger.debug('Avalanche path {0} - ID {1}'.format(path.name, path.id))
     return render_template('avalanche/path.html', path=path)

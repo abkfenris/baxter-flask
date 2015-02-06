@@ -137,7 +137,7 @@ For example, to add and activate a user:
 
 To give a user a specific role ``python manage.py user add_role`` is used
 
-.. program: add_role
+.. program:: add_role
 .. option:: -u <name@server.com> or --user <name@server.com>
 
     Email address for user that you wish to add the role too

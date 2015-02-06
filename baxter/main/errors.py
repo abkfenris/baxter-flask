@@ -1,7 +1,7 @@
 """
 App error handlers
 """
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, current_app
 from . import main
 
 
@@ -10,6 +10,7 @@ def forbidden(e):
     """
     Handle 403 Forbidden errors in html and json
     """
+    current_app.logger.error('403')
     if request.accept_mimetypes.accept_json and \
             not request.accept_mimetypes.accept_html:
         response = jsonify({'error': 'forbidden'})
@@ -23,6 +24,7 @@ def page_not_found(e):
     """
     Handle 404 Page Not Found errors in html and json
     """
+    current_app.logger.error('404')
     if request.accept_mimetypes.accept_json and \
             not request.accept_mimetypes.accept_html:
         response = jsonify({'error': 'not found'})
@@ -36,6 +38,7 @@ def internal_server_error(e):
     """
     Handle 500 Internal Server errors in html and json
     """
+    current_app.logger.error('500')
     if request.accept_mimetypes.accept_json and \
             not request.accept_mimetypes.accept_html:
         response = jsonify({'error': 'internal server error'})

@@ -17,7 +17,7 @@ Sphinx or elsewhere.
 * `Setting Up a New Server`_
 
 Hosts
-_____
+-----
 
 Fabric seems to work best when you can login into a host with ssh keys, and
 have sudo rights. So that the ``fabfile.py`` can be in source control, but
@@ -143,7 +143,7 @@ Adding Users to Site
 --------------------
 
 Instead of sshing into the server and using ``manage.py``, ``fab`` can also
-setup users with ``fab add_baxter_user``. It will ask for email address, 
+setup users with ``fab add_baxter_user``. It will ask for email address,
 password, and if that user should be an admin, which defaults to no.
 
 .. code-block:: bash

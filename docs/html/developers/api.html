@@ -129,7 +129,51 @@
             
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
-<p>There is a public API to access this server via REST.</p>
+<p>There is a public API to access this server via REST. Right now it is relatively
+simple, but the ability to get different types of data, and hopefully submit
+data is in the plans.</p>
+<dl class="get">
+<dt id="get--api-1.0-avalanche-incident-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/avalanche/incident/</tt><a class="headerlink" href="#get--api-1.0-avalanche-incident-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geojson for all avalanche incidents</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-avalanche-path-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/avalanche/path/</tt><a class="headerlink" href="#get--api-1.0-avalanche-path-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geojson for all avalanche paths</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-trail-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/trail/</tt><a class="headerlink" href="#get--api-1.0-trail-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show all trails</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-avalanche-incident-(int-id)-parts">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/avalanche/incident/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/parts</tt><a class="headerlink" href="#get--api-1.0-avalanche-incident-(int-id)-parts" title="Permalink to this definition">¶</a></dt>
+<dd><p>return geojson for individual avalanche incident</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-avalanche-incident-(int-id)-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/avalanche/incident/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--api-1.0-avalanche-incident-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>return geojson for individual avalanche incident</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-avalanche-path-(int-id)-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/avalanche/path/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--api-1.0-avalanche-path-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>return geojson for individual avalanche path</p>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--api-1.0-trail-(int-id)-">
+<tt class="descname">GET </tt><tt class="descname">/api/1.0/trail/</tt><big>(</big><em class="property">int: </em><em>id</em><big>)</big><tt class="descname">/</tt><a class="headerlink" href="#get--api-1.0-trail-(int-id)-" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show individual trail <em>id</em></p>
+</dd></dl>
+
 </div>
 
 

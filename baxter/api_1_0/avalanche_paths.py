@@ -2,7 +2,7 @@
 Trail API 1.0
 """
 
-from flask import jsonify, url_for
+from flask import jsonify, url_for, current_app
 import json
 
 from . import api
@@ -31,6 +31,8 @@ def avalanche_path(id):
         geometry = json.loads(path.path)
     except TypeError:
         geometry = {}
+    
+    current_app.logger.debug('API - Path {0} - ID {1}'.format(path.name, path.id))
 
     return jsonify({
                 'type': 'Feature',
@@ -74,7 +76,9 @@ def avalanche_paths():
             },
             'geometry': geometry
         })
-
+    
+    current_app.logger.debug('API - Path - All')
+    
     return jsonify({
         'type': 'FeatureCollection',
         'features': paths

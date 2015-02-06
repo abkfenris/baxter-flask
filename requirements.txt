@@ -30,3 +30,4 @@ psycopg2
 py-bcrypt
 gunicorn
 fiona
+raven

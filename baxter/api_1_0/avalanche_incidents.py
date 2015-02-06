@@ -2,7 +2,7 @@
 Trail API 1.0
 """
 
-from flask import jsonify, url_for
+from flask import jsonify, url_for, current_app
 import json
 
 from . import api
@@ -59,6 +59,8 @@ def incident(id):
         geojson = json.loads(incident.geojson)
     except TypeError:
         geojson = {}
+    
+    current_app.logger.debug('API - Incident {0} - ID {1}'.format(incident.name, incident.id))
 
     return jsonify({
         'type': 'FeatureCollection',
@@ -141,6 +143,8 @@ def incident_parts(id):
         debris_field = json.loads(incident.debris_field)
     except TypeError:
         debris_field = {}
+    
+    current_app.logger.debug('API - Incident - All')
 
     return jsonify({
         'type': 'FeatureCollection',

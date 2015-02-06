@@ -24,6 +24,7 @@ def trails():
                              Trail.skitrail,
                              Trail.length_mi
                              ).filter_by(display=True, tclass='ACTIVE').order_by(Trail.name.asc())
+    current_app.logger.debug('Trail list')
     return render_template('trails.html', trails=trails)
 
 
@@ -33,4 +34,5 @@ def trail(id):
     Show a single trail
     """
     trail = Trail.query.get_or_404(id)
+    current_app.logger.debug('Trail {0} - ID {1}'.format(trail.name, trail.id))
     return render_template('trail.html', trail=trail)

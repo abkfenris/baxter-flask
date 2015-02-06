@@ -18,4 +18,5 @@ def index():
     """
     Index page for site.
     """
+    current_app.logger.debug('Index page')
     return render_template('index.html')

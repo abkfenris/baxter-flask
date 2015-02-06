@@ -2,7 +2,7 @@
 Trail API 1.0
 """
 
-from flask import jsonify, url_for
+from flask import jsonify, url_for, current_app
 import json
 
 from . import api
@@ -11,7 +11,7 @@ from .. import cache
 from ..models import Trail
 
 @api.route('/trail/<int:id>/')
-@cache.cached()
+#@cache.cached()
 def trail(id):
     """
     Show individual trail *id*
@@ -27,6 +27,8 @@ def trail(id):
         geojson = json.loads(trail.geojson)
     except TypeError:
         geojson = {}
+    
+    current_app.logger.debug('API - Trail {0} - ID {1}'.format(trail.name, trail.id))
 
     return jsonify({
         'type': 'Feature',
@@ -39,7 +41,7 @@ def trail(id):
 
 
 @api.route('/trail/')
-@cache.cached()
+#@cache.cached()
 def list_trails():
     """
     Show all trails
@@ -48,7 +50,7 @@ def list_trails():
             Trail.id,
             Trail.geom.ST_Transform(4326).ST_AsGeoJSON().label('geojson')
             ).filter_by(display=True)
-
+    current_app.logger.debug('API - Trail - All')
     trails = []
     for trail in query:
 

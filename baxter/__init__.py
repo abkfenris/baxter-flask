@@ -12,12 +12,15 @@ from flask.ext.cache import Cache
 from config import config
 from flask_debugtoolbar import DebugToolbarExtension
 import markdown2
+import logging
+from raven.contrib.flask import Sentry
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 security = Security()
 toolbar = DebugToolbarExtension()
 cache = Cache()
+sentry = Sentry()
 
 md = markdown2.Markdown(extras={'html-classes': {'img': 'img-responsive'}})
 
@@ -49,6 +52,10 @@ def create_app(config_name):
     db.init_app(app)
     security.init_app(app, user_datastore)
     cache.init_app(app)
+    if app.debug:
+        sentry.init_app(app, logging=True, level=logging.DEBUG)
+    else:
+        sentry.init_app(app, logging=True, level=logging.ERROR)
 
     toolbar.init_app(app)
 

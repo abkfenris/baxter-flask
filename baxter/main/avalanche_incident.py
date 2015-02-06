@@ -32,6 +32,7 @@ def avalanche_incidents():
                              AvalancheIn.location
                              ).order_by(AvalancheIn.occurence_date.desc())
     incidents = query
+    current_app.logger.debug('Avalanche incident list')
     return render_template('avalanche/incidents.html', incidents=incidents)
 
 
@@ -49,6 +50,7 @@ def avalanche_incident(id):
         destructive = avalanche_destructive[str(incident.size_desctructive)]
     except KeyError:
         destructive = 'Unknown'
+    current_app.logger.debug('Avalanche incident {0} - ID {1}'.format(incident.name, incident.id))
     return render_template('avalanche/incident.html',
                            incident=incident,
                            aspects=aspects,
