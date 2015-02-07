@@ -7,7 +7,9 @@ class Config:
                   'vwk67hNn6Uxd[C3B^9o=3X*G3oUK4yzYiTrwRrA;)zm[9]8]&p')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     MAPBOX_MAP_ID = os.environ.get('MAPBOX_MAP_ID')
+    SENTRY_DSN = os.environ.get('SENTRY_DSN')
     SECURITY_POST_LOGIN_VIEW = 'admin/'
+    SECURITY_CHANGEABLE = True
 
     @staticmethod
     def init_app(app):

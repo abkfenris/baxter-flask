@@ -4,10 +4,12 @@ Admin interface, sets up admin views
 import os
 import os.path as op
 
-from flask import url_for, redirect
+from flask import url_for, redirect, current_app
+from redis import Redis
 from flask.ext.admin import Admin, AdminIndexView, expose
 from flask.ext.admin.base import MenuLink
 from flask.ext.admin.contrib.geoa import ModelView as _ModelView
+from flask.ext.admin.contrib import rediscli
 # from flask.ext.admin.form import rules
 from wtforms.fields import SelectField
 from sqlalchemy.event import listens_for
@@ -53,14 +55,20 @@ try:
 except OSError:
     pass
 
-pit_path = op.join(op.dirname(op.dirname(__file__)), 'static', 'uploaded' ,'pits')
+pit_path = op.join(op.dirname(op.dirname(__file__)),
+                   'static',
+                   'uploaded',
+                   'pits')
 pit_static_path = '/static/uploaded/pits/'
 try:
     os.makedirs(pit_path)
 except OSError:
     pass
 
-photo_path = op.join(op.dirname(op.dirname(__file__)), 'static', 'uploaded', 'photos')
+photo_path = op.join(op.dirname(op.dirname(__file__)),
+                     'static',
+                     'uploaded',
+                     'photos')
 photo_static_path = '/static/uploaded/photos/'
 try:
     os.makedirs(photo_path)
@@ -139,7 +147,7 @@ class InlineImageView(InlineFormAdmin):
 
 class InlineInvolvedView(InlineFormAdmin):
     form_widget_args = {'locations': h_w}
-    #form_rules = ['user',
+    # form_rules = ['user',
     #    rules.Header('Test Header'),
     #    rules.FieldSet(('first', 'last'), header='Name'),
     #    rules.FieldSet(('phone','email')),
@@ -153,7 +161,7 @@ class InlineInvolvedView(InlineFormAdmin):
     #                    'rescuer',
     #                    rules.HTML('</div>'))),
     #    'locations'
-    #] # Trying to format the inline form smaller
+    # ] # Trying to format the inline form smaller
 
 
 class FileView(ModelView):
@@ -218,22 +226,6 @@ class AvalancheProbView(ModelView):
     pass
 
 
-#class TrailView(ModelView):
-#    can_create = True
-#    column_exclude_list = ('geom')
-#    form_overrides = dict(location=WTFormsMapField)
-#    form_args = dict(
-#        geom=dict(geometry_type='MultiLineString', height=500, width=500)
-#                    )
-#
-#    def __init__(self, Trail, session, **kwargs):
-#        super(TrailView, self).__init__(Trail, session, **kwargs)
-#
-#    def scaffold_form(self):
-#        form_class = super(TrailView, self).scaffold_form()
-#        form_class.geom = WTFormsMapField()
-#        return form_class
-
 class AvalancheInView(ModelView):
     inline_models = (InlineInvolvedView(AvalancheInvolved),
                      InlineFileView(SnowPit),
@@ -263,7 +255,15 @@ class AvalancheInView(ModelView):
                         'description': {
                             'rows': 15
                         }}
-    column_list = ('name', 'occurence_date', 'depth', 'width', 'vertical', 'aspect', 'observer', 'bed_surface', 'debris_field')
+    column_list = ('name',
+                   'occurence_date',
+                   'depth',
+                   'width',
+                   'vertical',
+                   'aspect',
+                   'observer',
+                   'bed_surface',
+                   'debris_field')
 
 
 class MyAdminIndexView(AdminIndexView):
@@ -334,3 +334,4 @@ admin.add_view(ImageView(Photo, db.session,
                          url='photo'))
 admin.add_link(AuthenticatedMenuLink(name='Logout',
                                      endpoint='security.logout'))
+admin.add_view(rediscli.RedisCli(Redis()))

@@ -31,3 +31,4 @@ py-bcrypt
 gunicorn
 fiona
 raven
+redis

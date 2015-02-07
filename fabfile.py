@@ -45,6 +45,11 @@ def install_requirements():
     sudo('apt-get install -y git')
     sudo('apt-get install -y gdal-bin python-gdal libgdal-dev')
     sudo('apt-get install -y supervisor')
+    sudo('apt-get install -y redis-server')
+    sudo('apt-get install -y libxslt1.dev')
+    # for pillow
+    sudo('apt-get install -y libjpeg8-dev libjpeg-dev libfreetype6-dev')
+    sudo('apt-get install -y zlib1g-dev libpng12-dev')
     # So that GDAL can be built
     sudo('export CPLUS_INCLUDE_PATH=/usr/include/gdal')
     sudo('export C_INCLUDE_PATH=/usr/include/gdal')
@@ -151,6 +156,17 @@ def configure_gunicorn():
                 sudo('chmod +x gunicorn-start-baxter')
 
 
+def configure_ufw():
+    """
+    1. Allow ssh, http, https, and postgres connections through ufw
+    2. Enable ufw
+    """
+    sudo('ufw allow ssh')
+    sudo('ufw allow www')
+    sudo('ufw allow https')
+    sudo('ufw allow postgres')
+    sudo('ufw enable')
+
 def create():
     """
     Setup a brand new server
@@ -215,6 +231,7 @@ def status():
     sudo('service nginx status')
     sudo('service postgresql status')
     sudo('service ufw status')
+    sudo('service redis-server status')
 
 
 def add_baxter_user():
