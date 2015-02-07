@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Error 404{% endblock %}
+
+{% block body_attribs %} class="baxter-error"{% endblock %}
+
+
+
+
+{% block content %}
+<div class="jumbotron" style="background-image: url({{ url_for('static', filename='img/header-404.jpg' ) }}); background-size: 100%;">
+    <div class="container">
+        <h1 style="color: white;">404 Stability Not Found</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Well that didn't work right. What page you looking for?</p>
+            {% if g.sentry_event_id %}
+                <p><small>If you want to be awesome let Alex know that {{ g.sentry_event_id }} happened, and maybe he can fix it.</small></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
