@@ -26,9 +26,11 @@ itsdangerous==0.24
 markdown2==2.3.0
 passlib==1.6.2
 wsgiref==0.1.2
-psycopg2
-py-bcrypt
-gunicorn
-fiona
-raven
-redis
+psycopg2==2.5.4
+py-bcrypt==0.4
+gunicorn==19.1.1
+Fiona==1.4.8
+raven==5.1.1
+redis==2.10.3
+PIL==1.17
+Pillow==2.7.0

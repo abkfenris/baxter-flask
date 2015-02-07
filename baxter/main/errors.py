@@ -43,5 +43,5 @@ def internal_server_error(e):
             not request.accept_mimetypes.accept_html:
         response = jsonify({'error': 'internal server error'})
         response.status_code = 500
-        return reponse
+        return response
     return render_template('500.html'), 500

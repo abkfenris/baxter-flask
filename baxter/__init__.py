@@ -14,6 +14,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 import markdown2
 import logging
 from raven.contrib.flask import Sentry
+from werkzeug.contrib.fixers import ProxyFix
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
@@ -56,6 +57,7 @@ def create_app(config_name):
         sentry.init_app(app, logging=True, level=logging.DEBUG)
     else:
         sentry.init_app(app, logging=True, level=logging.ERROR)
+        app.wsgi_app = ProxyFix(app.wsgi_app)
 
     toolbar.init_app(app)
 
