@@ -56,7 +56,7 @@ def create_app(config_name):
     if app.debug:
         sentry.init_app(app, logging=True, level=logging.DEBUG)
     else:
-        sentry.init_app(app, logging=True, level=logging.ERROR)
+        sentry.init_app(app, logging=True, level=logging.INFO)
         app.wsgi_app = ProxyFix(app.wsgi_app)
 
     toolbar.init_app(app)

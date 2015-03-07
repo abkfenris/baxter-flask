@@ -3,3 +3,4 @@ baxter/static/uploaded/pits
 baxter/static/uploaded/photos
 host-export
 fabhosts.py
+docs/_build
