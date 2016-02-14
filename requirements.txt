@@ -18,7 +18,7 @@ MarkupSafe==0.23
 SQLAlchemy==1.0.11
 Shapely==1.5.13
 WTForms==2.1
-Werkzeug==0.11.3
+Werkzeug==0.11.4
 alembic==0.8.4
 argparse==1.4.0
 blinker==1.4
