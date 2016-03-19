@@ -23,7 +23,7 @@ alembic==0.8.5
 argparse==1.4.0
 blinker==1.4
 itsdangerous==0.24
-markdown2==2.3.0
+markdown2==2.3.1
 passlib==1.6.5
 wsgiref==0.1.2
 psycopg2==2.6.1
