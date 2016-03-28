@@ -16,7 +16,7 @@ Jinja2==2.8
 Mako==1.0.4
 MarkupSafe==0.23
 SQLAlchemy==1.0.12
-Shapely==1.5.13
+Shapely==1.5.14
 WTForms==2.1
 Werkzeug==0.11.5
 alembic==0.8.5
@@ -29,7 +29,7 @@ wsgiref==0.1.2
 psycopg2==2.6.1
 py-bcrypt==0.4
 gunicorn==19.4.5
-Fiona==1.6.3
+Fiona==1.6.3.post1
 raven==5.11.2
 redis==2.10.5
 PIL==1.1.7
