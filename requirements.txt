@@ -28,7 +28,7 @@ passlib==1.6.5
 wsgiref==0.1.2
 psycopg2==2.6.1
 py-bcrypt==0.4
-gunicorn==19.5.0
+gunicorn==19.6.0
 Fiona==1.6.4
 raven==5.18.0
 redis==2.10.5
