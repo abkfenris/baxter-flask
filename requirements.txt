@@ -29,7 +29,7 @@ wsgiref==0.1.2
 psycopg2==2.6.1
 py-bcrypt==0.4
 gunicorn==19.6.0
-Fiona==1.6.4
+Fiona==1.7.0
 raven==5.20.0
 redis==2.10.5
 PIL==1.1.7
