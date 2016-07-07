@@ -26,7 +26,7 @@ itsdangerous==0.24
 markdown2==2.3.1
 passlib==1.6.5
 wsgiref==0.1.2
-psycopg2==2.6.1
+psycopg2==2.6.2
 py-bcrypt==0.4
 gunicorn==19.6.0
 Fiona==1.7.0.post2
