@@ -30,7 +30,7 @@ psycopg2==2.6.2
 py-bcrypt==0.4
 gunicorn==19.6.0
 Fiona==1.7.0.post2
-raven==5.24.2
+raven==5.24.3
 redis==2.10.5
 PIL==1.1.7
 Pillow==3.3.0
