@@ -33,4 +33,4 @@ Fiona==1.7.0.post2
 raven==5.27.1
 redis==2.10.5
 PIL==1.1.7
-Pillow==3.3.1
+Pillow==3.4.0
